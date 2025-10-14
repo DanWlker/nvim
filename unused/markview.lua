@@ -1,9 +1,6 @@
 return {
   'OXY2DEV/markview.nvim',
   ft = 'markdown',
-  dependencies = {
-    { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
-  },
   opts = {
     hybrid_modes = { 'n' },
     callbacks = {

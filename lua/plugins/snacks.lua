@@ -14,12 +14,6 @@ return {
   branch = 'flatten_lsp_symbols',
   priority = 1000,
   lazy = false,
-  ---@type snacks.Config
-  dependencies = {
-    { 'nvim-mini/mini.icons', version = false },
-    'folke/todo-comments.nvim',
-    'folke/trouble.nvim',
-  },
   keys = {
     -- {
     --   '\\',

@@ -1,16 +1,13 @@
 return {
   'Wansmer/treesj',
-  dependencies = {
-    'nvim-treesitter',
-    'nvim-mini/mini.splitjoin',
-  },
   keys = {
     { 'jt', desc = 'Toggle Join/Split with treesitter' },
     { 'js', desc = 'Split with treesitter' },
     { 'jj', desc = 'Join with treesitter' },
   },
-  opts = { use_default_keymaps = false },
   config = function()
+    require('treesj').setup({ use_default_keymaps = false })
+
     local function get_pos_lang()
       local c = vim.api.nvim_win_get_cursor(0)
       local range = { c[1] - 1, c[2], c[1] - 1, c[2] }

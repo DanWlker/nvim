@@ -63,5 +63,5 @@ return {
       desc = 'Todo List',
     },
   },
-  config = true,
+  opts = {},
 }

@@ -19,5 +19,4 @@ return {
       desc = 'Toggle quickfix',
     },
   },
-  config = true,
 }

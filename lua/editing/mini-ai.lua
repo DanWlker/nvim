@@ -2,13 +2,9 @@
 return {
   'nvim-mini/mini.ai',
   event = 'VimEnter',
-  dependencies = {
-    { 'nvim-mini/mini.extra', config = true },
-    { 'nvim-treesitter/nvim-treesitter-textobjects', branch = 'main' },
-  },
-  opts = function()
+  config = function()
     local ai = require('mini.ai')
-    return {
+    local opts = {
       n_lines = 500,
       custom_textobjects = {
         o = ai.gen_spec.treesitter({ -- code block
@@ -40,9 +36,8 @@ return {
         inside_last = '',
       },
     }
-  end,
-  config = function(_, opts)
-    require('mini.ai').setup(opts)
+
+    ai.setup(opts)
 
     local function ai_whichkey(wopts)
       local ok, module = pcall(function() return require('which-key') end)
@@ -105,7 +100,6 @@ return {
 
       module.add(ret, { notify = false })
     end
-
     ai_whichkey(opts)
   end,
 }

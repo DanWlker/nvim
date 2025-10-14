@@ -12,8 +12,6 @@ return {
       return
     end
 
-    local dontUseTreesitterIndent = { 'bash', 'zsh', 'markdown' }
-
     vim.api.nvim_create_autocmd('User', {
       pattern = 'TSUpdate',
       group = vim.api.nvim_create_augroup(
@@ -31,6 +29,7 @@ return {
       end,
     })
 
+    local dontUseTreesitterIndent = { 'bash', 'zsh', 'markdown' }
     vim.api.nvim_create_autocmd('FileType', {
       pattern = { '*' },
       group = vim.api.nvim_create_augroup(

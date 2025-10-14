@@ -2,23 +2,6 @@ return {
   'Saghen/blink.cmp',
   event = { 'VimEnter' },
   version = '1.*',
-  dependencies = {
-    'kristijanhusak/vim-dadbod-completion',
-    {
-      'L3MON4D3/LuaSnip',
-      version = 'v2.*',
-      dependencies = {
-        'rafamadriz/friendly-snippets',
-        'folke/lazydev.nvim',
-      },
-      config = function()
-        require('luasnip.loaders.from_vscode').lazy_load()
-        require('luasnip').filetype_extend('dart', { 'flutter' })
-        require('luasnip.loaders.from_lua').load({ paths = { './snippets' } })
-      end,
-    },
-    'nvim-mini/mini.icons',
-  },
   opts = {
     keymap = {
       preset = 'enter',

@@ -1,9 +1,9 @@
 return {
   'antosha417/nvim-lsp-file-operations',
   event = 'LspAttach',
+  -- NOTE: This must be loaded before
   dependencies = {
-    'nvim-lua/plenary.nvim',
     'nvim-tree/nvim-tree.lua',
   },
-  config = true,
+  opts = {},
 }

@@ -1,7 +1,6 @@
 return {
   'andythigpen/nvim-coverage',
   cmd = { 'Coverage', 'CoverageToggle', 'CoverageSummary' },
-  dependencies = 'nvim-lua/plenary.nvim',
   opts = {
     commands = true,
     auto_reload = true,

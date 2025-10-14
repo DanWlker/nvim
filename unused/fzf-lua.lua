@@ -3,11 +3,6 @@ local file_ignore_patterns = { 'node_modules', '\\.git/', '\\.github/' }
 -- Everything in here is from LazyVim
 return {
   'ibhagwan/fzf-lua',
-  dependencies = {
-    'nvim-mini/mini.icons',
-    'folke/todo-comments.nvim',
-    'folke/trouble.nvim',
-  },
   -- init = function()
   --   ---@diagnostic disable-next-line: duplicate-set-field
   --   vim.ui.select = function(...)

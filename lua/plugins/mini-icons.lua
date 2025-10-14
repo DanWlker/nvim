@@ -1,6 +1,7 @@
 return {
   'nvim-mini/mini.icons',
   version = false,
+  lazy = true,
   config = function()
     require('mini.icons').setup({
       -- Check last letters explicitly to account for dots in file name

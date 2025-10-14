@@ -38,4 +38,5 @@ return {
       mode = 'v',
     },
   },
+  opts = {},
 }
