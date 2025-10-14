@@ -2,6 +2,9 @@
 return {
   'nvim-mini/mini.ai',
   event = 'VimEnter',
+  dependencies = {
+    'nvim-treesitter/nvim-treesitter-textobjects',
+  },
   config = function()
     local ai = require('mini.ai')
     local miniextra = require('mini.extra')

@@ -23,7 +23,8 @@ require('lazy').setup({
   -- [[ Editing ]]
   { import = 'editing' },
 
-  -- require('catppuccin'),
+  -- [[ Editing ]]
+  { import = 'themes' },
 }, {
   ui = {
     icons = vim.g.have_nerd_font and {} or {
@@ -45,4 +46,4 @@ require('lazy').setup({
   change_detection = { notify = false },
 })
 
--- vim.cmd.colorscheme('catppuccin')
+vim.cmd.colorscheme('catppuccin')

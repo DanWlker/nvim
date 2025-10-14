@@ -68,7 +68,7 @@ require('lazy').setup({
   { import = 'editing' },
 
   -- require 'plugins.nvim-autopairs', -- doesn't work
-  require('catppuccin'),
+  require('themes.catppuccin'),
 })
 
 vim.cmd.colorscheme('catppuccin')
