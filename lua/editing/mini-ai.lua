@@ -2,6 +2,7 @@
 return {
   'nvim-mini/mini.ai',
   event = 'VimEnter',
+  -- NOTE: These must be loaded before
   dependencies = {
     'nvim-treesitter/nvim-treesitter-textobjects',
   },
