@@ -11,7 +11,7 @@ return {
   },
   config = function()
     local dapui = require('dapui')
-    local dap = require('dap')
+    -- local dap = require('dap')
 
     dapui.setup({
       -- Set icons to characters that are more likely to work in every terminal.
@@ -33,8 +33,8 @@ return {
       },
     })
 
-    dap.listeners.after.event_initialized['dapui_config'] = dapui.open
-    dap.listeners.before.event_terminated['dapui_config'] = dapui.close
-    dap.listeners.before.event_exited['dapui_config'] = dapui.close
+    -- dap.listeners.after.event_initialized['dapui_config'] = dapui.open
+    -- dap.listeners.before.event_terminated['dapui_config'] = dapui.close
+    -- dap.listeners.before.event_exited['dapui_config'] = dapui.close
   end,
 }
