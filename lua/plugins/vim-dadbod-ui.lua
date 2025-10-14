@@ -1,5 +1,6 @@
 return {
   'kristijanhusak/vim-dadbod-ui',
+  -- NOTE: This must be loaded before
   dependencies = {
     'tpope/vim-dadbod',
   },
