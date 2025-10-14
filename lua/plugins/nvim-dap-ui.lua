@@ -1,5 +1,6 @@
 return {
   'rcarriga/nvim-dap-ui',
   lazy = true,
-  opts = {},
+  -- NOTE: This is commented on purpose
+  -- opts = {},
 }
