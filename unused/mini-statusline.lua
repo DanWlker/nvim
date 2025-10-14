@@ -5,7 +5,7 @@
 -- MiniStatuslineDiagnosticInfo = { bg = colors.surface0, fg = colors.sky },
 -- MiniStatuslineDiagnosticHint = { bg = colors.surface0, fg = colors.teal },
 
-local icons = require('shared.icons')
+local icons = require('icons')
 local diagnostics_highlight = {
   { name = 'ERROR', hl = 'MiniStatuslineDiagnosticError' },
   { name = 'WARN', hl = 'MiniStatuslineDiagnosticWarn' },

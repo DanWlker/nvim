@@ -78,7 +78,7 @@ return {
       end,
     })
 
-    for server_name, server in pairs(require('shared.tools').allServers) do
+    for server_name, server in pairs(require('external').allServers) do
       vim.lsp.config(server_name, server)
       vim.lsp.enable(server_name)
     end

@@ -72,7 +72,7 @@ opt.fillchars = {
   diff = '╱',
 }
 
-local icons = require('shared.icons')
+local icons = require('icons')
 vim.diagnostic.config({
   severity_sort = true,
   underline = { severity = vim.diagnostic.severity.ERROR },

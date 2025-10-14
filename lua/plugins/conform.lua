@@ -1,16 +1,8 @@
-local function Set(list)
-  local set = {}
-  for _, l in ipairs(list) do
-    set[l] = true
-  end
-  return set
-end
-
 local prettier = { 'prettierd', 'prettier', stop_after_first = true }
 
 -- local disable_filetypes = {}
-local prefer_lsp = Set({})
-local fallback_to_lsp = Set({ 'lua' })
+local prefer_lsp = {}
+local fallback_to_lsp = { ['lua'] = true }
 
 return {
   'stevearc/conform.nvim',

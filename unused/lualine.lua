@@ -12,7 +12,7 @@ local mode_map = {
   c = 'Σ(°△°ꪱꪱ)',
   s = '(´ ▽｀) ',
 }
-local icons = require('shared.icons')
+local icons = require('icons')
 
 local function show_macro_recording()
   local recording_register = vim.fn.reg_recording()

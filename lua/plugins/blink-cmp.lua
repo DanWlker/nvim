@@ -112,7 +112,7 @@ return {
       },
     },
     -- appearance = {
-    --   kind_icons = require('shared.icons').symbol_kinds,
+    --   kind_icons = require('icons').symbol_kinds,
     -- },
   },
 }

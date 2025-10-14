@@ -1,37 +1,13 @@
-local list_extend = function(where, what)
+local function list_extend(where, what)
   return vim.list_extend(vim.deepcopy(where), what)
 end
 
-local list_filter = function(where, what)
+local function list_filter(where, what)
   return vim
     .iter(where)
     :filter(function(val) return not vim.list_contains(what, val) end)
     :totable()
 end
-
-local files_config = {
-  hidden = true,
-  ignored = true,
-  exclude = { -- keep this ignored even if toggling to show hidden/ignored
-    'node_modules',
-    '.DS_Store',
-    '*.docx',
-    '*.zip',
-    '*.pptx',
-    '*.svg',
-  },
-  matcher = { frecency = true },
-  layout = {
-    hidden = { 'preview' },
-  },
-}
-
-local should_flatten = {
-  ['json'] = true,
-  ['yaml'] = true,
-  ['toml'] = true,
-  ['helm'] = true,
-}
 
 return {
   'DanWlker/snacks.nvim',
@@ -201,6 +177,23 @@ return {
     },
   },
   config = function()
+    local files_config = {
+      hidden = true,
+      ignored = true,
+      exclude = { -- keep this ignored even if toggling to show hidden/ignored
+        'node_modules',
+        '.DS_Store',
+        '*.docx',
+        '*.zip',
+        '*.pptx',
+        '*.svg',
+      },
+      matcher = { frecency = true },
+      layout = {
+        hidden = { 'preview' },
+      },
+    }
+
     require('snacks').setup({
       styles = {
         input = {
@@ -318,7 +311,7 @@ return {
             },
           },
         },
-        -- kinds = require('shared.icons').symbol_kinds,
+        -- kinds = require('icons').symbol_kinds,
         formatters = {
           file = {
             filename_first = true,
@@ -343,6 +336,13 @@ return {
             { buffer = event.buf, desc = 'LSP: ' .. desc }
           )
         end
+
+        local should_flatten = {
+          ['json'] = true,
+          ['yaml'] = true,
+          ['toml'] = true,
+          ['helm'] = true,
+        }
 
         map('grr', function() Snacks.picker.lsp_references() end, 'Goto References')
         map(

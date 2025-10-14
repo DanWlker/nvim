@@ -1,6 +1,6 @@
 return {
   'WhoIsSethDaniel/mason-tool-installer.nvim',
-  opts = { ensure_installed = require('shared.tools').ensureInstalled },
+  opts = { ensure_installed = require('external').ensureInstalled },
   dependencies = {
     {
       'mason-org/mason-lspconfig.nvim',

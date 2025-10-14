@@ -333,6 +333,6 @@ function M.render()
   })
 end
 
-vim.o.statusline = "%!v:lua.require'personal.statusline'.render()"
+vim.o.statusline = "%!v:lua.require('statusline').render()"
 
 return M

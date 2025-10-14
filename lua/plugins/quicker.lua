@@ -4,7 +4,7 @@ return {
   opts = {
     borders = {
       -- Thinner separator.
-      vert = require('shared.icons').misc.vertical_bar,
+      vert = require('icons').misc.vertical_bar,
     },
   },
   keys = {

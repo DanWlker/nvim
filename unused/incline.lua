@@ -16,7 +16,7 @@ return {
         local modified = vim.bo[props.buf].modified
 
         local function get_diagnostic_label()
-          local icons = require('shared.icons')
+          local icons = require('icons')
           local label = {}
 
           for severity, icon in pairs(icons) do
