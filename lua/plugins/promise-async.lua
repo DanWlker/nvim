@@ -1,5 +1,6 @@
 return {
   'kevinhwang91/promise-async',
   lazy = true,
-  opts = {},
+  -- NOTE: This is commented on purpose
+  -- opts = {},
 }

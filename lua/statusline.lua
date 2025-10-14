@@ -23,6 +23,9 @@ function M.get_or_create_hl(hl)
     -- and the statusline's background color.
     local bg_hl = vim.api.nvim_get_hl(0, { name = 'StatusLine' })
     local fg_hl = vim.api.nvim_get_hl(0, { name = hl })
+
+    if not bg_hl.bg or not fg_hl.fg then return '' end
+
     vim.api.nvim_set_hl(
       0,
       hl_name,
