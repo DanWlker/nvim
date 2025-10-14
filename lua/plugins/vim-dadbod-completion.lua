@@ -3,5 +3,5 @@ return {
   ft = { 'sql', 'mysql', 'plsql' },
   lazy = true,
   -- NOTE: This is commented on purpose
-  opts = {},
+  -- opts = {},
 }
