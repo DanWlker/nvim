@@ -38,5 +38,6 @@ return {
       mode = 'v',
     },
   },
-  opts = {},
+  -- NOTE: This is commented on purpose
+  -- opts = {},
 }
