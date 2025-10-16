@@ -4,23 +4,58 @@ return {
   branch = 'main',
   build = ':TSUpdate',
   config = function()
-    if vim.fn.executable('tree-sitter') == 0 then
-      vim.notify(
-        '**treesitter-main** requires the `tree-sitter` executable to be installed',
-        vim.log.levels.ERROR
-      )
-      return
+    ---@return string?
+    local function win_find_cl()
+      local path = 'C:/Program Files (x86)/Microsoft Visual Studio'
+      local pattern = '*/*/VC/Tools/MSVC/*/bin/Hostx64/x64/cl.exe'
+      return vim.fn.globpath(path, pattern, true, true)[1]
     end
 
-    -- From LazyVim
-    -- On Windows, use `gcc` if `cl` is not available, and `gcc` is.
-    if
-      not vim.env.CC
-      and vim.fn.has('win32') == 1
-      and vim.fn.executable('cl') == 0
-      and vim.fn.executable('gcc') == 1
-    then
-      vim.env.CC = 'gcc'
+    ---@return boolean ok
+    local function hasDependencies()
+      local is_win = vim.fn.has('win32') == 1
+      ---@param tool string
+      ---@param win boolean?
+      local function have(tool, win)
+        return (win == nil or is_win == win) and vim.fn.executable(tool) == 1
+      end
+
+      local have_cc = vim.env.CC ~= nil
+        or have('cc', false)
+        or have('cl', true)
+        or (is_win and win_find_cl() ~= nil)
+
+      if not have_cc and is_win and vim.fn.executable('gcc') == 1 then
+        vim.env.CC = 'gcc'
+        have_cc = true
+      end
+
+      ---@class table<string,boolean>
+      local ret = {
+        ['tree-sitter (CLI)'] = have('tree-sitter'),
+        ['C compiler'] = have_cc,
+        tar = have('tar'),
+        curl = have('curl'),
+        node = have('node'),
+      }
+      local ok = true
+      for tool, v in pairs(ret) do
+        ok = ok and v
+        if not v then
+          local msg = '**treesitter-main** requires ' .. tool
+          if tool == 'C compiler' then
+            msg = msg
+              .. ', install a C compiler with `winget install --id=BrechtSanders.WinLibs.POSIX.UCRT -e`'
+          end
+          vim.notify(msg, vim.log.levels.ERROR)
+        end
+      end
+      return ok
+    end
+
+    if not hasDependencies() then
+      vim.notify('something went wrong setting up treesitter', vim.log.levels.ERROR)
+      return
     end
 
     vim.api.nvim_create_autocmd('User', {
