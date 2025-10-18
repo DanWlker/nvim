@@ -1,6 +1,7 @@
 local M = {}
 
 M.masonInstalledServers = {
+  basedpyright = {},
   tombi = {},
   helm_ls = {
     settings = {
@@ -323,6 +324,7 @@ M.ensureInstalled = (function()
     'shfmt', --used by bashls
     -- 'goimports',
     'tree-sitter-cli',
+    'ruff',
   })
   return ensure_installed
 end)()

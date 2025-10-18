@@ -131,6 +131,7 @@ return {
       'regex',
       'kitty',
       'toml',
+      'python',
     })
 
     vim.treesitter.language.register('bash', 'zsh')
