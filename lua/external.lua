@@ -160,7 +160,8 @@ M.masonInstalledServers = {
   },
 
   --Html, Css, Js
-  html = {},
+  -- html = {},
+  superhtml = {},
   cssls = {},
   eslint = {}, -- May need to look into if this will conflict with prettier but, so far not sure
 
