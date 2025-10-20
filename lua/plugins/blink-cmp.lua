@@ -70,10 +70,9 @@ return {
               text = function(ctx) return '[' .. ctx.source_name .. ']' end,
             },
           },
-
           columns = {
             { 'label', 'label_description', gap = 1 },
-            { 'kind_icon' },
+            { 'kind' },
             { 'source_name' },
           },
         },
