@@ -39,7 +39,8 @@ return {
         BlinkCmpDocBorder = { fg = colors.overlay0 },
         -- BlinkCmpSignatureHelpBorder = { fg = colors.overlay0, bg = colors.base },
         BlinkCmpSignatureHelpBorder = { fg = colors.overlay0 },
-        BlinkCmpMenuSelection = { bg = '#474b66' },
+        -- BlinkCmpLabelMatch = { fg = colors.blue },
+        -- BlinkCmpLabel = { fg = colors.text },
 
         -- [[ Telescope ]]
         TelescopeNormal = { bg = colors.mantle },
