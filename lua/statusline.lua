@@ -216,7 +216,7 @@ end
 --- The buffer's filetype.
 ---@return string
 function M.filetype_component()
-  local devicons = require('mini.icons')
+  if not MiniIcons then require('mini.icons') end
 
   -- Special icons for some filetypes.
   local special_icons = {
@@ -246,10 +246,10 @@ function M.filetype_component()
     -- local name, ext = vim.fn.fnamemodify(buf_name, ':t'), vim.fn.fnamemodify(buf_name, ':e')
 
     -- icon, icon_hl = devicons.get(name, ext)
-    icon, icon_hl = devicons.get('file', buf_name)
+    icon, icon_hl = MiniIcons.get('file', buf_name)
     if not icon then
       -- icon, icon_hl = devicons.get_icon_by_filetype(filetype, { default = true })
-      icon, icon_hl = devicons.get('filetype', filetype)
+      icon, icon_hl = MiniIcons.get('filetype', filetype)
     end
   end
   icon_hl = M.get_or_create_hl(icon_hl)
