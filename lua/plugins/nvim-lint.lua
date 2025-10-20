@@ -16,6 +16,12 @@ return {
       end
     end, {})
 
+    -- yamllint
+    local yamllint = lint.linters.yamllint
+    table.insert(yamllint.args, '-d')
+    table.insert(yamllint.args, '{extends: default, rules: {braces: disable}}')
+
+    -- golangcilint
     -- local golangcilint = lint.linters.golangcilint
     -- -- Add wsl to golangcilint
     -- -- https://github.com/bombsimon/wsl?tab=readme-ov-file

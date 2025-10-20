@@ -326,6 +326,7 @@ M.ensureInstalled = (function()
     -- 'goimports',
     'tree-sitter-cli',
     'ruff',
+    -- 'yamlfmt',
   })
   return ensure_installed
 end)()

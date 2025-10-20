@@ -80,6 +80,7 @@ return {
       sql = { 'sqlfluff' },
       typescript = prettier,
       typescriptreact = prettier,
+      -- yaml = { 'yamlfmt' }, -- prettier adds spaces between braces, causes issues with yamllint
       yaml = prettier,
       python = {
         -- To fix auto-fixable lint errors.
