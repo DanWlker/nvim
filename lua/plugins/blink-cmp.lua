@@ -46,7 +46,7 @@ return {
         border = 'rounded',
         draw = {
           -- treesitter = { 'lsp' },
-          align_to = 'cursor',
+          -- align_to = 'cursor',
           components = {
             kind_icon = {
               text = function(ctx)
@@ -72,8 +72,8 @@ return {
           },
 
           columns = {
-            { 'kind_icon' },
             { 'label', 'label_description', gap = 1 },
+            { 'kind_icon' },
             { 'source_name' },
           },
         },
@@ -94,8 +94,5 @@ return {
         enabled = true,
       },
     },
-    -- appearance = {
-    --   kind_icons = require('icons').symbol_kinds,
-    -- },
   },
 }
