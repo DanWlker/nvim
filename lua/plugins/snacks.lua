@@ -11,7 +11,6 @@ end
 
 return {
   'DanWlker/snacks.nvim',
-  branch = 'flatten_lsp_symbols',
   priority = 1000,
   lazy = false,
   keys = {
