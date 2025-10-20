@@ -25,7 +25,7 @@ return {
     lint.linters_by_ft = {
       markdown = { 'markdownlint-cli2' },
       go = { 'golangcilint' },
-      -- yaml = { 'yamllint' }, -- Too noisy
+      yaml = { 'yamllint' }, -- Too noisy
       dockerfile = { 'hadolint' },
       sql = { 'sqlfluff' },
       mysql = { 'sqlfluff' },

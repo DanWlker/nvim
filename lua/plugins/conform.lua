@@ -75,6 +75,7 @@ return {
       jsonc = prettier,
       lua = { 'stylua' },
       markdown = prettier, -- markdown = { 'prettier', 'markdownlint-cli2', 'markdown-toc' },
+      css = prettier,
       scss = prettier,
       sql = { 'sqlfluff' },
       typescript = prettier,
