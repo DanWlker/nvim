@@ -1,7 +1,7 @@
 -- Everything in here is from LazyVim
 return {
   'nvim-mini/mini.ai',
-  event = 'VimEnter',
+  lazy = false,
   -- NOTE: These must be loaded before
   dependencies = {
     'nvim-treesitter/nvim-treesitter-textobjects',

@@ -2,7 +2,7 @@
 local icons = require('icons').diagnostics
 return {
   'akinsho/bufferline.nvim',
-  event = 'VimEnter',
+  lazy = false,
   opts = {
     options = {
       mode = 'tabs',
