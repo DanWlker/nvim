@@ -12,7 +12,7 @@ M.masonInstalledServers = {
       },
     },
   },
-  graphql = {},
+  -- graphql = {},
   marksman = {},
   -- yamlls from LazyVim
   yamlls = {
@@ -36,9 +36,9 @@ M.masonInstalledServers = {
       redhat = { telemetry = { enabled = false } },
       yaml = {
         keyOrdering = false,
-        -- format = {
-        --   enable = true,
-        -- },
+        format = {
+          enable = true,
+        },
         validate = true,
         schemaStore = {
           -- Must disable built-in schemaStore support to use
