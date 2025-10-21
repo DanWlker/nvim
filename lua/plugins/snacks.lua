@@ -11,6 +11,8 @@ end
 
 return {
   'DanWlker/snacks.nvim',
+  -- this commit breaks todo-comments design
+  -- commit = '3b54c8d3d1f0cd5b2698e343b218a01a42f4388f',
   priority = 1000,
   lazy = false,
   keys = {
