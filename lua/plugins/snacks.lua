@@ -158,7 +158,10 @@ return {
     },
     {
       '<leader>ft',
-      function() Snacks.picker.todo_comments() end,
+      function()
+        if not package.loaded['todo-comments'] then require('todo-comments') end
+        Snacks.picker.todo_comments()
+      end,
       desc = 'Find Todo',
     },
     {
