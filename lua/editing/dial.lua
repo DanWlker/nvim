@@ -20,22 +20,22 @@ return {
     {
       '<C-a>',
       function() require('dial.map').manipulate('increment', 'visual') end,
-      mode = 'v',
+      mode = 'x',
     },
     {
       '<C-x>',
       function() require('dial.map').manipulate('decrement', 'visual') end,
-      mode = 'v',
+      mode = 'x',
     },
     {
       'g<C-a>',
       function() require('dial.map').manipulate('increment', 'gvisual') end,
-      mode = 'v',
+      mode = 'x',
     },
     {
       'g<C-x>',
       function() require('dial.map').manipulate('decrement', 'gvisual') end,
-      mode = 'v',
+      mode = 'x',
     },
   },
   -- NOTE: This is commented on purpose

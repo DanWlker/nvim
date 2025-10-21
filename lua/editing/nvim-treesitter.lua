@@ -84,7 +84,7 @@ return {
       ),
       callback = function(ctx)
         -- highlights
-        local started = pcall(vim.treesitter.start) -- errors for filetypes with no parser, note this starts the parser as well
+        local started = pcall(vim.treesitter.start, ctx.buf) -- errors for filetypes with no parser, note this starts the parser as well
 
         -- indent
         if started and not vim.list_contains(dontUseTreesitterIndent, ctx.match) then

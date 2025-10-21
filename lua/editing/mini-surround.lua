@@ -5,7 +5,7 @@ return {
     local plugin = require('lazy.core.config').spec.plugins['mini.surround']
     local opts = require('lazy.core.plugin').values(plugin, 'opts', false)
     local mappings = {
-      { opts.mappings.add, desc = 'Add Matching', mode = { 'n', 'v' } },
+      { opts.mappings.add, desc = 'Add Matching', mode = { 'n', 'x' } },
       { opts.mappings.delete, desc = 'Delete Matching' },
       { opts.mappings.find, desc = 'Find Right Matching' },
       { opts.mappings.find_left, desc = 'Find Left Matching' },

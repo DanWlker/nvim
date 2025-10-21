@@ -9,7 +9,7 @@ return {
         })
       end,
       desc = 'Find Shortcuts in Toolbox',
-      mode = { 'n', 'v' },
+      mode = { 'n', 'x' },
     },
   },
   opts = {
