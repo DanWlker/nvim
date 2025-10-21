@@ -40,16 +40,7 @@ return {
     },
     {
       '<leader>ff',
-      function()
-        local truncate_width = vim.api.nvim_win_get_width(0) * 0.8
-        Snacks.picker.files({
-          formatters = {
-            file = {
-              truncate = truncate_width,
-            },
-          },
-        })
-      end,
+      function() Snacks.picker.files() end,
       mode = 'n',
       desc = 'Find Files',
     },
