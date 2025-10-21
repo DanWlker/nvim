@@ -167,6 +167,7 @@ return {
     {
       '<leader>fT',
       function()
+        if not package.loaded['todo-comments'] then require('todo-comments') end
         Snacks.picker.todo_comments({ keywords = { 'TODO', 'FIX', 'FIXME' } })
       end,
       desc = 'Find Todo/Fix/Fixme',
