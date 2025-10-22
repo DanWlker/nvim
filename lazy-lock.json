@@ -50,7 +50,7 @@
   "promise-async": { "branch": "main", "commit": "119e8961014c9bfaf1487bf3c2a393d254f337e2" },
   "quicker.nvim": { "branch": "master", "commit": "12a2291869a326424b1cbee937f4f80334433012" },
   "rainbow_csv.nvim": { "branch": "main", "commit": "26de78d8324f7ac6a3e478319d1eb1f17123eb5b" },
-  "snacks.nvim": { "branch": "main", "commit": "567b9d63c88e16670eca88362f9ff7ab83e74cff" },
+  "snacks.nvim": { "branch": "main", "commit": "55d6670a7eb2667d467489b5c6c6a2ed428cead2" },
   "substitute.nvim": { "branch": "main", "commit": "9db749a880e3dd3b0eb57f698aa8f1e1630e1f25" },
   "todo-comments.nvim": { "branch": "main", "commit": "19d461ddd543e938eb22505fb03fa878800270b6" },
   "toolbox.nvim": { "branch": "main", "commit": "f2890d9f0e41fbbaf586275d3c68e3648f3f9bf2" },

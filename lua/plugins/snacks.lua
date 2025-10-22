@@ -11,8 +11,6 @@ end
 
 return {
   'DanWlker/snacks.nvim',
-  -- this commit breaks todo-comments design
-  -- commit = '3b54c8d3d1f0cd5b2698e343b218a01a42f4388f',
   priority = 1000,
   lazy = false,
   keys = {
@@ -356,12 +354,16 @@ return {
             flatten = flatten,
           })
         end, 'Show Document Symbols')
-        -- map('grc', function()
-        --   require('telescope.builtin').lsp_incoming_calls()
-        -- end, 'Goto incoming calls')
-        -- map('gro', function()
-        --   require('telescope.builtin').lsp_outgoing_calls()
-        -- end, 'Goto outgoing calls')
+        map(
+          'grc',
+          function() Snacks.picker.lsp_incoming_calls() end,
+          'Goto incoming calls'
+        )
+        map(
+          'gro',
+          function() Snacks.picker.lsp_outgoing_calls() end,
+          'Goto outgoing calls'
+        )
         map('gd', function() Snacks.picker.lsp_definitions() end, 'Goto Definition')
         map(
           'grt',
