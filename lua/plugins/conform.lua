@@ -19,6 +19,7 @@ return {
       -- if disable_filetypes[vim.bo[bufnr].filetype] then
       --   return nil
       -- end
+      if vim.b.disable_autoformat == true then return nil end
 
       local to_return = { timeout_ms = 500 }
       -- Reenable when needed

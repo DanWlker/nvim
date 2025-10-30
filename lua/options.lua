@@ -58,6 +58,7 @@ o.foldtext = ''
 o.formatlistpat = [[^\s*[0-9\-\+\*]\+[\.\)]*\s\+]]
 o.complete = '.,w,b,kspell'
 o.completeopt = 'menuone,noselect,fuzzy,nosort'
+o.lazyredraw = true
 
 local opt = vim.opt
 opt.virtualedit = { 'block' } -- in visual block mode, cursor can move beyond end of line
