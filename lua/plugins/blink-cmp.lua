@@ -13,6 +13,8 @@ return {
       per_filetype = {
         lua = { inherit_defaults = true, 'lazydev' },
         sql = { 'dadbod' },
+        mysql = { 'dadbod' },
+        plsql = { 'dadbod' },
       },
       providers = {
         dadbod = {

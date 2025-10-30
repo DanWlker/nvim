@@ -163,6 +163,11 @@ return {
       end,
       desc = 'Find Todo/Fix/Fixme',
     },
+    {
+      '<leader>ts',
+      function() Snacks.scratch() end,
+      desc = 'Toggle scratch buffer',
+    },
   },
   config = function()
     local files_config = {

@@ -4,6 +4,13 @@ local prettier = { 'prettierd', 'prettier', stop_after_first = true }
 local prefer_lsp = {}
 local fallback_to_lsp = { ['lua'] = true }
 
+vim.keymap.set(
+  'n',
+  '<leader>tf',
+  function() vim.b.disable_autoformat = not vim.b.disable_autoformat end,
+  { desc = 'Toggle format' }
+)
+
 return {
   'stevearc/conform.nvim',
   event = { 'BufWritePre' },
@@ -19,7 +26,7 @@ return {
       -- if disable_filetypes[vim.bo[bufnr].filetype] then
       --   return nil
       -- end
-      if vim.b.disable_autoformat == true then return nil end
+      if vim.b[bufnr].disable_autoformat then return end
 
       local to_return = { timeout_ms = 500 }
       -- Reenable when needed
@@ -90,6 +97,9 @@ return {
         -- To organize the imports.
         'ruff_organize_imports',
       },
+      graphql = prettier,
+      html = prettier,
+      vue = prettier,
       ['_'] = { 'trim_whitespace', 'trim_newlines' },
     },
   },

@@ -68,12 +68,6 @@ map(
   '<cmd>windo set wrap!<cr>',
   { desc = 'Toggle wrap for all windows' }
 )
-map(
-  'n',
-  '<leader>tf',
-  function() vim.b.disable_autoformat = not vim.b.disable_autoformat end,
-  { desc = 'Toggle wrap' }
-)
 
 -- map('n', '<leader>td', function()
 --   vim.diagnostic.enable(not vim.diagnostic.is_enabled())

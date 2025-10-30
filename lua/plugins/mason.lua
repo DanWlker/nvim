@@ -1,5 +1,13 @@
 return {
   'mason-org/mason.nvim',
   lazy = true,
-  opts = {},
+  opts = {
+    ui = {
+      icons = {
+        package_pending = ' ',
+        package_installed = ' ',
+        package_uninstalled = ' ',
+      },
+    },
+  },
 }

@@ -162,7 +162,26 @@ M.masonInstalledServers = {
   --Html, Css, Js
   -- html = {},
   superhtml = {},
-  cssls = {},
+  cssls = {
+    -- from https://github.com/Alexis12119/nvim-config/blob/main/lua/plugins/lsp/settings/cssls.lua
+    settings = {
+      css = {
+        lint = {
+          unknownAtRules = 'ignore',
+        },
+      },
+      scss = {
+        lint = {
+          unknownAtRules = 'ignore',
+        },
+      },
+      less = {
+        lint = {
+          unknownAtRules = 'ignore',
+        },
+      },
+    },
+  },
   eslint = {}, -- May need to look into if this will conflict with prettier but, so far not sure
 
   -- TODO: Migrate to golang typescript lsp when it is done

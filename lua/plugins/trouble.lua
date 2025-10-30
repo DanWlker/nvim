@@ -59,7 +59,7 @@ return {
     },
     {
       '<leader>xt',
-      '<cmd>TodoTrouble<cr>',
+      '<cmd>TodoTrouble toggle<cr>',
       desc = 'Todo List',
     },
   },
