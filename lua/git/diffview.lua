@@ -13,4 +13,11 @@ return {
       desc = 'Git File Only History',
     },
   },
+  opts = {
+    view = {
+      default = {
+        layout = 'diff2_vertical',
+      },
+    },
+  },
 }
