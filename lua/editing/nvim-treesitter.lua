@@ -36,7 +36,6 @@ return {
         ['C compiler'] = have_cc,
         tar = have('tar'),
         curl = have('curl'),
-        node = have('node'),
       }
       local ok = true
       for tool, v in pairs(ret) do
