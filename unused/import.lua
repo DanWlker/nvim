@@ -3,7 +3,7 @@ return {
   'piersolenski/import.nvim',
   opts = {
     picker = 'snacks',
-    insert_at_top = false,
+    -- insert_at_top = false,
   },
   keys = {
     {

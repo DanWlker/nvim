@@ -63,6 +63,15 @@ function M.render()
   --   ),
   -- }
 
+  local wintype = vim.fn.win_gettype(0)
+  -- local thing = vim.api.nvim_win_get_config(0).relative ~= ''
+  -- local second_thing = vim.api.nvim_get_option_value('buftype', {})
+
+  if wintype == 'popup' then
+    vim.wo.winbar = nil
+    return ''
+  end
+
   return table.concat({
     -- '%=',
     -- '%#WinBarEndSeparators#',
@@ -90,13 +99,15 @@ vim.api.nvim_create_autocmd('BufWinEnter', {
   desc = 'Attach winbar',
   callback = function(args)
     if
-      not vim.api.nvim_win_get_config(0).zindex -- Not a floating window
-      and vim.bo[args.buf].buftype == '' -- Normal buffer
-      and vim.api.nvim_buf_get_name(args.buf) ~= '' -- Has a file name
-      and not vim.wo[0].diff -- Not in diff mode
+      vim.api.nvim_win_get_config(0).zindex -- Floating window
+      or not vim.bo[args.buf].buftype == '' -- Not a normal buffer
+      or vim.api.nvim_buf_get_name(args.buf) == '' -- Does not have a file name
+      or vim.wo[0].diff -- In diff mode
     then
-      vim.wo.winbar = "%{%v:lua.require('winbar').render()%}"
+      return
     end
+
+    vim.wo.winbar = "%{%v:lua.require('winbar').render()%}"
   end,
 })
 

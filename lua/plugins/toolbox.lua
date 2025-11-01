@@ -131,7 +131,7 @@ return {
       },
       {
         name = 'Undotree: Focus',
-        execute = 'UndotreeFocus',
+        execute = 'Atone focus',
       },
     },
   },
