@@ -73,7 +73,7 @@ function M.render()
   end
 
   return table.concat({
-    -- '%=',
+    '%=',
     -- '%#WinBarEndSeparators#',
     '%#WinBarIndDir# ',
     prefix,
