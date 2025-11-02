@@ -1,5 +1,9 @@
 return {
   'mfussenegger/nvim-dap',
+  dependencies = {
+    -- NOTE: This is intentional because want to lazy load virtual text
+    'theHamsta/nvim-dap-virtual-text',
+  },
   keys = {
     {
       '<F5>',
