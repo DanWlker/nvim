@@ -1,7 +1,11 @@
 return {
   'XXiaoA/atone.nvim',
   cmd = 'Atone',
-  opts = {}, -- your configuration here
+  opts = {
+    ui = {
+      compact = true,
+    },
+  }, -- your configuration here
   keys = {
     {
       '<leader>tu',
