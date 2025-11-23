@@ -84,9 +84,17 @@ return {
       end,
     })
 
+    -- From maria's config
+    -- Extend neovim's client capabilities with the completion ones.
+    vim.lsp.config(
+      '*',
+      { capabilities = require('blink.cmp').get_lsp_capabilities(nil, true) }
+    )
+
     for server_name, server in pairs(require('external').allServers) do
       vim.lsp.config(server_name, server)
-      vim.lsp.enable(server_name)
     end
+
+    vim.lsp.enable(require('external').allServersKeys)
   end,
 }

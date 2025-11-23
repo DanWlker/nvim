@@ -314,6 +314,14 @@ M.allServers = (function()
   )
 end)()
 
+M.allServersKeys = (function()
+  local keyset = {}
+  for server_name, _ in pairs(M.allServers) do
+    keyset[#keyset + 1] = server_name
+  end
+  return keyset
+end)()
+
 M.ensureInstalled = (function()
   local ensure_installed = vim.tbl_keys(M.masonInstalledServers)
   vim.list_extend(ensure_installed, {
