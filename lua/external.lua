@@ -16,15 +16,15 @@ M.masonInstalledServers = {
   marksman = {},
   -- yamlls from LazyVim
   yamlls = {
-    -- Have to add this for yamlls to understand that we support line folding
-    capabilities = {
-      textDocument = {
-        foldingRange = {
-          dynamicRegistration = false,
-          lineFoldingOnly = true,
-        },
-      },
-    },
+    -- vim.lsp.protocol.make_client_capabilities() already has this
+    -- capabilities = {
+    --   textDocument = {
+    --     foldingRange = {
+    --       dynamicRegistration = false,
+    --       lineFoldingOnly = true,
+    --     },
+    --   },
+    -- },
     before_init = function(_, new_config)
       new_config.settings.yaml.schemas = vim.tbl_deep_extend(
         'force',
@@ -312,14 +312,6 @@ M.allServers = (function()
     M.masonInstalledServers,
     M.manuallyInstalledServers
   )
-end)()
-
-M.allServersKeys = (function()
-  local keyset = {}
-  for server_name, _ in pairs(M.allServers) do
-    keyset[#keyset + 1] = server_name
-  end
-  return keyset
 end)()
 
 M.ensureInstalled = (function()
