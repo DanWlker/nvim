@@ -1,6 +1,6 @@
 return {
   'dmmulroy/ts-error-translator.nvim',
-  event = 'VimEnter', -- I don't actually know what event to use
+  event = 'LspAttach',
   opts = {
     -- Auto-attach to LSP servers for TypeScript diagnostics (default: true)
     auto_attach = true,
