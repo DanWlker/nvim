@@ -1,5 +1,4 @@
 local folder_icon = require('icons').misc.folder
-local function escape_pattern(text) return text:gsub('([^%w])', '%%%1') end
 
 local M = {}
 
@@ -39,7 +38,7 @@ function M.render()
     ::continue::
   end
   if prefix ~= '' then
-    path = path:gsub('^' .. escape_pattern(prefix_path), '')
+    path = path:gsub('^' .. vim.pesc(prefix_path), '')
     prefix = string.format('%%#WinBarDir#%s %s%s', folder_icon, prefix, separator)
   end
   -- If the window gets too narrow, shorten the path

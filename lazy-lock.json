@@ -7,8 +7,8 @@
   "bufferline.nvim": { "branch": "main", "commit": "655133c3b4c3e5e05ec549b9f8cc2894ac6f51b3" },
   "catppuccin": { "branch": "main", "commit": "da33755d00e09bff2473978910168ff9ea5dc453" },
   "clangd_extensions.nvim": { "branch": "main", "commit": "b67cc417d9020fb4b83d46662351b4d16894905e" },
-  "conform.nvim": { "branch": "master", "commit": "afce105eb47b0869dfafdac90d82f02ef2419d61" },
-  "dial.nvim": { "branch": "master", "commit": "f0404ec1f83a03f2c3457e60087c6331d1cbb83f" },
+  "conform.nvim": { "branch": "master", "commit": "6208aefd675939cc7c8f1a57176135974dad269f" },
+  "dial.nvim": { "branch": "master", "commit": "f97c0c7fa7d5111bc04a91d0f693900fb2d95861" },
   "diffview.nvim": { "branch": "main", "commit": "4516612fe98ff56ae0415a259ff6361a89419b0a" },
   "flash.nvim": { "branch": "main", "commit": "fcea7ff883235d9024dc41e638f164a450c14ca2" },
   "friendly-snippets": { "branch": "main", "commit": "572f5660cf05f8cd8834e096d7b4c921ba18e175" },
@@ -62,6 +62,6 @@
   "vim-dadbod": { "branch": "master", "commit": "e95afed23712f969f83b4857a24cf9d59114c2e6" },
   "vim-dadbod-completion": { "branch": "master", "commit": "a8dac0b3cf6132c80dc9b18bef36d4cf7a9e1fe6" },
   "vim-dadbod-ui": { "branch": "master", "commit": "48c4f271da13d380592f4907e2d1d5558044e4e5" },
-  "visual-whitespace.nvim": { "branch": "main", "commit": "77bd21fb442cf2b97d7224f8269c053e9def9cb9" },
+  "visual-whitespace.nvim": { "branch": "main", "commit": "001dd506fa19a096372b1b2fafee33712cc849cf" },
   "which-key.nvim": { "branch": "main", "commit": "3aab2147e74890957785941f0c1ad87d0a44c15a" }
 }
