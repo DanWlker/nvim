@@ -371,6 +371,7 @@ M.ensureInstalled = (function()
     'ruff',
     -- 'yamlfmt',
     'bacon', -- used by bacon_ls
+    'rustfmt',
   })
   return ensure_installed
 end)()

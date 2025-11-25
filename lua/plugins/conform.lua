@@ -100,6 +100,7 @@ return {
       graphql = prettier,
       html = prettier,
       vue = prettier,
+      rust = { 'rustfmt' },
       ['_'] = { 'trim_whitespace', 'trim_newlines' },
     },
   },
