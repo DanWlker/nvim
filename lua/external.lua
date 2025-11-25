@@ -289,6 +289,12 @@ M.masonInstalledServers = {
     style = 'full',
   },
   bashls = {},
+  bacon_ls = {},
+}
+
+M.manuallyInstalledServers = {
+  -- Don't install rust_analyzer with nvim, use rustup, run this:
+  -- rustup component add rust-analyzer
   rust_analyzer = {
     cargo = {
       allFeatures = true,
@@ -323,10 +329,6 @@ M.masonInstalledServers = {
       watcher = 'client',
     },
   },
-  bacon_ls = {},
-}
-
-M.manuallyInstalledServers = {
   dartls = {
     settings = {
       dart = {
