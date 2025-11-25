@@ -139,11 +139,5 @@ return {
 
     -- https://www.reddit.com/r/neovim/comments/1d9gzud/comment/l7e6akp/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
     -- vim.highlight.priorities.semantic_tokens = 95 -- Or any number lower than 100, treesitter's priority level
-
-    -- https://www.reddit.com/r/neovim/comments/1d9gzud/comment/l7igfe0/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
-    -- Remove comment token, because it conflicts with TS comment query.
-    vim.api.nvim_set_hl(0, '@lsp.type.comment.go', {})
-    -- Does nothing except coloring of string literal, but conflicts with regexp parser. Remove it.
-    vim.api.nvim_set_hl(0, '@lsp.type.string.go', {})
   end,
 }
