@@ -371,7 +371,7 @@ M.ensureInstalled = (function()
     'ruff',
     -- 'yamlfmt',
     'bacon', -- used by bacon_ls
-    'rustfmt',
+    -- 'rustfmt', -- deprecated, install this using rustup
   })
   return ensure_installed
 end)()
