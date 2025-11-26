@@ -172,6 +172,8 @@ function M.lsp_progress_component()
   })
 end
 
+-- TODO: Replace this by `vim.diagnostic.status()`
+-- Maria's repo 4ee9f0a4ced7a3c6c00063780eda25b85c9067e1
 local last_diagnostic_component = ''
 --- Diagnostic counts in the current buffer.
 ---@return string
