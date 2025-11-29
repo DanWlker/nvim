@@ -1,83 +1,110 @@
-local g = vim.g
-g.mapleader = ' '
-g.maplocalleader = ' '
-g.have_nerd_font = true
-
--- disable netrw (copied from nvim-tree)
-g.loaded_netrw = 1
-g.loaded_netrwPlugin = 1
-
 -- Enable all filetype plugins and syntax (if not enabled, for better startup)
 vim.cmd('filetype plugin indent on')
 if vim.fn.exists('syntax_on') ~= 1 then vim.cmd('syntax enable') end
 
+local g = vim.g
+
+g.mapleader = ' '
+g.maplocalleader = ' '
+g.have_nerd_font = true
+g.loaded_netrw = 1 -- disable netrw (copied from nvim-tree)
+g.loaded_netrwPlugin = 1 -- disable netrw (copied from nvim-tree)
+
 local o = vim.o
+
+-- UI options
 o.number = true
 o.relativenumber = true
-o.signcolumn = 'yes'
-o.mouse = 'a'
-vim.schedule(function() o.clipboard = 'unnamedplus' end)
-o.breakindent = true
-o.breakindentopt = 'list:-1'
-o.linebreak = true
-o.undofile = true
-o.ignorecase = true
-o.smartcase = true
-o.updatetime = 250
-o.timeoutlen = 500
-o.splitright = true
-o.splitbelow = true
-o.list = false
-o.inccommand = 'split'
-o.cursorline = true
-o.scrolloff = 12
-o.sidescrolloff = 12
-o.cursorlineopt = 'number'
-o.laststatus = 3 -- global statusline
+o.signcolumn = 'yes' -- Always show sign column
+o.mouse = 'a' -- Enable mouse support in all modes
+vim.schedule(function() o.clipboard = 'unnamedplus' end) -- Use system clipboard (after startup)
+o.cursorline = true -- Highlight current line
+o.cursorlineopt = 'number' -- Only highlight line number
+
+-- Indentation & formatting
+o.smartindent = true -- Auto-indent new lines smartly
+o.shiftwidth = 2 -- Shift size for << and >>
+o.shiftround = true -- Round indent to multiples of shiftwidth
+o.breakindent = true -- Maintain indent when wrapping
+o.breakindentopt = 'list:-1' -- Additional breakindent settings
+o.linebreak = true -- Break lines at word boundaries
+o.formatoptions = 'rqnl1j' -- Formatting behavior https://neovim.io/doc/user/change.html#fo-table
+o.formatlistpat = [[^\s*[0-9\-\+\*]\+[\.\)]*\s\+]] -- Recognize list patterns
+
+-- Search
+o.ignorecase = true -- Case-insensitive search...
+o.smartcase = true -- ...unless uppercase in pattern
+o.inccommand = 'split' -- Live preview substitute changes
+
+-- Backup/undo
+o.undofile = true -- Persistent undo across sessions
+o.swapfile = false -- Disable swapfiles
+o.shada = "'100,<50,s10,:1000,/100,@100,h" -- Limit ShaDa file size for faster startup
+
+-- Performance
+o.updatetime = 250 -- CursorHold delay
+o.timeoutlen = 500 -- Mapped sequence wait time
+o.lazyredraw = true -- Don’t redraw while executing macros
+
+-- Window management
+o.splitright = true -- New splits open to the right
+o.splitbelow = true -- New splits open below
+o.laststatus = 3 -- Global statusline
+o.scrolloff = 12 -- Keep 12 lines visible above/below cursor
+o.sidescrolloff = 12 -- Same but horizontally
+-- o.splitkeep = 'screen' -- Keeps text o same screen line
+
+-- Display and wrapping
+o.wrap = false -- Disable line wrap
+o.list = false -- Don't show invisible chars by default
 o.termguicolors = true -- True color support
+
+-- Completion
+o.complete = '.,w,b,kspell' -- Completion sources
+o.completeopt = 'menuone,noselect,fuzzy,nosort' -- Popup menu behavior
+o.pumheight = 10 -- Max height of completion popup
+
+-- Misc behavior
+o.confirm = true -- Confirm instead of erroring on quit
+o.grepformat = '%f:%l:%c:%m' -- Format for grep outputs
+o.grepprg = 'rg --vimgrep' -- Use ripgrep for :grep
 o.jumpoptions = 'stack' -- Make jumplist more intuitive
-o.grepformat = '%f:%l:%c:%m'
-o.grepprg = 'rg --vimgrep'
-o.shiftround = true
-o.smartindent = true
-o.wrap = false
-o.confirm = true
-o.swapfile = false
-o.shada = "'100,<50,s10,:1000,/100,@100,h" -- Limit ShaDa file (for startup)
-o.pumheight = 10
-o.shortmess = 'CFOSWaco'
-o.formatoptions = 'rqnl1j'
-o.infercase = true
-o.shiftwidth = 2
+o.infercase = true -- Smarter case detection when completing
+o.foldmethod = 'indent' -- Fold based on indent level
+o.foldlevel = 10 -- Start unfolded
+o.foldnestmax = 10 -- Max nested folds
+o.foldtext = '' -- Hide default fold text
 o.spelloptions = 'camel'
--- o.splitkeep = 'screen'
-o.foldlevel = 10
-o.foldmethod = 'indent'
-o.foldnestmax = 10
-o.foldtext = ''
-o.formatlistpat = [[^\s*[0-9\-\+\*]\+[\.\)]*\s\+]]
-o.complete = '.,w,b,kspell'
-o.completeopt = 'menuone,noselect,fuzzy,nosort'
-o.lazyredraw = true
+o.shortmess = 'CFOSWaco'
 
 local opt = vim.opt
-opt.virtualedit = { 'block' } -- in visual block mode, cursor can move beyond end of line
-opt.iskeyword:append('-') -- treat `-` as word character, same as `_`
-opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+
+-- Virtual editing / keyword behaviour
+opt.virtualedit = { 'block' } -- In visual block mode, cursor can move beyond end of line
+opt.iskeyword:append('-') -- Treat `-` as word character, same as `_`
+
+-- Characters for invisible items
+opt.listchars = {
+  tab = '» ',
+  trail = '·',
+  nbsp = '␣',
+}
+
+-- UI characters
 opt.fillchars = {
-  eob = ' ',
+  eob = ' ', -- No visible ~ on empty lines
   foldopen = '',
   foldclose = '',
   fold = ' ',
   foldsep = ' ',
   diff = '╱',
 }
-
+-- Diagnostic configuration
 local icons = require('icons')
 vim.diagnostic.config({
   severity_sort = true,
   underline = { severity = vim.diagnostic.severity.ERROR },
-  signs = false,
+  signs = false, -- Disable gutter signs
   -- signs = vim.g.have_nerd_font and {
   --   text = {
   --     [vim.diagnostic.severity.ERROR] = icons.ERROR,
@@ -99,7 +126,7 @@ vim.diagnostic.config({
     --   max = vim.diagnostic.severity.WARN,
     -- },
     -- prefix = '',
-    spacing = 2,
+    spacing = 2, -- Space before text
     format = function(diagnostic)
       -- Use shorter, nicer names for some sources:
       local special_sources = {
@@ -139,6 +166,7 @@ vim.diagnostic.config({
   update_in_insert = false,
 })
 
+-- WSL clipboard integration
 local function isNotEmpty(s) return s ~= nil and s ~= '' end
 if isNotEmpty(vim.env.WSL_INTEROP) or isNotEmpty(vim.env.WSL_DISTRO_NAME) then
   g.clipboard = {

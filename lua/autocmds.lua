@@ -35,3 +35,15 @@ vim.api.nvim_create_autocmd('ModeChanged', {
   group = vim.api.nvim_create_augroup('danwlker/toggle-hlsearch', { clear = true }),
   desc = 'Show search highlights in normal mode, hide in insert mode',
 })
+
+-- yankring
+vim.api.nvim_create_autocmd('TextYankPost', {
+  group = vim.api.nvim_create_augroup('danwlker/yankring', { clear = true }),
+  callback = function()
+    if vim.v.event.operator == 'y' then
+      for i = 9, 1, -1 do -- Shift all numbered registers.
+        vim.fn.setreg(tostring(i), vim.fn.getreg(tostring(i - 1)))
+      end
+    end
+  end,
+})
