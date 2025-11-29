@@ -284,6 +284,20 @@ return {
             layout = {
               preset = 'vscode',
             },
+            actions = {
+              accept = function(picker, item)
+                picker:close()
+                vim.cmd(item.cmd)
+              end,
+            },
+            win = {
+              input = {
+                keys = {
+                  ['<cr>'] = { 'accept', mode = { 'i', 'n' } }, -- Execute
+                  ['<tab>'] = { 'confirm', mode = { 'i', 'n' } }, -- Choose
+                },
+              },
+            },
           },
           diagnostics = {
             layout = {
