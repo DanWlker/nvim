@@ -16,5 +16,7 @@ return {
     'RainbowDelimSimple',
     'RainbowDelimQuoted',
     'RainbowMultiDelim',
+    'RainbowAlign',
+    'RainbowShrink',
   },
 }
