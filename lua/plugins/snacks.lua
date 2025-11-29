@@ -9,6 +9,18 @@ local function list_filter(where, what)
     :totable()
 end
 
+vim.api.nvim_create_user_command(
+  'ScratchToggle',
+  function() require('snacks').scratch() end,
+  { desc = 'Scratch Toggle Buffer' }
+)
+
+vim.api.nvim_create_user_command(
+  'ScratchSelect',
+  function() require('snacks').scratch.select() end,
+  { desc = 'Scratch Select Buffer' }
+)
+
 return {
   'DanWlker/snacks.nvim',
   priority = 1000,
@@ -59,7 +71,7 @@ return {
     {
       '<leader>fc',
       function() Snacks.picker.commands() end,
-      mode = 'n',
+      mode = { 'n', 'x' },
       desc = 'Find Commands',
     },
     {

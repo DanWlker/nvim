@@ -11,6 +11,12 @@ vim.keymap.set(
   { desc = 'Toggle format' }
 )
 
+vim.api.nvim_create_user_command(
+  'ConformFormat',
+  function() require('conform').format({ async = true, lsp_format = 'fallback' }) end,
+  { desc = 'Format buffer' }
+)
+
 return {
   'stevearc/conform.nvim',
   event = { 'BufWritePre' },

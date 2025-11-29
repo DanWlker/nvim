@@ -1,3 +1,9 @@
+vim.api.nvim_create_user_command(
+  'AtoneFocus',
+  function() vim.cmd('Atone focus') end,
+  { desc = 'Undotree Focus' }
+)
+
 return {
   'XXiaoA/atone.nvim',
   cmd = 'Atone',
