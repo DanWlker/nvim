@@ -20,6 +20,7 @@ o.mouse = 'a' -- Enable mouse support in all modes
 vim.schedule(function() o.clipboard = 'unnamedplus' end) -- Use system clipboard (after startup)
 o.cursorline = true -- Highlight current line
 o.cursorlineopt = 'number' -- Only highlight line number
+-- o.pumborder = 'rounded' -- Built-in completion window, TODO: needs nvim 0.12
 
 -- Indentation & formatting
 o.smartindent = true -- Auto-indent new lines smartly

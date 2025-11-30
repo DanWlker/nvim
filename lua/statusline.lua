@@ -320,6 +320,7 @@ function M.render()
     )
   end
 
+  -- TODO: diagnostic.status needs nvim 0.12
   local dgc = vim.diagnostic.status or M.diagnostics_component
 
   return table.concat({
