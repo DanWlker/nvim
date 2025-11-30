@@ -127,6 +127,11 @@ return {
         -- [[ Diffview ]]
         DiffviewNormal = { fg = colors.text, bg = colors.base },
 
+        -- [[ Statusline ]]
+        StatusLine = { bg = colors.base },
+        -- StatuslineTitle = { bg = colors.base },
+        -- StatuslineLineTitle = { bg = colors.base },
+
         -- [[ Syntax ]]
         ['@lsp.type.variable'] = { fg = colors.text }, -- for rust to allow variable to show in println!({variable})
         -- https://www.reddit.com/r/neovim/comments/1d9gzud/comment/l7igfe0/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
