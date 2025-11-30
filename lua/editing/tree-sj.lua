@@ -6,7 +6,9 @@ return {
     { 'jj', desc = 'Join with treesitter' },
   },
   config = function()
-    require('treesj').setup({ use_default_keymaps = false })
+    local treesj = require('treesj')
+    treesj.setup({ use_default_keymaps = false })
+    local tsj_langs = require('treesj.langs')['presets']
 
     local function get_pos_lang()
       local c = vim.api.nvim_win_get_cursor(0)
@@ -22,32 +24,29 @@ return {
     end
 
     vim.keymap.set('n', 'jt', function()
-      local tsj_langs = require('treesj.langs')['presets']
       local lang = get_pos_lang()
       if lang ~= '' and tsj_langs[lang] then
-        require('treesj').toggle()
+        treesj.toggle()
       else
-        require('mini.splitjoin').toggle()
+        require('mini.splitjoin').toggle() -- lazy load, only load if need to fallback
       end
     end)
 
     vim.keymap.set('n', 'js', function()
-      local tsj_langs = require('treesj.langs')['presets']
       local lang = get_pos_lang()
       if lang ~= '' and tsj_langs[lang] then
-        require('treesj').split()
+        treesj.split()
       else
-        require('mini.splitjoin').split()
+        require('mini.splitjoin').split() -- lazy load, only load if need to fallback
       end
     end)
 
     vim.keymap.set('n', 'jj', function()
-      local tsj_langs = require('treesj.langs')['presets']
       local lang = get_pos_lang()
       if lang ~= '' and tsj_langs[lang] then
-        require('treesj').join()
+        treesj.join()
       else
-        require('mini.splitjoin').join()
+        require('mini.splitjoin').join() -- lazy load, only load if need to fallback
       end
     end)
   end,

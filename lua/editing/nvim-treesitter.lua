@@ -92,8 +92,9 @@ return {
       end,
     })
 
-    require('nvim-treesitter').setup()
-    require('nvim-treesitter').install({
+    local nvim_treesitter = require('nvim-treesitter')
+    nvim_treesitter.setup()
+    nvim_treesitter.install({
       'bash',
       'c',
       'diff',

@@ -7,7 +7,7 @@ return {
 
     vim.api.nvim_create_user_command('LintInfo', function()
       local filetype = vim.bo.filetype
-      local linters = require('lint').linters_by_ft[filetype]
+      local linters = lint.linters_by_ft[filetype]
 
       if linters then
         vim.notify('Linters for ' .. filetype .. ': ' .. table.concat(linters, ', '))

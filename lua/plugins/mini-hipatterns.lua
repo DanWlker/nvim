@@ -320,9 +320,10 @@ return {
       callback = function() hl = {} end,
     })
 
-    require('mini.hipatterns').setup({
+    local mini_hipatterns = require('mini.hipatterns')
+    mini_hipatterns.setup({
       highlighters = {
-        hex_color = require('mini.hipatterns').gen_highlighter.hex_color({
+        hex_color = mini_hipatterns.gen_highlighter.hex_color({
           priority = 2000,
         }),
         shorthand = {
