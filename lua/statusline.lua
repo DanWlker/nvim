@@ -320,6 +320,8 @@ function M.render()
     )
   end
 
+  local dgc = vim.diagnostic.status or M.diagnostics_component
+
   return table.concat({
     concat_components({
       M.mode_component(),
@@ -328,7 +330,7 @@ function M.render()
     }),
     '%#StatusLine#%=',
     concat_components({
-      M.diagnostics_component(),
+      dgc(),
       M.filetype_component(),
       M.encoding_component(),
       M.position_component(),
