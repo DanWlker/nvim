@@ -134,9 +134,8 @@ return {
       'python',
       'rust',
       'ron',
+      'zsh',
     })
-
-    vim.treesitter.language.register('bash', 'zsh')
 
     -- https://www.reddit.com/r/neovim/comments/1d9gzud/comment/l7e6akp/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
     -- vim.highlight.priorities.semantic_tokens = 95 -- Or any number lower than 100, treesitter's priority level
