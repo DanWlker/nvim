@@ -27,7 +27,14 @@ function M.render()
       or '%#TabLinePillInactiveRight#'
 
     s = s .. hl_left .. ''
-    s = s .. hl_text .. ' ' .. M.getTabLabel(tab) .. ' '
+    s = s
+      .. hl_text
+      .. ' '
+      .. M.getTabLabel(tab)
+      .. ' '
+      .. '['
+      .. #vim.api.nvim_tabpage_list_wins(tab)
+      .. ']'
     s = s .. hl_right .. ''
     s = s .. '%#TabLine# '
   end
