@@ -10,6 +10,8 @@ require('commands')
 
 require('statusline')
 
+require('tabline')
+
 require('winbar')
 
 require('lazy').setup({
