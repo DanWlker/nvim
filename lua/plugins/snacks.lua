@@ -239,6 +239,11 @@ return {
       picker = {
         actions = require('trouble.sources.snacks').actions,
         win = {
+          preview = {
+            wo = {
+              wrap = true,
+            },
+          },
           input = {
             keys = {
               ['<c-t>'] = {
@@ -322,13 +327,6 @@ return {
           notifications = {
             layout = {
               preset = 'vertical',
-            },
-            win = {
-              preview = {
-                wo = {
-                  wrap = true,
-                },
-              },
             },
           },
           registers = {
