@@ -16,7 +16,7 @@ local function count_editable_buffers_in_tab(tab)
   for _, win in ipairs(vim.api.nvim_tabpage_list_wins(tab)) do
     local buf = vim.api.nvim_win_get_buf(win)
     local bo = vim.bo[buf]
-    if bo.buftype == '' and bo.modifiable and not bo.readonly then
+    if bo.buftype == '' and bo.buflisted and bo.modifiable and not bo.readonly then
       count = count + 1
     end
   end
