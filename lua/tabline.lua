@@ -11,6 +11,18 @@ function M.getTabLabel(n)
   return file_name
 end
 
+local function count_editable_buffers_in_tab(tab)
+  local count = 0
+  for _, win in ipairs(vim.api.nvim_tabpage_list_wins(tab)) do
+    local buf = vim.api.nvim_win_get_buf(win)
+    local bo = vim.bo[buf]
+    if bo.buftype == '' and bo.modifiable and not bo.readonly then
+      count = count + 1
+    end
+  end
+  return count
+end
+
 function M.render()
   local s = ''
   local tabs = vim.api.nvim_list_tabpages()
@@ -33,7 +45,7 @@ function M.render()
       .. M.getTabLabel(tab)
       .. ' '
       .. '['
-      .. #vim.api.nvim_tabpage_list_wins(tab)
+      .. count_editable_buffers_in_tab(tab)
       .. ']'
     s = s .. hl_right .. ''
     s = s .. '%#TabLine# '
