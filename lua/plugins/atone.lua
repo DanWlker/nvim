@@ -6,7 +6,7 @@ vim.api.nvim_create_user_command(
 
 return {
   'XXiaoA/atone.nvim',
-  cmd = { 'Atone', 'AtoneFocus' },
+  cmd = { 'Atone' },
   opts = {
     ui = {
       compact = true,

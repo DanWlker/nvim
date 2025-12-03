@@ -17,10 +17,9 @@ return {
     'DBUIToggle',
     'DBUIAddConnection',
     'DBUIFindBuffer',
-    'DBUITab',
   },
   init = function()
-    vim.g.db_ui_use_nerd_fonts = 1
+    vim.g.db_ui_use_nerd_fonts = vim.g.have_nerd_font
     vim.g.db_ui_use_nvim_notify = 1
   end,
   -- NOTE: This is commented on purpose
