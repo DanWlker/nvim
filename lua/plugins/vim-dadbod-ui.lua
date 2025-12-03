@@ -5,6 +5,7 @@ vim.api.nvim_create_user_command('DBUITab', function()
 end, {
   desc = 'Open DBUI in another tab',
 })
+
 return {
   'kristijanhusak/vim-dadbod-ui',
   -- NOTE: This must be loaded before
@@ -16,6 +17,7 @@ return {
     'DBUIToggle',
     'DBUIAddConnection',
     'DBUIFindBuffer',
+    'DBUITab',
   },
   init = function()
     vim.g.db_ui_use_nerd_fonts = 1

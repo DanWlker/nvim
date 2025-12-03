@@ -20,7 +20,7 @@ vim.api.nvim_create_user_command(
 return {
   'stevearc/conform.nvim',
   event = { 'BufWritePre' },
-  cmd = { 'ConformInfo' },
+  cmd = { 'ConformInfo', 'ConformFormat' },
   init = function()
     -- Use conform for gq.
     vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
