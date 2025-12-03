@@ -323,6 +323,13 @@ return {
             layout = {
               preset = 'vertical',
             },
+            win = {
+              preview = {
+                wo = {
+                  wrap = true,
+                },
+              },
+            },
           },
           registers = {
             layout = {
