@@ -55,7 +55,7 @@ end, {
   range = true,
 })
 
-ncuc('PrintTable', function(opts)
+ncuc('Print', function(opts)
   local expr = opts.fargs[1]
 
   -- Wrap the expression in "return ..." so loadstring evaluates it.
@@ -71,7 +71,7 @@ ncuc('PrintTable', function(opts)
     return
   end
 
-  print(vim.inspect(result))
+  print(type(result) == 'table' and vim.inspect(result) or result)
 end, {
   nargs = 1,
   desc = 'Evaluate a Lua expression and print its value',
