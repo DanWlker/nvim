@@ -117,14 +117,8 @@ return {
     {
       '<leader>fN',
       function()
-        local truncate_width = vim.api.nvim_win_get_width(0) * 0.8
         Snacks.picker.files({
           cwd = vim.fn.stdpath('config'),
-          formatters = {
-            file = {
-              truncate = truncate_width,
-            },
-          },
         })
       end,
       desc = 'Find Neovim Files',
