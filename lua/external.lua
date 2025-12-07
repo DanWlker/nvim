@@ -369,7 +369,7 @@ M.ensureInstalled = (function()
     'shellcheck', --used by bashls
     'shfmt', --used by bashls
     -- 'goimports',
-    'tree-sitter-cli',
+    -- 'tree-sitter-cli', -- don't use this, use brew installed one
     'ruff',
     -- 'yamlfmt',
     'bacon', -- used by bacon_ls
