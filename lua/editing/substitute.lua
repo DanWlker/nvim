@@ -1,7 +1,7 @@
 return {
   'gbprod/substitute.nvim',
   opts = {
-    yank_substituted_text = true,
+    -- yank_substituted_text = true,
     highlight_substituted_text = {
       timer = 150,
     },
@@ -28,6 +28,22 @@ return {
       'ss',
       function() require('substitute').line() end,
       desc = 'Substitute line',
+    },
+    {
+      'gs',
+      function() require('substitute.exchange').operator() end,
+      desc = 'Substitute exchange',
+    },
+    {
+      'gs',
+      function() require('substitute.exchange').visual() end,
+      mode = 'x',
+      desc = 'Substitute exchange',
+    },
+    {
+      'gss',
+      function() require('substitute.exchange').line() end,
+      desc = 'Substitute exchange line',
     },
   },
 }
