@@ -1,7 +1,7 @@
 return {
   'nvim-mini/mini.icons',
   version = false,
-  lazy = true,
+  lazy = false, -- fix sometimes if opening nvim tree too fast it will cause icons to be incorrect
   config = function()
     local ext3_blocklist = { scm = true, txt = true, yml = true }
     local ext4_blocklist = { json = true, yaml = true }
