@@ -1,9 +1,7 @@
 return {
   'cameron-wags/rainbow_csv.nvim',
   opts = {},
-  init = function()
-    vim.g.disable_rainbow_statusline = 1
-  end,
+  init = function() vim.g.disable_rainbow_statusline = 1 end,
   ft = {
     'csv',
     'tsv',
