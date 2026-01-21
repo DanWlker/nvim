@@ -285,8 +285,8 @@ function M.position_component()
   --   string.format('%%#StatuslineLineCount# %d', line_count),
   -- }
   return table.concat({
-    string.format('%%#StatuslineLineItalic# %d:%d ', line, col),
-    string.format('%%#StatuslineLineTitle#[%d]', line_count),
+    string.format('%%#StatuslineLineItalic# [%d:%d] ', line, col),
+    -- string.format('%%#StatuslineLineTitle#[%d]', line_count),
   })
 end
 
