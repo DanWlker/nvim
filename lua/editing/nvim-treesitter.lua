@@ -74,21 +74,22 @@ return {
       end,
     })
 
-    local dontUseTreesitterIndent = { 'bash', 'zsh', 'markdown' }
     vim.api.nvim_create_autocmd('FileType', {
       pattern = { '*' },
       group = vim.api.nvim_create_augroup(
         'danwlker/nvim-treesitter-start-and-indentexpr',
         { clear = true }
       ),
-      callback = function(ctx)
-        -- highlights
-        local started = pcall(vim.treesitter.start, ctx.buf) -- errors for filetypes with no parser, note this starts the parser as well
+      callback = function(args)
+        local buf, filetype = args.buf, args.match
+        local language = vim.treesitter.language.get_lang(filetype)
 
-        -- indent
-        if started and not vim.list_contains(dontUseTreesitterIndent, ctx.match) then
-          vim.bo[ctx.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-        end
+        if not language then return end
+
+        if not vim.treesitter.language.add(language) then return end
+
+        vim.treesitter.start(buf, language)
+        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
       end,
     })
 

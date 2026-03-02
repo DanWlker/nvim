@@ -84,11 +84,7 @@ return {
       end,
     })
 
-    -- From https://cmp.saghen.dev/installation
-    -- Extend neovim's client capabilities with the completion ones.
     for server_name, server in pairs(require('external').allServers) do
-      server.capabilities =
-        require('blink.cmp').get_lsp_capabilities(server.capabilities, true)
       vim.lsp.config(server_name, server)
       vim.lsp.enable(server_name)
     end

@@ -104,7 +104,7 @@ opt.fillchars = {
 local icons = require('icons')
 vim.diagnostic.config({
   severity_sort = true,
-  underline = { severity = vim.diagnostic.severity.ERROR },
+  underline = { severity = { min = vim.diagnostic.severity.WARN } },
   signs = false, -- Disable gutter signs
   -- signs = vim.g.have_nerd_font and {
   --   text = {
