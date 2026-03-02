@@ -111,7 +111,6 @@ M.masonInstalledServers = {
       completeUnimported = true,
       clangdFileStatus = true,
     },
-    before_init = function() require('clangd_extensions').setup() end,
   },
 
   -- Go, from LazyVim
