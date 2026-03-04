@@ -47,6 +47,9 @@ M.masonInstalledServers = {
           -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
           url = '',
         },
+        customTags = {
+          '!reference sequence', -- this is used for gitlab templates
+        },
       },
     },
   },
