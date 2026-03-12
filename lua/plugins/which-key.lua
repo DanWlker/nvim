@@ -19,6 +19,7 @@ return {
       { '<leader>w', group = '[W]orkspace' },
       { '<leader>g', group = '[G]it' },
       { '<leader>t', group = '[T]oggle' },
+      { '<leader>a', group = '[A]i' },
       { 'gr', group = 'LSP Actions', mode = { 'n' } },
     },
     triggers = {
