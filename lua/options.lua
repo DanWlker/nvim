@@ -20,7 +20,7 @@ o.mouse = 'a' -- Enable mouse support in all modes
 vim.schedule(function() o.clipboard = 'unnamedplus' end) -- Use system clipboard (after startup)
 o.cursorline = true -- Highlight current line
 o.cursorlineopt = 'number' -- Only highlight line number
--- o.pumborder = 'rounded' -- Built-in completion window, TODO: needs nvim 0.12
+o.pumborder = 'rounded' -- Built-in completion window
 
 -- Indentation & formatting
 o.smartindent = true -- Auto-indent new lines smartly
@@ -120,7 +120,14 @@ vim.diagnostic.config({
   --     min = vim.diagnostic.severity.ERROR,
   --   },
   -- },
-
+  status = {
+    format = {
+      [vim.diagnostic.severity.ERROR] = icons.diagnostics.ERROR,
+      [vim.diagnostic.severity.WARN] = icons.diagnostics.WARN,
+      [vim.diagnostic.severity.INFO] = icons.diagnostics.INFO,
+      [vim.diagnostic.severity.HINT] = icons.diagnostics.HINT,
+    },
+  },
   virtual_text = {
     -- source = 'if_many',
     -- severity = {

@@ -347,12 +347,7 @@ return {
       callback = function(event)
         local map = function(keys, func, desc, mode)
           mode = mode or 'n'
-          vim.keymap.set(
-            mode,
-            keys,
-            func,
-            { buffer = event.buf, desc = 'LSP: ' .. desc }
-          )
+          vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = desc })
         end
 
         local should_flatten = {
@@ -362,11 +357,15 @@ return {
           ['helm'] = true,
         }
 
-        map('grr', function() Snacks.picker.lsp_references() end, 'Goto References')
+        map(
+          'grr',
+          function() Snacks.picker.lsp_references() end,
+          'Snacks.picker.lsp_references()'
+        )
         map(
           'gri',
           function() Snacks.picker.lsp_implementations() end,
-          'Goto Implementation'
+          'Snacks.picker.lsp_implementations()'
         )
         map('gO', function()
           local flatten, tree = false, true
@@ -383,27 +382,31 @@ return {
             tree = tree,
             flatten = flatten,
           })
-        end, 'Show Document Symbols')
+        end, 'Snacks.picker.lsp_symbols()')
         map(
           'grc',
           function() Snacks.picker.lsp_incoming_calls() end,
-          'Goto incoming calls'
+          'Snacks.picker.lsp_incoming_calls()'
         )
         map(
           'gro',
           function() Snacks.picker.lsp_outgoing_calls() end,
-          'Goto outgoing calls'
+          'Snacks.picker.lsp_outgoing_calls()'
         )
-        map('gd', function() Snacks.picker.lsp_definitions() end, 'Goto Definition')
+        map(
+          'gd',
+          function() Snacks.picker.lsp_definitions() end,
+          'Snacks.picker.lsp_definitions()'
+        )
         map(
           'grt',
           function() Snacks.picker.lsp_type_definitions() end,
-          'Show Type Definition'
+          'Snacks.picker.lsp_type_definitions()'
         )
         map(
           'gW',
           function() Snacks.picker.lsp_workspace_symbols() end,
-          'Open Workspace Symbols'
+          'Snacks.picker.lsp_workspace_symbols()'
         )
       end,
     })

@@ -10,16 +10,15 @@ return {
       callback = function(event)
         local map = function(keys, func, desc, mode)
           mode = mode or 'n'
-          vim.keymap.set(
-            mode,
-            keys,
-            func,
-            { buffer = event.buf, desc = 'LSP: ' .. desc }
-          )
+          vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = desc })
         end
 
-        map('K', function() vim.lsp.buf.hover({ border = 'rounded' }) end, '')
-        map('gD', vim.lsp.buf.declaration, 'Goto Declaration')
+        map(
+          'K',
+          function() vim.lsp.buf.hover({ border = 'rounded' }) end,
+          'vim.lsp.buf.hover()'
+        )
+        map('gD', vim.lsp.buf.declaration, 'vim.lsp.buf.declaration()')
 
         local client = vim.lsp.get_client_by_id(event.data.client_id)
         if
@@ -72,15 +71,18 @@ return {
                 not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf })
               )
             end,
-            'LSP: Inlay Hint'
+            'vim.lsp.inlay_hint.enable()'
           )
         end
 
-        -- if
-        --   client and client:supports_method('textDocument/documentColor', event.buf)
-        -- then
-        --   vim.lsp.document_color.enable(true, event.buf)
-        -- end
+        if client and client:supports_method('textDocument/documentColor') then
+          map(
+            'grC',
+            function() vim.lsp.document_color.color_presentation() end,
+            'vim.lsp.document_color.color_presentation()',
+            { 'n', 'x' }
+          )
+        end
       end,
     })
 

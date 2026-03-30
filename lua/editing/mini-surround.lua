@@ -18,11 +18,11 @@ return {
   opts = {
     mappings = {
       add = 'l', -- Add surrounding in Normal and Visual modes
-      delete = 'ld', -- Delete surrounding
+      delete = 'dl', -- Delete surrounding
       find = '', -- Find surrounding (to the right)
       find_left = '', -- Find surrounding (to the left)
       highlight = '', -- Highlight surrounding
-      replace = 'lr', -- Replace surrounding
+      replace = 'cl', -- Replace surrounding
     },
   },
 }
