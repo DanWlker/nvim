@@ -72,3 +72,6 @@ map(
 -- map('n', '<leader>td', function()
 --   vim.diagnostic.enable(not vim.diagnostic.is_enabled())
 -- end, { desc = 'Toggle diagnostics' })
+
+vim.cmd('packadd nvim.undotree')
+vim.keymap.set('n', '<leader>tu', require('undotree').open)
