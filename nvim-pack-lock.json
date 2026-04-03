@@ -22,10 +22,6 @@
       "src": "https://github.com/Saghen/blink.cmp",
       "version": "1.0.0 - 2.0.0"
     },
-    "clangd_extensions.nvim": {
-      "rev": "9ac242ec71609eeeb5b5baff6ea6d3a1cb015b64",
-      "src": "https://github.com/p00f/clangd_extensions.nvim"
-    },
     "conform.nvim": {
       "rev": "086a40dc7ed8242c03be9f47fbcee68699cc2395",
       "src": "https://github.com/stevearc/conform.nvim"

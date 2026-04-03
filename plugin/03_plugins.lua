@@ -45,8 +45,6 @@ vim.pack.add({
   'https://github.com/nvim-mini/mini.diff',
   'https://github.com/nvim-mini/mini-git',
   -- lang
-  'https://github.com/saecki/crates.nvim',
-  'https://github.com/hat0uma/csvview.nvim',
   'https://github.com/folke/lazydev.nvim',
   'https://github.com/b0o/SchemaStore.nvim',
   'https://github.com/dmmulroy/ts-error-translator.nvim',
@@ -77,7 +75,6 @@ vim.pack.add({
   'https://github.com/igorlfs/nvim-dap-view',
   'https://github.com/mfussenegger/nvim-dap',
   'https://github.com/theHamsta/nvim-dap-virtual-text',
-  'https://github.com/leoluz/nvim-dap-go',
   'https://github.com/mfussenegger/nvim-lint',
   'https://github.com/antosha417/nvim-lsp-file-operations',
   'https://github.com/nvim-tree/nvim-tree.lua',
@@ -857,38 +854,6 @@ vim.api.nvim_create_autocmd('User', {
     local summary = vim.b[data.buf].minigit_summary
     vim.b[data.buf].minigit_summary_string = summary.head_name or ''
   end,
-})
-
--- saecki/crates.nvim
-require('crates').setup({
-  completion = {
-    crates = {
-      enabled = true,
-    },
-  },
-  lsp = {
-    enabled = true,
-    actions = true,
-    completion = true,
-    hover = true,
-  },
-})
-
--- hat0uma/csvview.nvim
-require('csvview').setup({
-  keymaps = {
-    -- Text objects for selecting fields
-    textobject_field_inner = { 'if', mode = { 'o', 'x' } },
-    textobject_field_outer = { 'af', mode = { 'o', 'x' } },
-    -- Excel-like navigation:
-    -- Use <Tab> and <S-Tab> to move horizontally between fields.
-    -- Use <Enter> and <S-Enter> to move vertically between rows and place the cursor at the end of the field.
-    -- Note: In terminals, you may need to enable CSI-u mode to use <S-Tab> and <S-Enter>.
-    jump_next_field_end = { '<Tab>', mode = { 'n', 'x' } },
-    jump_prev_field_end = { '<S-Tab>', mode = { 'n', 'x' } },
-    jump_next_row = { '<Enter>', mode = { 'n', 'x' } },
-    jump_prev_row = { '<S-Enter>', mode = { 'n', 'x' } },
-  },
 })
 
 -- folke/lazydev.nvim
@@ -1746,29 +1711,6 @@ require('coverage').setup({
   },
   summary = {
     min_coverage = 80.0,
-  },
-})
-
--- leoluz/nvim-dap-go
-require('dap-go').setup({
-  delve = {
-    -- On Windows delve must be run attached or it crashes.
-    -- See https://github.com/leoluz/nvim-dap-go/blob/main/README.md#configuring
-    detached = vim.fn.has('win32') == 0,
-  },
-  dap_configurations = {
-    -- https://github.com/golang/vscode-go/wiki/debugging#launchjson-attributes
-    -- https://stackoverflow.com/a/70661460
-    -- dlv debug -l 127.0.0.1:38697 --headless main.go
-    {
-      type = 'go',
-      name = 'Delve Attach (127.0.0.1:38697)',
-      debugAdapter = 'dlv-dap',
-      mode = 'remote',
-      request = 'attach',
-      port = 38697,
-      host = '127.0.0.1',
-    },
   },
 })
 
