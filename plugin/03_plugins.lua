@@ -57,7 +57,6 @@ vim.pack.add({
   'https://github.com/stevearc/conform.nvim',
   'https://github.com/rafamadriz/friendly-snippets',
   'https://github.com/shellRaining/hlchunk.nvim',
-  'https://github.com/mistweaverco/kulala.nvim',
   'https://github.com/AndrewRadev/linediff.vim',
   {
     src = 'https://github.com/L3MON4D3/LuaSnip',
@@ -1219,17 +1218,6 @@ require('hlchunk').setup({
   },
   blank = {
     enable = false,
-  },
-})
-
--- mistweaverco/kulala.nvim
-require('kulala').setup({
-  -- your configuration comes here
-  global_keymaps = true,
-  global_keymaps_prefix = '<leader>r',
-  kulala_keymaps_prefix = '',
-  ui = {
-    split_direction = 'horizontal',
   },
 })
 
