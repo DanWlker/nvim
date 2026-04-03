@@ -2204,6 +2204,238 @@ vim.api.nvim_create_user_command(
   function() require('snacks').scratch.select() end,
   { desc = 'Scratch Select Buffer' }
 )
+local files_config = {
+  hidden = true,
+  ignored = true,
+  exclude = { -- keep this ignored even if toggling to show hidden/ignored
+    'node_modules',
+    '.DS_Store',
+    '*.docx',
+    '*.zip',
+    '*.pptx',
+    '*.svg',
+  },
+  matcher = { frecency = true },
+  layout = {
+    hidden = { 'preview' },
+  },
+}
+
+require('snacks').setup({
+  styles = {
+    input = {
+      relative = 'cursor',
+      row = -3,
+      col = 0,
+    },
+  },
+  input = { enabled = true },
+  notifier = { enabled = true },
+  statuscolumn = {
+    right = { 'fold' },
+  },
+  -- disable backdrop
+  -- win = {
+  --   backdrop = false,
+  -- },
+  --
+  -- Not as good as hlchunk
+  -- indent = {
+  --   indent = {
+  --     enabled = false,
+  --   },
+  --   animate = {
+  --     enabled = false,
+  --   },
+  --   chunk = {
+  --     enabled = true,
+  --     char = {
+  --       horizontal = '─',
+  --       vertical = '│',
+  --       corner_top = '╭',
+  --       corner_bottom = '╰',
+  --       arrow = '─',
+  --     },
+  --   },
+  -- },
+  picker = {
+    actions = require('trouble.sources.snacks').actions,
+    win = {
+      preview = {
+        wo = {
+          wrap = true,
+        },
+      },
+      input = {
+        keys = {
+          ['<c-t>'] = {
+            'trouble_open',
+            mode = { 'n', 'i' },
+          },
+        },
+      },
+    },
+    sources = {
+      smart = files_config,
+      files = files_config,
+      grep = {
+        hidden = true,
+        ignored = true,
+        case_sens = false,
+        toggles = {
+          case_sens = 's',
+        },
+        finder = function(opts, ctx)
+          local args_extend = { '--case-sensitive' }
+          opts.args = list_filter(opts.args or {}, args_extend)
+          if opts.case_sens then opts.args = list_extend(opts.args, args_extend) end
+          return require('snacks.picker.source.grep').grep(opts, ctx)
+        end,
+        actions = {
+          toggle_live_case_sens = function(picker) -- [[Override]]
+            picker.opts.case_sens = not picker.opts.case_sens
+            picker:find()
+          end,
+        },
+        win = {
+          input = {
+            keys = {
+              ['<M-s>'] = { 'toggle_live_case_sens', mode = { 'i', 'n' } },
+            },
+          },
+        },
+      },
+      commands = {
+        layout = {
+          preset = 'vscode',
+        },
+        actions = {
+          accept = function(picker, item)
+            picker:close()
+            vim.cmd(item.cmd)
+          end,
+        },
+        win = {
+          input = {
+            keys = {
+              ['<cr>'] = { 'accept', mode = { 'i', 'n' } }, -- Execute
+              ['<tab>'] = { 'confirm', mode = { 'i', 'n' } }, -- Choose
+            },
+          },
+        },
+      },
+      diagnostics = {
+        layout = {
+          preset = 'ivy_split',
+        },
+      },
+      recent = {
+        layout = {
+          hidden = { 'preview' },
+        },
+      },
+      buffer = {
+        layout = {
+          hidden = { 'preview' },
+        },
+      },
+      colorschemes = {
+        layout = {
+          preset = 'ivy',
+        },
+      },
+      notifications = {
+        layout = {
+          preset = 'vertical',
+        },
+      },
+      registers = {
+        layout = {
+          preset = 'vertical',
+        },
+      },
+    },
+    -- kinds = require('icons').symbol_kinds,
+    formatters = {
+      file = {
+        filename_first = true,
+      },
+    },
+  },
+  image = {},
+})
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup(
+    'danwlker/lsp-attach-pickers',
+    { clear = true }
+  ),
+  callback = function(event)
+    local map = function(keys, func, desc, mode)
+      mode = mode or 'n'
+      vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = desc })
+    end
+
+    local should_flatten = {
+      ['json'] = true,
+      ['yaml'] = true,
+      ['toml'] = true,
+      ['helm'] = true,
+    }
+
+    map(
+      'grr',
+      function() Snacks.picker.lsp_references() end,
+      'Snacks.picker.lsp_references()'
+    )
+    map(
+      'gri',
+      function() Snacks.picker.lsp_implementations() end,
+      'Snacks.picker.lsp_implementations()'
+    )
+    map('gO', function()
+      local flatten, tree = false, true
+      if should_flatten[vim.bo.ft] then
+        flatten = true
+        tree = false
+      end
+
+      Snacks.picker.lsp_symbols({
+        filter = {
+          default = true,
+          lua = true,
+        },
+        tree = tree,
+        flatten = flatten,
+      })
+    end, 'Snacks.picker.lsp_symbols()')
+    map(
+      'grc',
+      function() Snacks.picker.lsp_incoming_calls() end,
+      'Snacks.picker.lsp_incoming_calls()'
+    )
+    map(
+      'gro',
+      function() Snacks.picker.lsp_outgoing_calls() end,
+      'Snacks.picker.lsp_outgoing_calls()'
+    )
+    map(
+      'gd',
+      function() Snacks.picker.lsp_definitions() end,
+      'Snacks.picker.lsp_definitions()'
+    )
+    map(
+      'grt',
+      function() Snacks.picker.lsp_type_definitions() end,
+      'Snacks.picker.lsp_type_definitions()'
+    )
+    map(
+      'gW',
+      function() Snacks.picker.lsp_workspace_symbols() end,
+      'Snacks.picker.lsp_workspace_symbols()'
+    )
+  end,
+})
 -- vim.keymap.set(
 --   'n',
 --   '\\',
