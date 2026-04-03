@@ -8,7 +8,9 @@ vim.api.nvim_create_autocmd('PackChanged', {
       return
     end
 
-    if name == 'luasnip' and kind == 'update' then
+    if
+      name == 'LuaSnip' and (ev.data.kind == 'install' or ev.data.kind == 'update')
+    then
       if not ev.data.active then vim.cmd.packadd('luasnip') end
       vim.cmd('make install_jsregexp')
       return
@@ -45,7 +47,6 @@ vim.pack.add({
   'https://github.com/nvim-mini/mini.diff',
   'https://github.com/nvim-mini/mini-git',
   -- lang
-  'https://github.com/folke/lazydev.nvim',
   'https://github.com/b0o/SchemaStore.nvim',
   'https://github.com/dmmulroy/ts-error-translator.nvim',
   -- plugins
@@ -376,7 +377,7 @@ require('mini.extra').setup()
 -- nvim-mini/mini.ai
 local ai = require('mini.ai')
 local miniextra = require('mini.extra')
-local opts = {
+local mini_ai_opts = {
   n_lines = 500,
   custom_textobjects = {
     o = ai.gen_spec.treesitter({ -- code block
@@ -408,7 +409,7 @@ local opts = {
     inside_last = '',
   },
 }
-ai.setup(opts)
+ai.setup(mini_ai_opts)
 local function ai_whichkey(wopts)
   local ok, module = pcall(function() return require('which-key') end)
   if not ok then return end
@@ -470,7 +471,7 @@ local function ai_whichkey(wopts)
 
   module.add(ret, { notify = false })
 end
-ai_whichkey(opts)
+ai_whichkey(mini_ai_opts)
 
 -- nvim-mini/mini.move
 require('mini.move').setup({
@@ -853,14 +854,6 @@ vim.api.nvim_create_autocmd('User', {
     local summary = vim.b[data.buf].minigit_summary
     vim.b[data.buf].minigit_summary_string = summary.head_name or ''
   end,
-})
-
--- folke/lazydev.nvim
-require('lazydev').setup({
-  library = {
-    { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
-    { path = 'snacks.nvim', words = { 'Snacks' } },
-  },
 })
 
 -- dmmulroy/ts-error-translator.nvim
