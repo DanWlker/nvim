@@ -20,7 +20,6 @@ o.mouse = 'a' -- Enable mouse support in all modes
 vim.schedule(function() o.clipboard = 'unnamedplus' end) -- Use system clipboard (after startup)
 o.cursorline = true -- Highlight current line
 o.cursorlineopt = 'number' -- Only highlight line number
-o.pumborder = 'rounded' -- Built-in completion window
 
 -- Indentation & formatting
 o.smartindent = true -- Auto-indent new lines smartly
@@ -63,6 +62,7 @@ o.termguicolors = true -- True color support
 -- Completion
 o.complete = '.,w,b,kspell' -- Completion sources
 o.completeopt = 'menuone,noselect,fuzzy,nosort' -- Popup menu behavior
+o.pumborder = 'rounded' -- Built-in completion window
 o.pumheight = 10 -- Max height of completion popup
 
 -- Misc behavior
