@@ -1,0 +1,124 @@
+vim.api.nvim_create_autocmd('TextYankPost', {
+  desc = 'Highlight when yanking (copying) text',
+  group = vim.api.nvim_create_augroup('danwlker/highlight-yank', { clear = true }),
+  callback = function() vim.hl.on_yank() end,
+})
+
+-- Check if we need to reload the file when it changed
+vim.api.nvim_create_autocmd({ 'FocusGained', 'TermClose', 'TermLeave' }, {
+  group = vim.api.nvim_create_augroup('danwlker/checktime', { clear = true }),
+  callback = function()
+    if vim.o.buftype ~= 'nofile' then vim.cmd('checktime') end
+  end,
+})
+
+-- resize splits if window got resized
+vim.api.nvim_create_autocmd({ 'VimResized' }, {
+  group = vim.api.nvim_create_augroup('danwlker/resize-splits', { clear = true }),
+  callback = function()
+    local current_tab = vim.fn.tabpagenr()
+    vim.cmd('tabdo wincmd =')
+    vim.cmd('tabnext ' .. current_tab)
+  end,
+})
+
+vim.api.nvim_create_autocmd('ModeChanged', {
+  pattern = '*',
+  callback = function()
+    local mode = vim.fn.mode()
+    if mode:match('i') or mode:match('v') then
+      vim.opt.hlsearch = false -- hide in insert mode
+    else
+      vim.opt.hlsearch = true -- show in normal / visual / command modes
+    end
+  end,
+  group = vim.api.nvim_create_augroup('danwlker/toggle-hlsearch', { clear = true }),
+  desc = 'Show search highlights in normal mode, hide in insert mode',
+})
+
+-- yankring
+vim.api.nvim_create_autocmd('TextYankPost', {
+  group = vim.api.nvim_create_augroup('danwlker/yankring', { clear = true }),
+  callback = function()
+    if vim.v.event.operator == 'y' then
+      for i = 9, 1, -1 do -- Shift all numbered registers.
+        vim.fn.setreg(tostring(i), vim.fn.getreg(tostring(i - 1)))
+      end
+    end
+  end,
+})
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup(
+    'danwlker/lsp-attach-lspconfig',
+    { clear = true }
+  ),
+  callback = function(event)
+    local map = function(keys, func, desc, mode)
+      mode = mode or 'n'
+      vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = desc })
+    end
+
+    map(
+      'K',
+      function() vim.lsp.buf.hover({ border = 'rounded' }) end,
+      'vim.lsp.buf.hover()'
+    )
+    map('gD', vim.lsp.buf.declaration, 'vim.lsp.buf.declaration()')
+
+    local client = vim.lsp.get_client_by_id(event.data.client_id)
+    if
+      client
+      and client:supports_method('textDocument/documentHighlight', event.buf)
+    then
+      local highlight_augroup =
+        vim.api.nvim_create_augroup('danwlker/lsp-highlight', { clear = false })
+      vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+        buffer = event.buf,
+        group = highlight_augroup,
+        callback = function()
+          local mode = vim.fn.mode()
+          if not mode:match('i') then vim.lsp.buf.document_highlight() end
+        end,
+      })
+
+      vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI', 'ModeChanged' }, {
+        buffer = event.buf,
+        group = highlight_augroup,
+        callback = vim.lsp.buf.clear_references,
+      })
+
+      vim.api.nvim_create_autocmd('LspDetach', {
+        group = vim.api.nvim_create_augroup('danwlker/lsp-detach', { clear = true }),
+        callback = function(event2)
+          vim.lsp.buf.clear_references()
+          vim.api.nvim_clear_autocmds({
+            group = highlight_augroup,
+            buffer = event2.buf,
+          })
+        end,
+      })
+    end
+
+    if client and client:supports_method('textDocument/inlayHint', event.buf) then
+      map(
+        'grh',
+        function()
+          vim.lsp.inlay_hint.enable(
+            not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf })
+          )
+        end,
+        'vim.lsp.inlay_hint.enable()'
+      )
+    end
+
+    if client and client:supports_method('textDocument/documentColor') then
+      map(
+        'grC',
+        function() vim.lsp.document_color.color_presentation() end,
+        'vim.lsp.document_color.color_presentation()',
+        { 'n', 'x' }
+      )
+    end
+  end,
+})

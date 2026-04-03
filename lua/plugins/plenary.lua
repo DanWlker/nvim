@@ -1,6 +1,0 @@
-return {
-  'nvim-lua/plenary.nvim',
-  lazy = true,
-  -- NOTE: This is commented on purpose
-  -- opts = {},
-}
