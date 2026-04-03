@@ -95,8 +95,29 @@ vim.pack.add({
 
 -- catppuccin/nvim
 require('catppuccin').setup({
-  auto_integrations = true,
+  auto_integrations = false, -- Disables the slow 212ms detection
   integrations = {
+    blink_cmp = {
+      enabled = true,
+      style = 'bordered',
+    },
+    dadbod_ui = true,
+    dap = true,
+    diffview = true,
+    flash = true,
+    lsp_trouble = true,
+    mason = true,
+    mini = {
+      enabled = true,
+      indentscope_color = 'overlay2',
+    },
+    nvimtree = true,
+    snacks = {
+      enabled = true,
+    },
+    treesitter_context = true,
+    ufo = true,
+    which_key = true,
     lsp_styles = {
       underlines = {
         errors = { 'undercurl' },
@@ -2687,3 +2708,16 @@ require('which-key').setup({
     { 'j', mode = { 'n' } }, -- for mini.splitjoin
   },
 })
+
+-- vim.defer_fn(function()
+--   local ok, detect = pcall(require, 'catppuccin.lib.detect_integrations')
+--   if ok then
+--     local detected_plugins = detect.detect_plugins()
+--     print('=== DETECTED PLUGINS ===')
+--     print(vim.inspect(detected_plugins))
+--
+--     local integration_table = detect.create_integrations_table()
+--     print('=== AUTO-ENABLED INTEGRATIONS ===')
+--     print(vim.inspect(integration_table))
+--   end
+-- end, 1000) -- Run after startup
