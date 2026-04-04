@@ -353,13 +353,7 @@ vim.keymap.set(
 )
 
 -- folke/flash.nvim
-require('flash').setup({
-  modes = {
-    char = {
-      enabled = false,
-    },
-  },
-})
+require('flash').setup({ modes = { char = { enabled = false } } })
 vim.keymap.set(
   { 'n', 'x', 'o' },
   'h',
@@ -513,11 +507,7 @@ require('mini.move').setup({
 
 -- nvim-mini/mini.splitjoin
 require('mini.splitjoin').setup({
-  mappings = {
-    toggle = 'jT',
-    split = 'jS',
-    join = 'jJ',
-  },
+  mappings = { toggle = 'jT', split = 'jS', join = 'jJ' },
 })
 local gen_hook = MiniSplitjoin.gen_hook
 local add_comma_curly = gen_hook.add_trailing_separator()
@@ -540,55 +530,6 @@ require('mini.surround').setup({
 })
 
 -- nvim-treesitter/nvim-treesitter
-local function win_find_cl()
-  local path = 'C:/Program Files (x86)/Microsoft Visual Studio'
-  local pattern = '*/*/VC/Tools/MSVC/*/bin/Hostx64/x64/cl.exe'
-  return vim.fn.globpath(path, pattern, true, true)[1]
-end
----@return boolean ok
-local function hasDependencies()
-  local is_win = vim.fn.has('win32') == 1
-  ---@param tool string
-  ---@param win boolean?
-  local function have(tool, win)
-    return (win == nil or is_win == win) and vim.fn.executable(tool) == 1
-  end
-
-  local have_cc = vim.env.CC ~= nil
-    or have('cc', false)
-    or have('cl', true)
-    or (is_win and win_find_cl() ~= nil)
-
-  if not have_cc and is_win and vim.fn.executable('gcc') == 1 then
-    vim.env.CC = 'gcc'
-    have_cc = true
-  end
-
-  ---@class table<string,boolean>
-  local ret = {
-    ['tree-sitter (CLI)'] = have('tree-sitter'),
-    ['C compiler'] = have_cc,
-    tar = have('tar'),
-    curl = have('curl'),
-  }
-  local ok = true
-  for tool, v in pairs(ret) do
-    ok = ok and v
-    if not v then
-      local msg = '**treesitter-main** requires ' .. tool
-      if tool == 'C compiler' then
-        msg = msg
-          .. ', install a C compiler with `winget install --id=BrechtSanders.WinLibs.POSIX.UCRT -e`'
-      end
-      vim.notify(msg, vim.log.levels.ERROR)
-    end
-  end
-  return ok
-end
-if not hasDependencies() then
-  vim.notify('something went wrong setting up treesitter', vim.log.levels.ERROR)
-  return
-end
 vim.api.nvim_create_autocmd('User', {
   pattern = 'TSUpdate',
   group = vim.api.nvim_create_augroup(
@@ -741,9 +682,7 @@ require('ts-comments').setup({
 })
 
 -- FabijanZulj/blame.nvim
-require('blame').setup({
-  blame_options = { '-w' },
-})
+require('blame').setup({ blame_options = { '-w' } })
 vim.keymap.set(
   'n',
   '<leader>gl',
@@ -773,9 +712,7 @@ vim.keymap.set(
 )
 
 -- f-person/git-blame.nvim
-require('gitblame').setup({
-  enabled = false,
-})
+require('gitblame').setup({ enabled = false })
 vim.keymap.set(
   'n',
   '<leader>gcs',
@@ -814,14 +751,7 @@ vim.keymap.set('n', '<leader>gb', '<Plug>(git-messenger)', { desc = 'Git Blame' 
 
 -- nvim-mini/mini.diff
 require('mini.diff').setup({
-  view = {
-    style = 'sign',
-    signs = {
-      add = '▎',
-      change = '▎',
-      delete = '',
-    },
-  },
+  view = { style = 'sign', signs = { add = '▎', change = '▎', delete = '' } },
 })
 vim.keymap.set(
   'n',
@@ -1212,7 +1142,7 @@ luasnip.filetype_extend('php', { 'html' })
 luasnip.filetype_extend('javascript', { 'javascriptreact' })
 luasnip.filetype_extend('typescript', { 'typescriptreact' })
 luasnip.filetype_extend('dart', { 'flutter' })
-require('luasnip.loaders.from_lua').load({ paths = { './snippets' } })
+require('luasnip.loaders.from_lua').lazy_load({ paths = { './snippets' } })
 
 -- mason-org/mason.nvim
 require('mason').setup({
@@ -1226,9 +1156,7 @@ require('mason').setup({
 })
 
 -- mason-org/mason-lspconfig.nvim
-require('mason-lspconfig').setup({
-  automatic_enable = false,
-})
+require('mason-lspconfig').setup({ automatic_enable = false })
 
 -- WhoIsSethDaniel/mason-tool-installer.nvim
 require('mason-tool-installer').setup({
@@ -1345,9 +1273,7 @@ vim.keymap.set(
 )
 
 -- theHamsta/nvim-dap-virtual-text
-require('nvim-dap-virtual-text').setup({
-  virt_text_pos = 'eol',
-})
+require('nvim-dap-virtual-text').setup({ virt_text_pos = 'eol' })
 
 -- mfussenegger/nvim-dap
 vim.api.nvim_set_hl(0, 'DapBreak', { fg = '#e51400' })
