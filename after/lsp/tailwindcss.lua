@@ -18,5 +18,4 @@ return {
     'typescriptreact',
     'vue',
   },
-  style = 'full',
 }
