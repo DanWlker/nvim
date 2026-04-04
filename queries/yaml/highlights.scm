@@ -4,6 +4,7 @@
 ; TODO: Remove this when this upstreams to main
 ; FIX: for yaml's norway problem https://www.bram.us/2022/01/11/yaml-the-norway-problem/
 ; see also https://yamllint.readthedocs.io/en/stable/rules.html#module-yamllint.rules.truthy
+; WARN: Apparently treesitter targets yaml 1.2, so this needs to be kept in
 ;───────────────────────────────────────────────────────────────────────────────
 (block_mapping_pair
   value: (block_node
