@@ -1142,7 +1142,9 @@ luasnip.filetype_extend('php', { 'html' })
 luasnip.filetype_extend('javascript', { 'javascriptreact' })
 luasnip.filetype_extend('typescript', { 'typescriptreact' })
 luasnip.filetype_extend('dart', { 'flutter' })
-require('luasnip.loaders.from_lua').lazy_load({ paths = { './snippets' } })
+require('luasnip.loaders.from_lua').lazy_load({
+  paths = vim.fn.stdpath('config') .. '/snippets',
+})
 
 -- mason-org/mason.nvim
 require('mason').setup({
