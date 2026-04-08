@@ -27,7 +27,7 @@ vim.pack.add({
   'https://github.com/nvim-lua/plenary.nvim',
   -- editing
   'https://github.com/monaqa/dial.nvim',
-  'https://github.com/folke/flash.nvim',
+  'https://github.com/DanWlker/nvim-jump',
   'https://github.com/NMAC427/guess-indent.nvim',
   'https://github.com/nvim-mini/mini.extra',
   'https://github.com/nvim-mini/mini.ai',
@@ -50,7 +50,7 @@ vim.pack.add({
   'https://github.com/b0o/SchemaStore.nvim',
   'https://github.com/dmmulroy/ts-error-translator.nvim',
   -- plugins
-  'https://github.com/Danwlker/99',
+  'https://github.com/DanWlker/99',
   {
     src = 'https://github.com/Saghen/blink.cmp',
     version = vim.version.range('1.x'),
@@ -352,35 +352,16 @@ vim.keymap.set(
   function() require('dial.map').manipulate('decrement', 'gvisual') end
 )
 
--- folke/flash.nvim
-require('flash').setup({ modes = { char = { enabled = false } } })
+-- yorickpeterse/nvim-jump
+
+require('jump').setup({
+  labels = 'shtarenigpcydolubvjwfzkxqm',
+})
 vim.keymap.set(
   { 'n', 'x', 'o' },
   'h',
-  function()
-    require('flash').jump({
-      search = {
-        multi_window = false,
-      },
-    })
-  end,
-  { desc = 'Flash Hop (On the character)' }
-)
-vim.keymap.set(
-  { 'n', 'x', 'o' },
-  'H',
-  function()
-    require('flash').jump({
-      search = {
-        multi_window = false,
-      },
-      jump = {
-        pos = 'end',
-        inclusive = false,
-      },
-    })
-  end,
-  { desc = 'Flash Hop (One character before)' }
+  require('jump').start,
+  { desc = 'Hop (On the character)' }
 )
 
 -- NMAC427/guess-indent.nvim
