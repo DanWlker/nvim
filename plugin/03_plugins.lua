@@ -360,6 +360,12 @@ vim.keymap.set(
   require('jump').start,
   { desc = 'Hop (On the character)' }
 )
+vim.keymap.set(
+  { 'n', 'x', 'o' },
+  'H',
+  function() require('jump').start({ before = true }) end,
+  { desc = 'Hop (On the character)' }
+)
 
 -- NMAC427/guess-indent.nvim
 require('guess-indent').setup({})
