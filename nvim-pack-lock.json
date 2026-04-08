@@ -155,7 +155,7 @@
       "src": "https://github.com/theHamsta/nvim-dap-virtual-text"
     },
     "nvim-jump": {
-      "rev": "44f61201a0c014c5bc7bdffa164cfb5da6c0d4ac",
+      "rev": "76f60ef8713ff63615c804e40eb221377534e031",
       "src": "https://github.com/DanWlker/nvim-jump"
     },
     "nvim-lint": {

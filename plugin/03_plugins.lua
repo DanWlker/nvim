@@ -353,10 +353,7 @@ vim.keymap.set(
 )
 
 -- yorickpeterse/nvim-jump
-
-require('jump').setup({
-  labels = 'shtarenigpcydolubvjwfzkxqm',
-})
+require('jump').setup()
 vim.keymap.set(
   { 'n', 'x', 'o' },
   'h',
