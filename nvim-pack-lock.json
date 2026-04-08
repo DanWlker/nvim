@@ -30,6 +30,10 @@
       "rev": "086a40dc7ed8242c03be9f47fbcee68699cc2395",
       "src": "https://github.com/stevearc/conform.nvim"
     },
+    "crates.nvim": {
+      "rev": "0f536967abd097d9a4275087483f15d012418740",
+      "src": "https://github.com/saecki/crates.nvim"
+    },
     "csvview.nvim": {
       "rev": "7022e18a0fbae9aecf99a3ba02b2a541edc2b8a1",
       "src": "https://github.com/hat0uma/csvview.nvim"
@@ -71,7 +75,7 @@
       "src": "https://github.com/AndrewRadev/linediff.vim"
     },
     "mason-lspconfig.nvim": {
-      "rev": "25f609e7fca78af7cede4f9fa3af8a94b1c4950b",
+      "rev": "63a3c6a80538de1003373a619e29aeda27809ad3",
       "src": "https://github.com/mason-org/mason-lspconfig.nvim"
     },
     "mason-nvim-dap.nvim": {
@@ -155,7 +159,7 @@
       "src": "https://github.com/theHamsta/nvim-dap-virtual-text"
     },
     "nvim-jump": {
-      "rev": "0308082280a975fc4e4f4146d7e83dbd2d161b81",
+      "rev": "e9788fe578b48f4c7b024ac35844ee9029c01a49",
       "src": "https://github.com/DanWlker/nvim-jump"
     },
     "nvim-lint": {
