@@ -172,6 +172,15 @@ vim.diagnostic.config({
     suffix = '',
   },
   update_in_insert = false,
+  jump = {
+    on_jump = function(_, bufnr)
+      vim.diagnostic.open_float({
+        bufnr = bufnr,
+        scope = 'cursor',
+        focus = false,
+      })
+    end,
+  },
 })
 
 -- Ui2
