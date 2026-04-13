@@ -100,6 +100,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
       })
     end
 
+    vim.lsp.codelens.enable(true)
+
     if client and client:supports_method('textDocument/inlayHint', event.buf) then
       map(
         'grh',

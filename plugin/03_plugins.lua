@@ -934,7 +934,7 @@ require('blink.cmp').setup({
       range = 'full',
     },
     accept = {
-      auto_brackets = { enabled = true },
+      auto_brackets = { enabled = false },
     },
     menu = {
       border = 'rounded',
