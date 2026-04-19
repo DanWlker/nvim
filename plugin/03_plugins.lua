@@ -538,7 +538,7 @@ local function treesitter_try_attach(buf, language)
   if not vim.treesitter.language.add(language) then return end
   vim.treesitter.start(buf, language)
 
-  local has_indent_query = vim.treesitter.query.get(language, 'indent') ~= nil
+  local has_indent_query = vim.treesitter.query.get(language, 'indents') ~= nil
   if has_indent_query then
     vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
   end
@@ -1002,7 +1002,7 @@ vim.keymap.set(
 )
 vim.api.nvim_create_user_command(
   'ConformFormat',
-  function() require('conform').format({ async = true, lsp_format = 'fallback' }) end,
+  function() require('conform').format({ async = true }) end,
   { desc = 'Format buffer' }
 )
 vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
