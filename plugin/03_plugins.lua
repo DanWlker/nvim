@@ -41,7 +41,7 @@ vim.pack.add({
   'https://github.com/folke/ts-comments.nvim',
   -- git
   'https://github.com/FabijanZulj/blame.nvim',
-  'https://github.com/sindrets/diffview.nvim',
+  'https://github.com/dlyongemallo/diffview.nvim',
   'https://github.com/f-person/git-blame.nvim',
   'https://github.com/rhysd/git-messenger.vim',
   'https://github.com/nvim-mini/mini.diff',
