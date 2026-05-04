@@ -1006,6 +1006,7 @@ vim.api.nvim_create_user_command(
   { desc = 'Format buffer' }
 )
 vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+local dialects = vim.fn.systemlist('sqruff dialects')
 require('conform').setup({
   notify_on_error = false,
   format_on_save = function(bufnr)
@@ -1040,7 +1041,14 @@ require('conform').setup({
   end,
   formatters = {
     sqruff = {
-      args = { 'fix', '--dialect=ansi' },
+      args = function(self, ctx)
+        local ft = vim.bo[ctx.buf].filetype
+        local dialect = ft:match('^([^.]+)%.')
+        local dialect_arg = vim.tbl_contains(dialects, dialect)
+            and '--dialect=' .. dialect
+          or '--dialect=ansi'
+        return { 'fix', dialect_arg, '$FILENAME' }
+      end,
     },
     -- ['markdown-toc'] = {
     --   condition = function(_, ctx)
@@ -1331,7 +1339,6 @@ table.insert(yamllint.args, '{extends: default, rules: {braces: disable}}')
 
 -- sqruff
 local sqruff = require('lint').linters.sqruff
-local dialects = vim.fn.systemlist('sqruff dialects')
 require('lint').linters.sqruff = function()
   local linter = vim.deepcopy(sqruff)
   local ft = vim.bo.filetype
