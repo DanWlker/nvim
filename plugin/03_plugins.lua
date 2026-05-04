@@ -1328,6 +1328,20 @@ end, {})
 local yamllint = lint.linters.yamllint
 table.insert(yamllint.args, '-d')
 table.insert(yamllint.args, '{extends: default, rules: {braces: disable}}')
+
+-- sqruff
+local sqruff = require('lint').linters.sqruff
+local dialects = vim.fn.systemlist('sqruff dialects')
+require('lint').linters.sqruff = function()
+  local linter = vim.deepcopy(sqruff)
+  local ft = vim.bo.filetype
+  local dialect = ft:match('^([^.]+)%.')
+  local dialect_arg = vim.tbl_contains(dialects, dialect) and '--dialect=' .. dialect
+    or '--dialect=ansi'
+  linter.args = { 'lint', '--format=json', dialect_arg, '-' }
+  return linter
+end
+
 -- golangcilint
 -- local golangcilint = lint.linters.golangcilint
 -- -- Add wsl to golangcilint
@@ -1340,8 +1354,6 @@ lint.linters_by_ft = {
   yaml = { 'yamllint' },
   dockerfile = { 'hadolint' },
   sql = { 'sqruff' },
-  mysql = { 'sqruff' },
-  plsql = { 'sqruff' },
   python = { 'ruff' },
 }
 -- To allow other plugins to add linters to require('lint').linters_by_ft,
