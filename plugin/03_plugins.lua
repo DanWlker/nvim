@@ -905,8 +905,6 @@ require('blink.cmp').setup({
     per_filetype = {
       lua = { inherit_defaults = true, 'lazydev' },
       sql = { 'dadbod' },
-      mysql = { 'dadbod' },
-      plsql = { 'dadbod' },
     },
     providers = {
       dadbod = {
@@ -1041,7 +1039,7 @@ require('conform').setup({
   end,
   formatters = {
     sqruff = {
-      args = function(self, ctx)
+      args = function(_, ctx)
         local ft = vim.bo[ctx.buf].filetype
         local dialect = ft:match('^([^.]+)%.')
         local dialect_arg = vim.tbl_contains(dialects, dialect)
