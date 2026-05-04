@@ -1039,8 +1039,8 @@ require('conform').setup({
     return to_return
   end,
   formatters = {
-    sqlfluff = {
-      args = { 'format', '--dialect=ansi', '-' },
+    sqruff = {
+      args = { 'fix', '--dialect=ansi' },
     },
     -- ['markdown-toc'] = {
     --   condition = function(_, ctx)
@@ -1072,7 +1072,7 @@ require('conform').setup({
     markdown = prettier, -- markdown = { 'prettier', 'markdownlint-cli2', 'markdown-toc' },
     css = prettier,
     scss = prettier,
-    sql = { 'sqlfluff' },
+    sql = { 'sqruff' },
     typescript = prettier,
     typescriptreact = prettier,
     yaml = prettier,
@@ -1184,7 +1184,7 @@ require('mason-tool-installer').setup({
     'yamllint',
     'gofumpt',
     'hadolint',
-    'sqlfluff',
+    'sqruff',
     'delve',
     'shellcheck', --used by bashls
     'shfmt', --used by bashls
@@ -1339,9 +1339,9 @@ lint.linters_by_ft = {
   go = { 'golangcilint' },
   yaml = { 'yamllint' },
   dockerfile = { 'hadolint' },
-  sql = { 'sqlfluff' },
-  mysql = { 'sqlfluff' },
-  plsql = { 'sqlfluff' },
+  sql = { 'sqruff' },
+  mysql = { 'sqruff' },
+  plsql = { 'sqruff' },
   python = { 'ruff' },
 }
 -- To allow other plugins to add linters to require('lint').linters_by_ft,
