@@ -1168,7 +1168,7 @@ require('mason-tool-installer').setup({
     'dockerls',
     'docker_compose_language_service',
     'clangd',
-    -- 'gopls', -- Use gopls by doing go install golang.org/x/tools/gopls@latest
+    'gopls', -- Check your go env version, cauld cause issues
     'superhtml',
     'cssls',
     'eslint',
@@ -1185,10 +1185,10 @@ require('mason-tool-installer').setup({
     -- 'markdown-toc',
     'prettierd',
     'prettier',
-    -- 'golangci-lint', -- Install this manually
+    'golangci-lint', -- Check your go env version, cauld cause issues
     'clang-format',
     'yamllint',
-    'gofumpt',
+    'gofumpt', -- Check your go env version, cauld cause issues
     'hadolint',
     'sqruff',
     'delve',
