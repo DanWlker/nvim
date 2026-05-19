@@ -988,7 +988,7 @@ require('blink.cmp').setup({
 })
 
 -- stevearc/conform.nvim
-local prettier = { 'prettierd', 'prettier', stop_after_first = true }
+local biome = { 'biome-check' }
 -- local disable_filetypes = {}
 local prefer_lsp = {}
 local fallback_to_lsp = { ['lua'] = true }
@@ -1065,23 +1065,23 @@ require('conform').setup({
     --     return #diag > 0
     --   end,
     -- },
-    prettier = { require_cwd = true },
+    biome = { require_cwd = true },
   },
   formatters_by_ft = {
     c = { 'clang-format' },
     -- go = { 'goimports' }, -- 'gofumpt' is lsp handled, slows down gopls if configured here
-    javascript = prettier,
-    javascriptreact = prettier,
-    json = prettier,
-    jsonc = prettier,
+    javascript = biome,
+    javascriptreact = biome,
+    json = biome,
+    jsonc = biome,
     lua = { 'stylua' },
-    markdown = prettier, -- markdown = { 'prettier', 'markdownlint-cli2', 'markdown-toc' },
-    css = prettier,
-    scss = prettier,
+    markdown = biome, -- markdown = { 'prettier', 'markdownlint-cli2', 'markdown-toc' },
+    css = biome,
+    scss = biome,
     sql = { 'sqruff' },
-    typescript = prettier,
-    typescriptreact = prettier,
-    yaml = prettier,
+    typescript = biome,
+    typescriptreact = biome,
+    yaml = biome,
     python = {
       -- To fix auto-fixable lint errors.
       'ruff_fix',
@@ -1090,9 +1090,9 @@ require('conform').setup({
       -- To organize the imports.
       'ruff_organize_imports',
     },
-    graphql = prettier,
-    html = prettier,
-    vue = prettier,
+    graphql = biome,
+    html = biome,
+    vue = biome,
     rust = { 'rustfmt' },
     ['_'] = { 'trim_whitespace', 'trim_newlines' },
   },
@@ -1178,13 +1178,12 @@ require('mason-tool-installer').setup({
     'tailwindcss',
     'bashls',
     'bacon_ls',
+    'biome',
 
     -- tools
     'stylua',
     'markdownlint-cli2',
     -- 'markdown-toc',
-    'prettierd',
-    'prettier',
     'golangci-lint', -- Check your go env version, cauld cause issues
     'clang-format',
     'yamllint',
