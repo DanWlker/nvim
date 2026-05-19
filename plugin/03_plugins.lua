@@ -48,7 +48,8 @@ vim.pack.add({
   'https://github.com/nvim-mini/mini-git',
   -- lang
   'https://github.com/b0o/SchemaStore.nvim',
-  'https://github.com/dmmulroy/ts-error-translator.nvim',
+  -- FIX: Having issues with tsgo, commenting out first
+  -- 'https://github.com/dmmulroy/ts-error-translator.nvim',
   -- plugins
   'https://github.com/DanWlker/99',
   {
@@ -763,21 +764,23 @@ vim.api.nvim_create_autocmd('User', {
   end,
 })
 
+-- FIX: having issues with tsgo, commenting out first
 -- dmmulroy/ts-error-translator.nvim
-require('ts-error-translator').setup({
-  -- Auto-attach to LSP servers for TypeScript diagnostics (default: true)
-  auto_attach = true,
-  -- LSP server names to translate diagnostics for (default shown below)
-  servers = {
-    'astro',
-    'svelte',
-    'ts_ls',
-    'tsserver', -- deprecated, use ts_ls
-    'typescript-tools',
-    'volar',
-    'vtsls',
-  },
-})
+-- require('ts-error-translator').setup({
+--   -- Auto-attach to LSP servers for TypeScript diagnostics (default: true)
+--   auto_attach = true,
+--   -- LSP server names to translate diagnostics for (default shown below)
+--   servers = {
+--     'astro',
+--     'svelte',
+--     'ts_ls',
+--     'tsserver', -- deprecated, use ts_ls
+--     'typescript-tools',
+--     'volar',
+--     'vtsls',
+--     'tsgo',
+--   },
+-- })
 
 -- Danwlker/99
 local _99 = require('99')
@@ -1172,7 +1175,7 @@ require('mason-tool-installer').setup({
     'superhtml',
     'cssls',
     'eslint',
-    'vtsls',
+    'tsgo',
     'emmet_language_server',
     'lua_ls',
     'tailwindcss',

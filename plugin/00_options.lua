@@ -239,9 +239,7 @@ vim.lsp.enable({
   'superhtml',
   'cssls',
   'eslint',
-  -- TODO: Migrate to golang typescript lsp when it is done
-  -- Alternate to ts_ls
-  'vtsls',
+  'tsgo',
   'emmet_language_server',
   'lua_ls',
   'tailwindcss',

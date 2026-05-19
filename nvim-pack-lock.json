@@ -234,10 +234,6 @@
       "rev": "123a9fb12e7229342f807ec9e6de478b1102b041",
       "src": "https://github.com/folke/ts-comments.nvim"
     },
-    "ts-error-translator.nvim": {
-      "rev": "558abff11b9e8f4cefc0de09df780c56841c7a4b",
-      "src": "https://github.com/dmmulroy/ts-error-translator.nvim"
-    },
     "vim-dadbod": {
       "rev": "6d1d41da4873a445c5605f2005ad2c68c99d8770",
       "src": "https://github.com/tpope/vim-dadbod"
