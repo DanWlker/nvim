@@ -10,7 +10,7 @@
       "version": "2.0.0 - 3.0.0"
     },
     "SchemaStore.nvim": {
-      "rev": "988a3aafe6d8bb0f71c54aa79e2c65a79aa08837",
+      "rev": "05383893462944f20bf2044b5a1216f894c9b7a0",
       "src": "https://github.com/b0o/SchemaStore.nvim"
     },
     "blame.nvim": {
@@ -43,7 +43,7 @@
       "src": "https://github.com/monaqa/dial.nvim"
     },
     "diffview.nvim": {
-      "rev": "7df789b5228b2ed81789eccb7f37c29d4f52b0b5",
+      "rev": "e94b7fd2fdf5521674e396218628a4872fbbb6d1",
       "src": "https://github.com/dlyongemallo/diffview.nvim"
     },
     "friendly-snippets": {
@@ -99,7 +99,7 @@
       "src": "https://github.com/nvim-mini/mini.ai"
     },
     "mini.diff": {
-      "rev": "117c301374ab8546891e2b34f63885ea83527432",
+      "rev": "5af2b6be4a4beb673f3196a414f6fd932bbedd48",
       "src": "https://github.com/nvim-mini/mini.diff"
     },
     "mini.extra": {
@@ -107,11 +107,11 @@
       "src": "https://github.com/nvim-mini/mini.extra"
     },
     "mini.hipatterns": {
-      "rev": "35b632f6c138d720f29de87476361af44bed2198",
+      "rev": "e25cf080aae092a651a92fa5e477f64a61adbebf",
       "src": "https://github.com/nvim-mini/mini.hipatterns"
     },
     "mini.icons": {
-      "rev": "9c7b1b90b15bdd69c52f6e31889dbc9987c30ec4",
+      "rev": "520995f1d75da0e4cc901ee95080b1ff2bc46b94",
       "src": "https://github.com/nvim-mini/mini.icons"
     },
     "mini.move": {
@@ -123,7 +123,7 @@
       "src": "https://github.com/nvim-mini/mini.splitjoin"
     },
     "mini.surround": {
-      "rev": "990ce30f724d08e79670107de6b915a3f1bb9a9b",
+      "rev": "c375ea503646fe8393593b5fb8a40406eaa437b2",
       "src": "https://github.com/nvim-mini/mini.surround"
     },
     "numb.nvim": {
@@ -151,7 +151,7 @@
       "src": "https://github.com/leoluz/nvim-dap-go"
     },
     "nvim-dap-view": {
-      "rev": "b5cc6e1c4cd188478fdad2e0b58dbca08fd6d363",
+      "rev": "2fe10567913fca43f352791ac83d19b9fdeacc95",
       "src": "https://github.com/igorlfs/nvim-dap-view"
     },
     "nvim-dap-virtual-text": {
@@ -163,7 +163,7 @@
       "src": "https://github.com/DanWlker/nvim-jump"
     },
     "nvim-lint": {
-      "rev": "8b06eeec3c674744b993caecd73343df108c052d",
+      "rev": "d48f3a76189d03b2239f6df1b2f7e3fa8353743b",
       "src": "https://github.com/mfussenegger/nvim-lint"
     },
     "nvim-lsp-file-operations": {
@@ -233,6 +233,11 @@
     "ts-comments.nvim": {
       "rev": "123a9fb12e7229342f807ec9e6de478b1102b041",
       "src": "https://github.com/folke/ts-comments.nvim"
+    },
+    "ts-error-translator.nvim": {
+      "rev": "90819107491fe74b89d1d64dfbefa50324c75e49",
+      "src": "https://github.com/DanWlker/ts-error-translator.nvim",
+      "version": "'support-tsgo'"
     },
     "vim-dadbod": {
       "rev": "6d1d41da4873a445c5605f2005ad2c68c99d8770",

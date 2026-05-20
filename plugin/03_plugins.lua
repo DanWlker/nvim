@@ -48,8 +48,13 @@ vim.pack.add({
   'https://github.com/nvim-mini/mini-git',
   -- lang
   'https://github.com/b0o/SchemaStore.nvim',
-  -- FIX: Having issues with tsgo, commenting out first
+  -- FIX: Having issues with tsgo, awaiting upstream merge:
+  -- https://github.com/dmmulroy/ts-error-translator.nvim/pull/44
   -- 'https://github.com/dmmulroy/ts-error-translator.nvim',
+  {
+    src = 'https://github.com/DanWlker/ts-error-translator.nvim',
+    version = 'support-tsgo',
+  },
   -- plugins
   'https://github.com/DanWlker/99',
   {
@@ -764,23 +769,21 @@ vim.api.nvim_create_autocmd('User', {
   end,
 })
 
--- FIX: having issues with tsgo, commenting out first
--- dmmulroy/ts-error-translator.nvim
--- require('ts-error-translator').setup({
---   -- Auto-attach to LSP servers for TypeScript diagnostics (default: true)
---   auto_attach = true,
---   -- LSP server names to translate diagnostics for (default shown below)
---   servers = {
---     'astro',
---     'svelte',
---     'ts_ls',
---     'tsserver', -- deprecated, use ts_ls
---     'typescript-tools',
---     'volar',
---     'vtsls',
---     'tsgo',
---   },
--- })
+require('ts-error-translator').setup({
+  -- Auto-attach to LSP servers for TypeScript diagnostics (default: true)
+  auto_attach = true,
+  -- LSP server names to translate diagnostics for (default shown below)
+  servers = {
+    'astro',
+    'svelte',
+    'ts_ls',
+    'tsserver', -- deprecated, use ts_ls
+    'typescript-tools',
+    'volar',
+    'vtsls',
+    'tsgo',
+  },
+})
 
 -- Danwlker/99
 local _99 = require('99')
