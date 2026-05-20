@@ -236,8 +236,7 @@
     },
     "ts-error-translator.nvim": {
       "rev": "90819107491fe74b89d1d64dfbefa50324c75e49",
-      "src": "https://github.com/DanWlker/ts-error-translator.nvim",
-      "version": "'support-tsgo'"
+      "src": "https://github.com/DanWlker/ts-error-translator.nvim"
     },
     "vim-dadbod": {
       "rev": "6d1d41da4873a445c5605f2005ad2c68c99d8770",

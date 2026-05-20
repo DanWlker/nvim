@@ -51,10 +51,7 @@ vim.pack.add({
   -- FIX: Having issues with tsgo, awaiting upstream merge:
   -- https://github.com/dmmulroy/ts-error-translator.nvim/pull/44
   -- 'https://github.com/dmmulroy/ts-error-translator.nvim',
-  {
-    src = 'https://github.com/DanWlker/ts-error-translator.nvim',
-    version = 'support-tsgo',
-  },
+  'https://github.com/DanWlker/ts-error-translator.nvim',
   -- plugins
   'https://github.com/DanWlker/99',
   {
