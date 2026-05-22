@@ -381,6 +381,7 @@ require('mini.extra').setup()
 -- nvim-mini/mini.ai
 -- TODO: remove after nvim 0.13 as this provides the same functionality
 -- https://github.com/neovim/neovim/pull/39845
+-- could change: https://github.com/neovim/neovim/issues/39893
 local function nvim_013_l_textobject()
   return function(ai_type, _, opts)
     -- taken from miniextra.gen_ai_spec.line(),
@@ -401,15 +402,6 @@ local function nvim_013_l_textobject()
 
     -- taken from miniextra.gen_ai_spec.buffer()
     local start_line, end_line = 1, vim.fn.line('$')
-    -- Skip first and last blank lines
-    local first_nonblank, last_nonblank =
-      vim.fn.nextnonblank(start_line), vim.fn.prevnonblank(end_line)
-    -- Do nothing for buffer with all blanks
-    if first_nonblank == 0 or last_nonblank == 0 then
-      return { from = { line = start_line, col = 1 } }
-    end
-    start_line, end_line = first_nonblank, last_nonblank
-
     local to_col = math.max(vim.fn.getline(end_line):len(), 1)
     return {
       from = { line = start_line, col = 1 },
