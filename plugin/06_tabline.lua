@@ -26,7 +26,10 @@ function _G.TabLine()
   local tabs = vim.api.nvim_list_tabpages()
   local current = vim.api.nvim_get_current_tabpage()
 
-  for _, tab in ipairs(tabs) do
+  local hl_label_left = '%#TabLinePillLabelLeft#'
+  local hl_label_text = '%#TabLinePillLabelText#'
+  local hl_label_right = '%#TabLinePillLabelRight#'
+  for i, tab in ipairs(tabs) do
     local is_active = (tab == current)
 
     local hl_left = is_active and '%#TabLinePillActiveLeft#'
@@ -34,18 +37,20 @@ function _G.TabLine()
     local hl_text = is_active and '%#TabLinePillActiveText#'
       or '%#TabLinePillInactiveText#'
     local hl_right = is_active and '%#TabLinePillActiveRight#'
-      or '%#TabLinePillInactiveRight#'
-
-    s = s .. hl_left .. ''
+      or '%#TabLinePillInactiveLeft#'
+    s = s .. hl_left .. '' .. hl_text .. ' ' .. i .. ' ' .. hl_right .. ''
     s = s
-      .. hl_text
+      .. hl_label_left
+      .. ''
+      .. hl_label_text
       .. ' '
       .. getTabLabel(tab)
       .. ' '
-      .. '['
-      .. count_editable_buffers_in_tab(tab)
-      .. ']'
-    s = s .. hl_right .. ''
+      .. hl_label_right
+      .. ''
+    -- .. '['
+    -- .. count_editable_buffers_in_tab(tab)
+    -- .. ']'
     s = s .. '%#TabLine# '
   end
 

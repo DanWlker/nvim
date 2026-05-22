@@ -255,6 +255,9 @@ require('catppuccin').setup({
       TabLinePillInactiveLeft = { fg = colors.overlay2 },
       TabLinePillInactiveText = { bg = colors.overlay2, fg = colors.base },
       TabLinePillInactiveRight = { fg = colors.overlay2 },
+      TabLinePillLabelLeft = { fg = colors.surface1 },
+      TabLinePillLabelText = { bg = colors.surface1, fg = colors.subtext1 },
+      TabLinePillLabelRight = { fg = colors.surface1 },
 
       -- [[ Syntax ]]
       ['@lsp.type.variable'] = { fg = colors.text }, -- for rust to allow variable to show in println!({variable})
