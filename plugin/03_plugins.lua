@@ -379,6 +379,44 @@ require('guess-indent').setup({})
 require('mini.extra').setup()
 
 -- nvim-mini/mini.ai
+-- TODO: remove after nvim 0.13 as this provides the same functionality
+-- https://github.com/neovim/neovim/pull/39845
+local function nvim_013_l_textobject()
+  return function(ai_type, _, opts)
+    -- taken from miniextra.gen_ai_spec.line(),
+    if ai_type == 'i' then
+      local lnum_from = vim.fn.line('.')
+      local lnum_to = lnum_from + opts.n_times - 1
+      local line_from, line_to = vim.fn.getline(lnum_from), vim.fn.getline(lnum_to)
+      -- Ignore indentation for `i` textobject
+      local col_from = line_from:match('^(%s*)'):len() + 1
+      -- Don't select `\n` past the line to operate within a line
+      local col_to = line_to:len()
+
+      return {
+        from = { line = lnum_from, col = col_from },
+        to = { line = lnum_to, col = col_to },
+      }
+    end
+
+    -- taken from miniextra.gen_ai_spec.buffer()
+    local start_line, end_line = 1, vim.fn.line('$')
+    -- Skip first and last blank lines
+    local first_nonblank, last_nonblank =
+      vim.fn.nextnonblank(start_line), vim.fn.prevnonblank(end_line)
+    -- Do nothing for buffer with all blanks
+    if first_nonblank == 0 or last_nonblank == 0 then
+      return { from = { line = start_line, col = 1 } }
+    end
+    start_line, end_line = first_nonblank, last_nonblank
+
+    local to_col = math.max(vim.fn.getline(end_line):len(), 1)
+    return {
+      from = { line = start_line, col = 1 },
+      to = { line = end_line, col = to_col },
+    }
+  end
+end
 local ai = require('mini.ai')
 local miniextra = require('mini.extra')
 local mini_ai_opts = {
@@ -401,10 +439,9 @@ local mini_ai_opts = {
       },
       '^().*()$',
     },
-    g = miniextra.gen_ai_spec.buffer(), -- buffer
     u = ai.gen_spec.function_call(), -- u for "Usage"
     U = ai.gen_spec.function_call({ name_pattern = '[%w_]' }), -- without dot in function name
-    l = miniextra.gen_ai_spec.line(),
+    l = nvim_013_l_textobject(),
   },
   mappings = {
     around_next = '',

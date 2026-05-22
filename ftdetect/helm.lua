@@ -8,7 +8,6 @@ vim.filetype.add({
     ['values.*%.yaml'] = 'yaml.helm-values',
   },
   filename = {
-    -- TODO: enable if helm-ls supports Chart.yaml
     ['Chart.yaml'] = 'yaml.helm-chartfile',
   },
 })
