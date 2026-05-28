@@ -249,4 +249,5 @@ vim.lsp.enable({
   -- rustup component add rust-analyzer
   'rust_analyzer',
   'dartls',
+  'terraformls',
 })

@@ -648,6 +648,8 @@ nvim_treesitter.install({
   'rust',
   'ron',
   'zsh',
+  'terraform',
+  'hcl',
 })
 
 -- nvim-treesitter-textobjects
@@ -1130,6 +1132,10 @@ require('conform').setup({
     vue = biome,
     rust = { 'rustfmt' },
     ['_'] = { 'trim_whitespace', 'trim_newlines' },
+    hcl = { 'packer_fmt' },
+    terraform = { 'terraform_fmt' },
+    tf = { 'terraform_fmt' },
+    ['terraform-vars'] = { 'terraform_fmt' },
   },
 })
 
@@ -1214,6 +1220,7 @@ require('mason-tool-installer').setup({
     'bashls',
     'bacon_ls',
     'biome',
+    'terraformls',
 
     -- tools
     'stylua',
@@ -1234,6 +1241,7 @@ require('mason-tool-installer').setup({
     -- 'yamlfmt',
     'bacon', -- used by bacon_ls
     -- 'rustfmt', -- deprecated, install this using rustup
+    'tflint',
   },
 })
 
@@ -1394,6 +1402,8 @@ lint.linters_by_ft = {
   dockerfile = { 'hadolint' },
   sql = { 'sqruff' },
   python = { 'ruff' },
+  terraform = { 'terraform_validate' },
+  tf = { 'terraform_validate' },
 }
 -- To allow other plugins to add linters to require('lint').linters_by_ft,
 -- instead set linters_by_ft like this:
