@@ -175,7 +175,7 @@
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-tree.lua": {
-      "rev": "79d14a3d913f1b5ef77bcce92ac16067bffaf902",
+      "rev": "c50d89e4558a0250e3583391240e2ab677cf2260",
       "src": "https://github.com/DanWlker/nvim-tree.lua"
     },
     "nvim-treesitter": {

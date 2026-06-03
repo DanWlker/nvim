@@ -1649,6 +1649,18 @@ require('nvim-tree').setup({
       enable = false,
       restrict_above_cwd = true,
     },
+    open_file = {
+      window_picker = {
+        picker = function()
+          local api = require('nvim-tree.api')
+          local open_file = require('nvim-tree.actions.node.open-file')
+          api.tree.close()
+          local winid = open_file.pick_win_id()
+          api.tree.open()
+          return winid
+        end,
+      },
+    },
   },
   filters = {
     custom = { 'node_modules', '^\\.git$', '^\\.github$' },
