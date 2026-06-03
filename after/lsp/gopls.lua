@@ -37,7 +37,6 @@ return {
         '-.vscode-test',
         '-node_modules',
       },
-      semanticTokens = true,
     },
   },
 }
