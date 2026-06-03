@@ -241,7 +241,7 @@ vim.lsp.enable({
   'gopls',
   'superhtml',
   'cssls',
-  'eslint',
+  'oxlint',
   'tsgo',
   'emmet_language_server',
   'lua_ls',

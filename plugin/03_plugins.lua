@@ -1025,7 +1025,7 @@ require('blink.cmp').setup({
 })
 
 -- stevearc/conform.nvim
-local biome = { 'biome-check' }
+local oxfmt = { 'oxfmt' }
 -- local disable_filetypes = {}
 local prefer_lsp = {}
 local fallback_to_lsp = { ['lua'] = true }
@@ -1102,23 +1102,23 @@ require('conform').setup({
     --     return #diag > 0
     --   end,
     -- },
-    biome = { require_cwd = true },
+    -- biome = { require_cwd = true },
   },
   formatters_by_ft = {
     c = { 'clang-format' },
     -- go = { 'goimports' }, -- 'gofumpt' is lsp handled, slows down gopls if configured here
-    javascript = biome,
-    javascriptreact = biome,
-    json = biome,
-    jsonc = biome,
+    javascript = oxfmt,
+    javascriptreact = oxfmt,
+    json = oxfmt,
+    jsonc = oxfmt,
     lua = { 'stylua' },
-    markdown = biome, -- markdown = { 'prettier', 'markdownlint-cli2', 'markdown-toc' },
-    css = biome,
-    scss = biome,
+    markdown = oxfmt, -- markdown = { 'prettier', 'markdownlint-cli2', 'markdown-toc' },
+    css = oxfmt,
+    scss = oxfmt,
     sql = { 'sqruff' },
-    typescript = biome,
-    typescriptreact = biome,
-    yaml = biome,
+    typescript = oxfmt,
+    typescriptreact = oxfmt,
+    yaml = oxfmt,
     python = {
       -- To fix auto-fixable lint errors.
       'ruff_fix',
@@ -1127,9 +1127,9 @@ require('conform').setup({
       -- To organize the imports.
       'ruff_organize_imports',
     },
-    graphql = biome,
-    html = biome,
-    vue = biome,
+    graphql = oxfmt,
+    html = oxfmt,
+    vue = oxfmt,
     rust = { 'rustfmt' },
     ['_'] = { 'trim_whitespace', 'trim_newlines' },
     hcl = { 'packer_fmt' },
@@ -1212,15 +1212,15 @@ require('mason-tool-installer').setup({
     'gopls', -- Check your go env version, cauld cause issues
     'superhtml',
     'cssls',
-    'eslint',
     'tsgo',
     'emmet_language_server',
     'lua_ls',
     'tailwindcss',
     'bashls',
     'bacon_ls',
-    'biome',
     'terraformls',
+    'oxfmt',
+    'oxlint',
 
     -- tools
     'stylua',
