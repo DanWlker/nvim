@@ -1,3 +1,6 @@
+-- Enable faster startup by caching compiled lua modules
+vim.loader.enable()
+
 -- Enable all filetype plugins and syntax (if not enabled, for better startup)
 vim.cmd('filetype plugin indent on')
 if vim.fn.exists('syntax_on') ~= 1 then vim.cmd('syntax enable') end

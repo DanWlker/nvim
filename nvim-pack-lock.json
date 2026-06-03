@@ -43,7 +43,7 @@
       "src": "https://github.com/monaqa/dial.nvim"
     },
     "diffview.nvim": {
-      "rev": "e94b7fd2fdf5521674e396218628a4872fbbb6d1",
+      "rev": "3d948ae75e2dac5b7590cfdf91dd9de1b8098f2c",
       "src": "https://github.com/dlyongemallo/diffview.nvim"
     },
     "friendly-snippets": {
@@ -211,7 +211,7 @@
       "src": "https://github.com/stevearc/quicker.nvim"
     },
     "snacks.nvim": {
-      "rev": "50b0d8d67e02a9105014cffa36e1fd8c846b65e9",
+      "rev": "8a641a9ad8a23b321b7b4e068f3cff3782e338be",
       "src": "https://github.com/DanWlker/snacks.nvim"
     },
     "substitute.nvim": {
