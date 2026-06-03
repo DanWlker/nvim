@@ -80,7 +80,7 @@ vim.pack.add({
   'https://github.com/theHamsta/nvim-dap-virtual-text',
   'https://github.com/mfussenegger/nvim-lint',
   'https://github.com/antosha417/nvim-lsp-file-operations',
-  'https://github.com/nvim-tree/nvim-tree.lua',
+  'https://github.com/DanWlker/nvim-tree.lua',
   'https://github.com/nvim-treesitter/nvim-treesitter-context',
   'https://github.com/windwp/nvim-ts-autotag',
   'https://github.com/kevinhwang91/nvim-ufo',
