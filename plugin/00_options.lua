@@ -103,6 +103,10 @@ opt.fillchars = {
   foldsep = ' ',
   diff = '╱',
 }
+
+-- Diff Mode settings (taken from maria's config)
+vim.opt.diffopt:append('followwrap,vertical,context:99')
+
 -- Diagnostic configuration
 local icons = require('icons')
 vim.diagnostic.config({

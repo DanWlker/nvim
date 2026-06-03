@@ -1,17 +1,5 @@
 local ncuc = vim.api.nvim_create_user_command
 
-ncuc('FormatJson', function(opts)
-  if opts.range > 0 then
-    vim.cmd(opts.line1 .. ',' .. opts.line2 .. '!jq')
-  else
-    -- No selection: apply to whole buffer
-    vim.cmd('%!jq')
-  end
-end, {
-  desc = 'Format Json',
-  range = true,
-})
-
 ncuc('CopyRelPath', function()
   local path = vim.fn.expand('%:.')
   vim.fn.setreg('+', path)
@@ -41,18 +29,6 @@ ncuc('Reload', function(opts)
 end, {
   nargs = 1,
   desc = 'Reload plugin',
-})
-
-ncuc('FormatSql', function(opts)
-  if opts.range > 0 then
-    vim.cmd(opts.line1 .. ',' .. opts.line2 .. '!sleek')
-  else
-    -- No selection: apply to whole buffer
-    vim.cmd('%!sleek')
-  end
-end, {
-  desc = 'Format Sql',
-  range = true,
 })
 
 ncuc('Print', function(opts)
