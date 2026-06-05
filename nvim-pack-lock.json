@@ -1,9 +1,5 @@
 {
   "plugins": {
-    "99": {
-      "rev": "3983bbdf58820c47a17b2c105ad03cca550fe7a9",
-      "src": "https://github.com/DanWlker/99"
-    },
     "LuaSnip": {
       "rev": "642b0c595e11608b4c18219e93b88d7637af27bc",
       "src": "https://github.com/L3MON4D3/LuaSnip",
@@ -137,10 +133,6 @@
     "nvim-bqf": {
       "rev": "c282a62bec6c0621a1ef5132aa3f4c9fc4dcc2c7",
       "src": "https://github.com/kevinhwang91/nvim-bqf"
-    },
-    "nvim-coverage": {
-      "rev": "a939e425e363319d952a6c35fb3f38b34041ded2",
-      "src": "https://github.com/andythigpen/nvim-coverage"
     },
     "nvim-dap": {
       "rev": "531771530d4f82ad2d21e436e3cc052d68d7aebb",
