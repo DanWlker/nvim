@@ -912,7 +912,10 @@ require('blink.cmp').setup({
 local oxfmt = { 'oxfmt' }
 -- local disable_filetypes = {}
 local prefer_lsp = {}
-local fallback_to_lsp = { ['lua'] = true }
+local fallback_to_lsp = { -- only fallback to lsp if no formatter
+  lua = true,
+  html = true, -- superhtml lsp has issues formatting <script> tags
+}
 vim.keymap.set(
   'n',
   '<leader>tf',
@@ -942,13 +945,13 @@ require('conform').setup({
     elseif fallback_to_lsp[vim.bo[bufnr].filetype] then
       to_return['lsp_format'] = 'fallback'
     else
-      -- -- should be safe to put this as default, most people and projects have lsp
-      -- -- and lsp is usually the priority? I think
+      -- should be safe to put this as default, most people and projects have lsp
+      -- and lsp is usually the priority? I think
+      -- NOTE: last here means lsp format will run last, unlike fallback which doesn't run lsp format if a formatter is available
       to_return['lsp_format'] = 'last'
-      --
     end
 
-    -- Why not use 'fallback'?
+    -- Why not use 'fallback' as a default?
     -- Gopls should be prioritised
     -- And usually LSP is done by the language designers? so.. in that case
     -- if they provide a formatter, we should use it.
