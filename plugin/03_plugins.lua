@@ -915,7 +915,9 @@ local prefer_lsp = {}
 local fallback_to_lsp = { -- only fallback to lsp if no formatter
   lua = true,
   html = true, -- superhtml lsp has issues formatting <script> tags
-  typescript = true, -- tsgo formats weirdly for some reason
+  -- tsgo formats typescript weirdly for some reason
+  typescript = true,
+  typescriptreact = true,
 }
 vim.keymap.set(
   'n',
