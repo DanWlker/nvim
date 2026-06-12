@@ -22,15 +22,6 @@ end, {
   desc = 'Copy Relative Path Without File',
 })
 
-ncuc('Reload', function(opts)
-  local name = opts.fargs[1]
-  package.loaded[name] = nil
-  require(name).setup()
-end, {
-  nargs = 1,
-  desc = 'Reload plugin',
-})
-
 ncuc('Print', function(opts)
   local expr = opts.fargs[1]
 
