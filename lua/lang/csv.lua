@@ -18,3 +18,9 @@ require('csvview').setup({
     jump_prev_row = { '<S-Enter>', mode = { 'n', 'x' } },
   },
 })
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'csv',
+  desc = 'Enable CSV View on .csv files',
+  callback = function() require('csvview').enable() end,
+})
