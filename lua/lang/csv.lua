@@ -20,7 +20,11 @@ require('csvview').setup({
 })
 
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'csv',
+  pattern = { 'csv', 'tsv' },
   desc = 'Enable CSV View on .csv files',
   callback = function() require('csvview').enable() end,
 })
+
+-- enable because this config loads when the file type is detected
+-- however the autocmd does not run immediately
+require('csvview').enable()
