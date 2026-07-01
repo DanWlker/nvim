@@ -92,6 +92,7 @@ vim.pack.add({
   'https://github.com/tpope/vim-dadbod',
   'https://github.com/mcauley-penney/visual-whitespace.nvim',
   'https://github.com/folke/which-key.nvim',
+  'https://github.com/nemanjamalesija/smart-paste.nvim',
 })
 
 -- catppuccin/nvim
@@ -2133,6 +2134,9 @@ vim.api.nvim_create_user_command('DBUITab', function()
 end, {
   desc = 'Open DBUI in another tab',
 })
+
+-- nemanjamalesija/smart-paste.nvim
+require('smart-paste').setup()
 
 -- mcauley-penney/visual-whitespace.nvim
 require('visual-whitespace').setup({
