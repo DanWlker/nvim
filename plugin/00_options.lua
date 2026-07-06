@@ -217,7 +217,7 @@ if isNotEmpty(vim.env.WSL_INTEROP) or isNotEmpty(vim.env.WSL_DISTRO_NAME) then
 end
 
 vim.lsp.enable({
-  'basedpyright',
+  'ty',
   'tombi',
   'helm_ls',
   'marksman',

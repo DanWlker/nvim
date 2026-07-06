@@ -1091,7 +1091,7 @@ require('mason-lspconfig').setup({ automatic_enable = false })
 -- WhoIsSethDaniel/mason-tool-installer.nvim
 require('mason-tool-installer').setup({
   ensure_installed = {
-    'basedpyright',
+    'ty',
     'tombi',
     'helm_ls',
     'marksman',
