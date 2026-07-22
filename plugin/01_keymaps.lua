@@ -74,4 +74,9 @@ map(
 -- end, { desc = 'Toggle diagnostics' })
 
 vim.cmd('packadd nvim.undotree')
-vim.keymap.set('n', '<leader>tu', require('undotree').open)
+vim.keymap.set(
+  'n',
+  '<leader>tu',
+  require('undotree').open,
+  { desc = 'Toggle undotree' }
+)
