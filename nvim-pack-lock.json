@@ -207,8 +207,9 @@
       "src": "https://github.com/nemanjamalesija/smart-paste.nvim"
     },
     "snacks.nvim": {
-      "rev": "8a641a9ad8a23b321b7b4e068f3cff3782e338be",
-      "src": "https://github.com/DanWlker/snacks.nvim"
+      "rev": "410308059b26a1bc185ca86d65aeab75910cf61e",
+      "src": "https://github.com/DanWlker/snacks.nvim",
+      "version": "'keep_parents_ordering'"
     },
     "substitute.nvim": {
       "rev": "0d2077398552f069abccbd964a26dd7cd26882cd",

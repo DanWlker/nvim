@@ -84,7 +84,10 @@ vim.pack.add({
   'https://github.com/kevinhwang91/nvim-ufo',
   'https://github.com/kevinhwang91/promise-async',
   'https://github.com/stevearc/quicker.nvim',
-  'https://github.com/DanWlker/snacks.nvim',
+  {
+    src = 'https://github.com/DanWlker/snacks.nvim',
+    version = 'keep_parents_ordering',
+  },
   'https://github.com/folke/todo-comments.nvim',
   'https://github.com/folke/trouble.nvim',
   'https://github.com/kristijanhusak/vim-dadbod-completion',
@@ -1867,22 +1870,19 @@ vim.api.nvim_create_autocmd('LspAttach', {
       function() Snacks.picker.lsp_implementations() end,
       'Snacks.picker.lsp_implementations()'
     )
-    map('gO', function()
-      local flatten, tree = false, true
-      if should_flatten[vim.bo.ft] then
-        flatten = true
-        tree = false
-      end
-
-      Snacks.picker.lsp_symbols({
-        filter = {
-          default = true,
-          lua = true,
-        },
-        tree = tree,
-        flatten = flatten,
-      })
-    end, 'Snacks.picker.lsp_symbols()')
+    map(
+      'gO',
+      function()
+        Snacks.picker.lsp_symbols({
+          filter = {
+            default = true,
+            lua = true,
+          },
+          keep_parents = true,
+        })
+      end,
+      'Snacks.picker.lsp_symbols()'
+    )
     map(
       'grc',
       function() Snacks.picker.lsp_incoming_calls() end,
