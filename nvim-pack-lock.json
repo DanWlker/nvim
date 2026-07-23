@@ -6,7 +6,7 @@
       "version": "2.0.0 - 3.0.0"
     },
     "SchemaStore.nvim": {
-      "rev": "77fb1b0aa0c7528680bed48687f3dd2c2a6ed111",
+      "rev": "3d2c297f7152208daf4a382ea7123f9e4ebf9da1",
       "src": "https://github.com/b0o/SchemaStore.nvim"
     },
     "blame.nvim": {
@@ -127,7 +127,7 @@
       "src": "https://github.com/nacro90/numb.nvim"
     },
     "nvim": {
-      "rev": "058e83dc009e4dd62f30807054de9cc849699e27",
+      "rev": "c7c692a0ad3080710893abbae100171819a3e4be",
       "src": "https://github.com/catppuccin/nvim"
     },
     "nvim-bqf": {
@@ -151,7 +151,7 @@
       "src": "https://github.com/theHamsta/nvim-dap-virtual-text"
     },
     "nvim-jump": {
-      "rev": "6f9a265c72a255fb43dc324db82b6d97bd91f2b6",
+      "rev": "81366c4e058b7bd82ab86cbf7eb1940d6def1c33",
       "src": "https://github.com/DanWlker/nvim-jump"
     },
     "nvim-lint": {
@@ -167,7 +167,7 @@
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-tree.lua": {
-      "rev": "3483f1b765908044d3c9c183aaa70a7ad1aba45a",
+      "rev": "e9e6c4a8b751fe5860275f6475964b84cd835e66",
       "src": "https://github.com/DanWlker/nvim-tree.lua"
     },
     "nvim-treesitter": {
@@ -220,7 +220,7 @@
       "src": "https://github.com/folke/todo-comments.nvim"
     },
     "touchup.nvim": {
-      "rev": "da808d941cef641127ae92fa34eff48952b26112",
+      "rev": "ffd9365ae3e6af6b55d882f0b5760f543882bba8",
       "src": "https://github.com/noisesfromspace/touchup.nvim"
     },
     "treesj": {
