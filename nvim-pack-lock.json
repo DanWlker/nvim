@@ -155,8 +155,9 @@
       "src": "https://github.com/DanWlker/nvim-jump"
     },
     "nvim-lint": {
-      "rev": "a219b2c9e5b4765e5c845aba119dad55806fcaf1",
-      "src": "https://github.com/mfussenegger/nvim-lint"
+      "rev": "4f1d14fd24a5d7fdee51f9164997d7157caaf5bc",
+      "src": "https://github.com/DanWlker/nvim-lint",
+      "version": "'droast'"
     },
     "nvim-lsp-file-operations": {
       "rev": "b9c795d3973e8eec22706af14959bc60c579e771",
