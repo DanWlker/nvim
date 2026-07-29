@@ -41,7 +41,7 @@ vim.pack.add({
   'https://github.com/folke/ts-comments.nvim',
   -- git
   'https://github.com/FabijanZulj/blame.nvim',
-  'https://github.com/dlyongemallo/diffview.nvim',
+  'https://github.com/esmuellert/codediff.nvim',
   'https://github.com/f-person/git-blame.nvim',
   'https://github.com/rhysd/git-messenger.vim',
   'https://github.com/nvim-mini/mini.diff',
@@ -722,24 +722,23 @@ vim.keymap.set(
   { desc = 'Git Blame List' }
 )
 
--- sindrets/diffview.nvim
-require('diffview').setup({
-  view = {
-    default = {
-      layout = 'diff2_vertical',
-    },
+-- esmuellert/codediff.nvim
+require('codediff').setup({
+  diff = {
+    compact = true,
   },
 })
 vim.keymap.set(
   'n',
   '<leader>gh',
-  '<cmd>DiffviewFileHistory<cr>',
+  '<cmd>CodeDiff history<cr>',
   { desc = 'Git History' }
 )
+
 vim.keymap.set(
   'n',
   '<leader>gf',
-  '<cmd>DiffviewFileHistory %<cr>',
+  '<cmd>CodeDiff history %<cr>',
   { desc = 'Git File Only History' }
 )
 
