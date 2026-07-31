@@ -143,6 +143,7 @@ require('catppuccin').setup({
     transparent = true,
   },
   custom_highlights = function(colors)
+    local U = require('catppuccin.utils.colors')
     local custom_stuff = {
       WinSeparator = { fg = colors.surface2 },
       -- NormalFloat = { fg = colors.text, bg = colors.none },
@@ -247,6 +248,15 @@ require('catppuccin').setup({
 
       -- [[ Diffview ]]
       DiffviewNormal = { fg = colors.text, bg = colors.base },
+      -- VSCode-style side-by-side diff: red = old/left, green = new/right.
+      -- Consumed by the diff_buf_win_enter hook in diffview.setup() below.
+      -- `DiffAdd` (green changed line, new side) is already defined by
+      -- catppuccin, so only the three missing groups are added here. Line
+      -- backgrounds use the 0.18 blend catppuccin uses for DiffAdd/DiffDelete;
+      -- the changed-char groups use a stronger 0.30 blend so edits pop.
+      DiffAddAsDelete = { bg = U.darken(colors.red, 0.18, colors.base) },
+      DiffDeleteText = { bg = U.darken(colors.red, 0.30, colors.base) },
+      DiffTextAdd = { bg = U.darken(colors.green, 0.30, colors.base) },
 
       -- [[ Statusline ]]
       StatusLine = { bg = colors.base },
@@ -728,6 +738,25 @@ require('diffview').setup({
     default = {
       layout = 'diff2_vertical',
     },
+  },
+  -- https://github.com/sindrets/diffview.nvim/issues/241
+  -- https://github.com/sindrets/diffview.nvim/pull/258#issuecomment-1408689220
+  hooks = {
+    diff_buf_win_enter = function(_, _, ctx)
+      if ctx.layout_name:match('^diff2') then
+        if ctx.symbol == 'a' then
+          vim.opt_local.winhl = table.concat({
+            'DiffChange:DiffAddAsDelete',
+            'DiffText:DiffDeleteText',
+          }, ',')
+        elseif ctx.symbol == 'b' then
+          vim.opt_local.winhl = table.concat({
+            'DiffChange:DiffAdd',
+            'DiffText:DiffTextAdd',
+          }, ',')
+        end
+      end
+    end,
   },
 })
 vim.keymap.set(
