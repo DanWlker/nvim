@@ -246,7 +246,7 @@ local function position_component()
   --   string.format('%%#StatuslineLineCount# %d', line_count),
   -- }
   return table.concat({
-    string.format('%%#StatuslineLineItalic# [%d:%d] ', line, col),
+    string.format('%%#StatuslineLineItalic#[%d:%d]', line, col),
     -- string.format('%%#StatuslineLineTitle#[%d]', line_count),
   })
 end
@@ -280,7 +280,7 @@ function _G.StatusLine()
     return vim.iter(components):skip(1):fold(
       components[1],
       function(acc, component)
-        return #component > 0 and string.format('%s    %s', acc, component) or acc
+        return #component > 0 and string.format('%s   %s', acc, component) or acc
       end
     )
   end
