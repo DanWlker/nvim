@@ -134,10 +134,6 @@ require('catppuccin').setup({
         information = { 'undercurl' },
       },
     },
-    colorful_winsep = {
-      enabled = true,
-      color = 'lavender',
-    },
   },
   float = {
     transparent = true,
