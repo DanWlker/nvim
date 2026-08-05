@@ -266,7 +266,7 @@ end
 local function cwd_component()
   local cwd = vim.fn.fnamemodify(vim.uv.cwd() or '', ':~')
 
-  if vim.o.columns < 80 then cwd = vim.fn.pathshorten(cwd) end
+  if vim.o.columns < 75 then cwd = vim.fn.pathshorten(cwd) end
 
   return '%#StatusLine#' .. icons.misc.folder .. ' ' .. cwd .. ' '
 end
@@ -289,9 +289,9 @@ function _G.StatusLine()
     concat_components({
       mode_component(),
       git_component(),
-      '%<' .. (dap_component() or lsp_progress_component() or cwd_component() or ''),
+      (dap_component() or lsp_progress_component() or cwd_component() or ''),
     }),
-    '%#StatusLine#%=',
+    '%#StatusLine#%=%<',
     concat_components({
       vim.diagnostic.status(),
       filetype_component(),
