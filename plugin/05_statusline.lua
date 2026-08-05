@@ -95,7 +95,7 @@ local function mode_component()
     hl = 'Command'
   end
 
-  if vim.o.columns < 100 then
+  if vim.o.columns < 115 then
     mode = mode:sub(1, 1) -- N, I, V, C...
   end
 
@@ -110,7 +110,7 @@ end
 --- Git status (if any).
 ---@return string
 local function git_component()
-  if vim.o.columns < 100 then return '' end
+  if vim.o.columns < 110 then return '' end
 
   local head = vim.b.minigit_summary_string or vim.b.gitsigns_head
   if not head or head == '' then return '' end
@@ -266,7 +266,7 @@ end
 local function cwd_component()
   local cwd = vim.fn.fnamemodify(vim.uv.cwd() or '', ':~')
 
-  if vim.o.columns < 75 then cwd = vim.fn.pathshorten(cwd) end
+  if vim.o.columns < 85 then cwd = vim.fn.pathshorten(cwd) end
 
   return '%#StatusLine#' .. icons.misc.folder .. ' ' .. cwd .. ' '
 end
