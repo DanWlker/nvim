@@ -122,10 +122,6 @@
       "rev": "8d5d0c5aa92449368ac251e85451d79d8f69d296",
       "src": "https://github.com/nvim-mini/mini.surround"
     },
-    "numb.nvim": {
-      "rev": "167fbbb8de5529eac4f66ef054c260636cd9af51",
-      "src": "https://github.com/nacro90/numb.nvim"
-    },
     "nvim": {
       "rev": "79e2049a0fdf7ec840f8463fe1d962c94493196b",
       "src": "https://github.com/catppuccin/nvim"

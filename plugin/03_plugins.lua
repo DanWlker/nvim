@@ -71,7 +71,6 @@ vim.pack.add({
   'https://github.com/jay-babu/mason-nvim-dap.nvim',
   'https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim',
   'https://github.com/nvim-mini/mini.hipatterns',
-  'https://github.com/nacro90/numb.nvim',
   'https://github.com/kevinhwang91/nvim-bqf',
   'https://github.com/igorlfs/nvim-dap-view',
   'https://github.com/mfussenegger/nvim-dap',
@@ -1190,9 +1189,6 @@ mini_hipatterns.setup({
     },
   },
 })
-
--- nacro90/numb.nvim
-require('numb').setup()
 
 -- kevinhwang91/nvim-bqf
 require('bqf').setup()

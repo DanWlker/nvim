@@ -107,7 +107,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
 
     -- TODO: revisit https://github.com/neovim/neovim/issues/39477
-    vim.lsp.codelens.enable(true)
+    -- vim.lsp.codelens.enable(true)
 
     if client and client:supports_method('textDocument/inlayHint', event.buf) then
       map(
