@@ -571,8 +571,13 @@ vim.api.nvim_create_autocmd('User', {
     require('nvim-treesitter.parsers').go_tags = {
       install_info = {
         url = 'https://github.com/DanWlker/tree-sitter-go_tags',
-        -- branch = 'main',
-        -- files = { 'src/parser.c' },
+      },
+    }
+    require('nvim-treesitter.parsers').tmux = {
+      install_info = {
+        url = 'https://github.com/Freed-Wu/tree-sitter-tmux',
+        generate = true,
+        generate_from_json = false,
       },
     }
   end,
@@ -660,6 +665,7 @@ nvim_treesitter.install({
   'zsh',
   'terraform',
   'hcl',
+  'tmux',
 })
 
 -- nvim-treesitter-textobjects
