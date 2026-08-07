@@ -571,6 +571,7 @@ vim.api.nvim_create_autocmd('User', {
     require('nvim-treesitter.parsers').go_tags = {
       install_info = {
         url = 'https://github.com/DanWlker/tree-sitter-go_tags',
+        queries = 'queries',
       },
     }
     require('nvim-treesitter.parsers').tmux = {
@@ -578,6 +579,7 @@ vim.api.nvim_create_autocmd('User', {
         url = 'https://github.com/Freed-Wu/tree-sitter-tmux',
         generate = true,
         generate_from_json = false,
+        queries = 'queries',
       },
     }
   end,
