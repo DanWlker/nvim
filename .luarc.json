@@ -1,5 +1,7 @@
 {
   "diagnostics.globals": [
-    "isNotEmpty"
+    "MiniIcons",
+    "MiniSplitjoin",
+    "MiniHipatterns"
   ]
 }

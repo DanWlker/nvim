@@ -1,22 +1,4 @@
-local filename = vim.fn.expand('%:t')
-
-if filename == 'Cargo.toml' then
-  vim.pack.add({
-    'https://github.com/saecki/crates.nvim',
-  })
-
-  -- saecki/crates.nvim
-  require('crates').setup({
-    completion = {
-      crates = {
-        enabled = true,
-      },
-    },
-    lsp = {
-      enabled = true,
-      actions = true,
-      completion = true,
-      hover = true,
-    },
-  })
-end
+-- Guard here rather than in lang.toml: ftplugin runs per buffer, so this still
+-- fires for a Cargo.toml opened after some other .toml. The require itself is
+-- module-cached, so crates.setup() only ever runs once.
+if vim.fn.expand('%:t') == 'Cargo.toml' then require('lang.cargo.toml') end

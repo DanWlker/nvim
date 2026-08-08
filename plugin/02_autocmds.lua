@@ -32,11 +32,7 @@ vim.api.nvim_create_autocmd('ModeChanged', {
   pattern = '*',
   callback = function()
     local mode = vim.fn.mode()
-    if mode:match('i') or mode:match('v') then
-      vim.opt.hlsearch = false -- hide in insert mode
-    else
-      vim.opt.hlsearch = true -- show in normal / visual / command modes
-    end
+    vim.o.hlsearch = not (mode:match('i') or mode:match('v'))
   end,
   group = vim.api.nvim_create_augroup('danwlker/toggle-hlsearch', { clear = true }),
   desc = 'Show search highlights in normal mode, hide in insert mode',

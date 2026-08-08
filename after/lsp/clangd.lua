@@ -1,16 +1,15 @@
-vim.keymap.set(
-  'n',
-  '<leader>ch',
-  '<cmd>ClangdSwitchSourceHeader<cr>',
-  { desc = 'Switch Source/Header (C/C++)' }
-)
 return {
+  on_attach = function(_, bufnr)
+    vim.keymap.set('n', '<leader>ch', '<cmd>ClangdSwitchSourceHeader<cr>', {
+      buffer = bufnr,
+      desc = 'Switch Source/Header (C/C++)',
+    })
+  end,
   root_markers = {
     'compile_commands.json',
     'compile_flags.txt',
     'configure.ac', -- AutoTools
     'Makefile',
-    'configure.ac',
     'configure.in',
     'config.h.in',
     'meson.build',

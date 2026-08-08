@@ -200,8 +200,10 @@ vim.diagnostic.config({
 require('vim._core.ui2').enable()
 
 -- WSL clipboard integration
-local function isNotEmpty(s) return s ~= nil and s ~= '' end
-if isNotEmpty(vim.env.WSL_INTEROP) or isNotEmpty(vim.env.WSL_DISTRO_NAME) then
+local function stringIsNotEmpty(s) return s ~= nil and s ~= '' end
+if
+  stringIsNotEmpty(vim.env.WSL_INTEROP) or stringIsNotEmpty(vim.env.WSL_DISTRO_NAME)
+then
   g.clipboard = {
     name = 'WslClipboard',
     copy = {

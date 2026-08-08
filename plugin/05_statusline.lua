@@ -35,49 +35,50 @@ local function get_or_create_hl(hl)
   return hl_name
 end
 
+-- Note that: \19 = ^S and \22 = ^V.
+---@type table<string, string>
+local mode_to_str = {
+  ['n'] = 'NORMAL',
+  ['no'] = 'OP-PENDING',
+  ['nov'] = 'OP-PENDING',
+  ['noV'] = 'OP-PENDING',
+  ['no\22'] = 'OP-PENDING',
+  ['niI'] = 'NORMAL',
+  ['niR'] = 'NORMAL',
+  ['niV'] = 'NORMAL',
+  ['nt'] = 'NORMAL',
+  ['ntT'] = 'NORMAL',
+  ['v'] = 'VISUAL',
+  ['vs'] = 'VISUAL',
+  ['V'] = 'VISUAL',
+  ['Vs'] = 'VISUAL',
+  ['\22'] = 'VISUAL',
+  ['\22s'] = 'VISUAL',
+  ['s'] = 'SELECT',
+  ['S'] = 'SELECT',
+  ['\19'] = 'SELECT',
+  ['i'] = 'INSERT',
+  ['ic'] = 'INSERT',
+  ['ix'] = 'INSERT',
+  ['R'] = 'REPLACE',
+  ['Rc'] = 'REPLACE',
+  ['Rx'] = 'REPLACE',
+  ['Rv'] = 'VIRT REPLACE',
+  ['Rvc'] = 'VIRT REPLACE',
+  ['Rvx'] = 'VIRT REPLACE',
+  ['c'] = 'COMMAND',
+  ['cv'] = 'VIM EX',
+  ['ce'] = 'EX',
+  ['r'] = 'PROMPT',
+  ['rm'] = 'MORE',
+  ['r?'] = 'CONFIRM',
+  ['!'] = 'SHELL',
+  ['t'] = 'TERMINAL',
+}
+
 --- Current mode.
 ---@return string
 local function mode_component()
-  -- Note that: \19 = ^S and \22 = ^V.
-  local mode_to_str = {
-    ['n'] = 'NORMAL',
-    ['no'] = 'OP-PENDING',
-    ['nov'] = 'OP-PENDING',
-    ['noV'] = 'OP-PENDING',
-    ['no\22'] = 'OP-PENDING',
-    ['niI'] = 'NORMAL',
-    ['niR'] = 'NORMAL',
-    ['niV'] = 'NORMAL',
-    ['nt'] = 'NORMAL',
-    ['ntT'] = 'NORMAL',
-    ['v'] = 'VISUAL',
-    ['vs'] = 'VISUAL',
-    ['V'] = 'VISUAL',
-    ['Vs'] = 'VISUAL',
-    ['\22'] = 'VISUAL',
-    ['\22s'] = 'VISUAL',
-    ['s'] = 'SELECT',
-    ['S'] = 'SELECT',
-    ['\19'] = 'SELECT',
-    ['i'] = 'INSERT',
-    ['ic'] = 'INSERT',
-    ['ix'] = 'INSERT',
-    ['R'] = 'REPLACE',
-    ['Rc'] = 'REPLACE',
-    ['Rx'] = 'REPLACE',
-    ['Rv'] = 'VIRT REPLACE',
-    ['Rvc'] = 'VIRT REPLACE',
-    ['Rvx'] = 'VIRT REPLACE',
-    ['c'] = 'COMMAND',
-    ['cv'] = 'VIM EX',
-    ['ce'] = 'EX',
-    ['r'] = 'PROMPT',
-    ['rm'] = 'MORE',
-    ['r?'] = 'CONFIRM',
-    ['!'] = 'SHELL',
-    ['t'] = 'TERMINAL',
-  }
-
   -- Get the respective string to display.
   local mode = mode_to_str[vim.api.nvim_get_mode().mode] or 'UNKNOWN'
 
@@ -176,27 +177,27 @@ local function lsp_progress_component()
   })
 end
 
+-- Special icons for some filetypes.
+local special_icons = {
+  DiffviewFileHistory = { icons.misc.git, 'Number' },
+  DiffviewFiles = { icons.misc.git, 'Number' },
+  ['grug-far'] = { icons.misc.search, 'Constant' },
+  dapui_breakpoints = { icons.misc.bug, 'DapUIRestart' },
+  dapui_scopes = { icons.misc.bug, 'DapUIRestart' },
+  dapui_stacks = { icons.misc.bug, 'DapUIRestart' },
+  fzf = { icons.misc.terminal, 'Special' },
+  gitcommit = { icons.misc.git, 'Number' },
+  gitrebase = { icons.misc.git, 'Number' },
+  lazy = { icons.misc.func, 'Special' },
+  lazyterm = { icons.misc.terminal, 'Special' },
+  minifiles = { icons.misc.folder, 'Directory' },
+  qf = { icons.misc.search, 'Conditional' },
+}
+
 --- The buffer's filetype.
 ---@return string
 local function filetype_component()
   if not MiniIcons then require('mini.icons') end
-
-  -- Special icons for some filetypes.
-  local special_icons = {
-    DiffviewFileHistory = { icons.misc.git, 'Number' },
-    DiffviewFiles = { icons.misc.git, 'Number' },
-    ['grug-far'] = { icons.misc.search, 'Constant' },
-    dapui_breakpoints = { icons.misc.bug, 'DapUIRestart' },
-    dapui_scopes = { icons.misc.bug, 'DapUIRestart' },
-    dapui_stacks = { icons.misc.bug, 'DapUIRestart' },
-    fzf = { icons.misc.terminal, 'Special' },
-    gitcommit = { icons.misc.git, 'Number' },
-    gitrebase = { icons.misc.git, 'Number' },
-    lazy = { icons.misc.func, 'Special' },
-    lazyterm = { icons.misc.terminal, 'Special' },
-    minifiles = { icons.misc.folder, 'Directory' },
-    qf = { icons.misc.search, 'Conditional' },
-  }
 
   local filetype = vim.bo.filetype
   if filetype == '' then filetype = '[No Name]' end

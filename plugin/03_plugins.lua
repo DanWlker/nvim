@@ -294,6 +294,7 @@ require('catppuccin').setup({
     return custom_stuff
   end,
 })
+local palette = require('catppuccin.palettes').get_palette()
 vim.cmd.colorscheme('catppuccin')
 
 -- nvim-mini/mini.icons
@@ -971,7 +972,6 @@ vim.api.nvim_create_user_command(
   { desc = 'Format buffer' }
 )
 vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-local dialects = vim.fn.systemlist('sqruff dialects')
 require('conform').setup({
   notify_on_error = false,
   format_on_save = function(bufnr)
@@ -1007,12 +1007,7 @@ require('conform').setup({
   formatters = {
     sqruff = {
       args = function(_, ctx)
-        local ft = vim.bo[ctx.buf].filetype
-        local dialect = ft:match('^([^.]+)%.')
-        local dialect_arg = vim.tbl_contains(dialects, dialect)
-            and '--dialect=' .. dialect
-          or '--dialect=ansi'
-        return { 'fix', dialect_arg, '$FILENAME' }
+        return { 'fix', require('sqruff').dialect_arg(ctx.buf), '$FILENAME' }
       end,
     },
     -- ['markdown-toc'] = {
@@ -1080,9 +1075,10 @@ require('hlchunk').setup({
       left_bottom = '╰',
       right_arrow = '─',
     },
+    -- Sourced from the palette so they can't drift from the theme
     style = {
-      '#9399b2',
-      '#eba0ac',
+      palette.overlay2,
+      palette.maroon,
     },
     enable = true,
     duration = 0,
@@ -1290,14 +1286,10 @@ table.insert(yamllint.args, '-d')
 table.insert(yamllint.args, '{extends: default, rules: {braces: disable}}')
 
 -- sqruff
-local sqruff = require('lint').linters.sqruff
-require('lint').linters.sqruff = function()
+local sqruff = lint.linters.sqruff
+lint.linters.sqruff = function()
   local linter = vim.deepcopy(sqruff)
-  local ft = vim.bo.filetype
-  local dialect = ft:match('^([^.]+)%.')
-  local dialect_arg = vim.tbl_contains(dialects, dialect) and '--dialect=' .. dialect
-    or '--dialect=ansi'
-  linter.args = { 'lint', '--format=json', dialect_arg, '-' }
+  linter.args = { 'lint', '--format=json', require('sqruff').dialect_arg(0), '-' }
   return linter
 end
 
@@ -1383,15 +1375,14 @@ if floating then
     float = {
       enable = true,
       open_win_config = function()
-        local screen_w = vim.opt.columns:get()
-        local screen_h = vim.opt.lines:get() - vim.opt.cmdheight:get()
+        local screen_w = vim.o.columns
+        local screen_h = vim.o.lines - vim.o.cmdheight
         local window_w = screen_w * WIDTH_RATIO
         local window_h = screen_h * HEIGHT_RATIO
         local window_w_int = math.floor(window_w)
         local window_h_int = math.floor(window_h)
         local center_x = (screen_w - window_w) / 2
-        local center_y = ((vim.opt.lines:get() - window_h) / 2)
-          - vim.opt.cmdheight:get()
+        local center_y = ((vim.o.lines - window_h) / 2) - vim.o.cmdheight
         return {
           border = 'rounded',
           relative = 'editor',
@@ -1402,144 +1393,55 @@ if floating then
         }
       end,
     },
-    width = function() return math.floor(vim.opt.columns:get() * WIDTH_RATIO) end,
+    width = function() return math.floor(vim.o.columns * WIDTH_RATIO) end,
   }
 end
 require('nvim-tree').setup({
   on_attach = function(bufnr)
-    local function nvim_tree_opts(desc)
-      return {
-        desc = 'nvim-tree: ' .. desc,
+    -- { lhs, api function, description }
+    for _, m in ipairs({
+      { 'K', tree_api.node.show_info_popup, 'Info' },
+      { '<C-t>', tree_api.node.open.tab, 'Open: New Tab' },
+      { '<C-v>', tree_api.node.open.vertical, 'Open: Vertical Split' },
+      { '<C-s>', tree_api.node.open.horizontal, 'Open: Horizontal Split' },
+      { '<BS>', tree_api.node.navigate.parent_close, 'Close Directory' },
+      { '<CR>', tree_api.node.open.edit, 'Open' },
+      { '.', tree_api.node.run.cmd, 'Run Command' },
+      { 'a', tree_api.fs.create, 'Create File Or Directory' },
+      { 'bd', tree_api.marks.bulk.delete, 'Delete Bookmarked' },
+      { 'bD', tree_api.marks.bulk.trash, 'Trash Bookmarked' },
+      { 'bmv', tree_api.marks.bulk.move, 'Move Bookmarked' },
+      { 'B', tree_api.filter.no_buffer.toggle, 'Toggle Filter: No Buffer' },
+      { 'y', tree_api.fs.copy.node, 'Copy' },
+      { 'd', tree_api.fs.remove, 'Delete' },
+      { 'D', tree_api.fs.trash, 'Trash' },
+      { 'E', tree_api.tree.expand_all, 'Expand All' },
+      { 'F', tree_api.filter.live.clear, 'Live Filter: Clear' },
+      { 'f', tree_api.filter.live.start, 'Live Filter: Start' },
+      { 'g?', tree_api.tree.toggle_help, 'Help' },
+      { 'H', tree_api.filter.dotfiles.toggle, 'Toggle Filter: Dotfiles' },
+      { 'I', tree_api.filter.git.ignored.toggle, 'Toggle Filter: Git Ignore' },
+      { 'M', tree_api.filter.no_bookmark.toggle, 'Toggle Filter: No Bookmark' },
+      { 'm', tree_api.marks.toggle, 'Toggle Bookmark' },
+      { 'p', tree_api.fs.paste, 'Paste' },
+      { 'P', tree_api.node.navigate.parent, 'Parent Directory' },
+      { 'q', tree_api.tree.close, 'Close' },
+      { 'r', tree_api.fs.rename_full, 'Rename' },
+      { 'R', tree_api.tree.reload, 'Refresh' },
+      { 'W', tree_api.tree.collapse_all, 'Collapse' },
+      { 'x', tree_api.fs.cut, 'Cut' },
+      { 'gc', tree_api.fs.copy.filename, 'Copy Name' },
+      { 'c', tree_api.fs.copy.relative_path, 'Copy Relative Path' },
+      { 'C', tree_api.fs.copy.absolute_path, 'Copy Absolute Path' },
+    }) do
+      vim.keymap.set('n', m[1], m[2], {
+        desc = 'nvim-tree: ' .. m[3],
         buffer = bufnr,
         noremap = true,
         silent = true,
         nowait = true,
-      }
+      })
     end
-
-    vim.keymap.set('n', 'K', tree_api.node.show_info_popup, nvim_tree_opts('Info'))
-    vim.keymap.set(
-      'n',
-      '<C-t>',
-      tree_api.node.open.tab,
-      nvim_tree_opts('Open: New Tab')
-    )
-    vim.keymap.set(
-      'n',
-      '<C-v>',
-      tree_api.node.open.vertical,
-      nvim_tree_opts('Open: Vertical Split')
-    )
-    vim.keymap.set(
-      'n',
-      '<C-s>',
-      tree_api.node.open.horizontal,
-      nvim_tree_opts('Open: Horizontal Split')
-    )
-    vim.keymap.set(
-      'n',
-      '<BS>',
-      tree_api.node.navigate.parent_close,
-      nvim_tree_opts('Close Directory')
-    )
-    vim.keymap.set('n', '<CR>', tree_api.node.open.edit, nvim_tree_opts('Open'))
-    vim.keymap.set('n', '.', tree_api.node.run.cmd, nvim_tree_opts('Run Command'))
-    vim.keymap.set(
-      'n',
-      'a',
-      tree_api.fs.create,
-      nvim_tree_opts('Create File Or Directory')
-    )
-    vim.keymap.set(
-      'n',
-      'bd',
-      tree_api.marks.bulk.delete,
-      nvim_tree_opts('Delete Bookmarked')
-    )
-    vim.keymap.set(
-      'n',
-      'bD',
-      tree_api.marks.bulk.trash,
-      nvim_tree_opts('Trash Bookmarked')
-    )
-    vim.keymap.set(
-      'n',
-      'bmv',
-      tree_api.marks.bulk.move,
-      nvim_tree_opts('Move Bookmarked')
-    )
-    vim.keymap.set(
-      'n',
-      'B',
-      tree_api.filter.no_buffer.toggle,
-      nvim_tree_opts('Toggle Filter: No Buffer')
-    )
-    vim.keymap.set('n', 'y', tree_api.fs.copy.node, nvim_tree_opts('Copy'))
-    vim.keymap.set('n', 'd', tree_api.fs.remove, nvim_tree_opts('Delete'))
-    vim.keymap.set('n', 'D', tree_api.fs.trash, nvim_tree_opts('Trash'))
-    vim.keymap.set('n', 'E', tree_api.tree.expand_all, nvim_tree_opts('Expand All'))
-    vim.keymap.set(
-      'n',
-      'F',
-      tree_api.filter.live.clear,
-      nvim_tree_opts('Live Filter: Clear')
-    )
-    vim.keymap.set(
-      'n',
-      'f',
-      tree_api.filter.live.start,
-      nvim_tree_opts('Live Filter: Start')
-    )
-    vim.keymap.set('n', 'g?', tree_api.tree.toggle_help, nvim_tree_opts('Help'))
-    vim.keymap.set(
-      'n',
-      'H',
-      tree_api.filter.dotfiles.toggle,
-      nvim_tree_opts('Toggle Filter: Dotfiles')
-    )
-    vim.keymap.set(
-      'n',
-      'I',
-      tree_api.filter.git.ignored.toggle,
-      nvim_tree_opts('Toggle Filter: Git Ignore')
-    )
-    vim.keymap.set(
-      'n',
-      'M',
-      tree_api.filter.no_bookmark.toggle,
-      nvim_tree_opts('Toggle Filter: No Bookmark')
-    )
-    vim.keymap.set(
-      'n',
-      'm',
-      tree_api.marks.toggle,
-      nvim_tree_opts('Toggle Bookmark')
-    )
-    vim.keymap.set('n', 'p', tree_api.fs.paste, nvim_tree_opts('Paste'))
-    vim.keymap.set(
-      'n',
-      'P',
-      tree_api.node.navigate.parent,
-      nvim_tree_opts('Parent Directory')
-    )
-    vim.keymap.set('n', 'q', tree_api.tree.close, nvim_tree_opts('Close'))
-    vim.keymap.set('n', 'r', tree_api.fs.rename_full, nvim_tree_opts('Rename'))
-    vim.keymap.set('n', 'R', tree_api.tree.reload, nvim_tree_opts('Refresh'))
-    vim.keymap.set('n', 'W', tree_api.tree.collapse_all, nvim_tree_opts('Collapse'))
-    vim.keymap.set('n', 'x', tree_api.fs.cut, nvim_tree_opts('Cut'))
-    vim.keymap.set('n', 'gc', tree_api.fs.copy.filename, nvim_tree_opts('Copy Name'))
-    vim.keymap.set(
-      'n',
-      'c',
-      tree_api.fs.copy.relative_path,
-      nvim_tree_opts('Copy Relative Path')
-    )
-    vim.keymap.set(
-      'n',
-      'C',
-      tree_api.fs.copy.absolute_path,
-      nvim_tree_opts('Copy Absolute Path')
-    )
   end,
   disable_netrw = true,
   hijack_netrw = true,
@@ -1793,6 +1695,8 @@ require('snacks').setup({
     layouts = {
       ivy = { layout = { backdrop = true } },
     },
+    -- Default for every source; only the no-preview ones override below.
+    layout = ivy_preview,
     sources = {
       smart = files_config,
       files = files_config,
@@ -1822,7 +1726,6 @@ require('snacks').setup({
             },
           },
         },
-        layout = ivy_preview,
       },
       commands = {
         layout = ivy_no_preview,
@@ -1842,11 +1745,7 @@ require('snacks').setup({
         },
       },
       pickers = { layout = ivy_no_preview },
-      keymaps = { layout = ivy_preview },
-      jumps = { layout = ivy_preview },
       highlights = { layout = ivy_no_preview },
-      help = { layout = ivy_preview },
-      diagnostics = { layout = ivy_preview },
       grep_buffers = { layout = ivy_no_preview },
       colorschemes = { -- fix colorscheme wont change if preview is not enabled
         layout = ivy_no_preview,
@@ -1877,26 +1776,15 @@ require('snacks').setup({
         end,
       },
       notifications = { layout = ivy_no_preview },
-      registers = { layout = ivy_preview },
-      undo = { layout = ivy_preview },
-      grep_word = { layout = ivy_preview },
       lines = { layout = ivy_no_preview },
       command_history = { layout = ivy_no_preview },
-      lsp_references = { layout = ivy_preview },
-      lsp_implementations = { layout = ivy_preview },
       lsp_symbols = {
-        layout = ivy_preview,
         filter = {
           default = true,
           lua = true,
         },
         keep_parents = true,
       },
-      lsp_incoming_calls = { layout = ivy_preview },
-      lsp_outgoing_calls = { layout = ivy_preview },
-      lsp_definitions = { layout = ivy_preview },
-      lsp_type_definitions = { layout = ivy_preview },
-      lsp_workspace_symbols = { layout = ivy_preview },
     },
     -- kinds = require('icons').symbol_kinds,
     formatters = {
