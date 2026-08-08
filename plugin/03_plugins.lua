@@ -1128,6 +1128,9 @@ require('mason').setup({
 
 -- mason-org/mason-lspconfig.nvim
 require('mason-lspconfig').setup({ automatic_enable = false })
+--
+-- mason-org/mason-lspconfig.nvim
+require('mason-nvim-dap').setup()
 
 -- WhoIsSethDaniel/mason-tool-installer.nvim
 require('mason-tool-installer').setup({
@@ -1356,10 +1359,7 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
 -- nvim-tree/nvim-tree.lua
 local tree_api = require('nvim-tree.api')
 vim.keymap.set('n', '\\', function()
-  local currentBuf = vim.api.nvim_get_current_buf()
-  local currentBufFt =
-    vim.api.nvim_get_option_value('filetype', { buf = currentBuf })
-  if currentBufFt == 'NvimTree' then
+  if vim.bo.filetype == 'NvimTree' then
     tree_api.tree.toggle()
   else
     tree_api.tree.open()
@@ -2055,7 +2055,7 @@ vim.g.db_ui_use_nvim_notify = 1
 vim.api.nvim_create_user_command('DBUITab', function()
   vim.cmd('tabnew')
   vim.cmd('DBUI')
-  vim.cmd('set shiftwidth=2')
+  vim.cmd('setlocal shiftwidth=2')
 end, {
   desc = 'Open DBUI in another tab',
 })
@@ -2097,10 +2097,8 @@ require('which-key').setup({
   spec = {
     { '<leader>x', group = 'Trouble' },
     { '<leader>f', group = '[F]ind', mode = { 'n', 'x' } },
-    { '<leader>w', group = '[W]orkspace' },
     { '<leader>g', group = '[G]it' },
     { '<leader>t', group = '[T]oggle' },
-    { '<leader>a', group = '[A]i' },
     { 'gr', group = 'LSP Actions', mode = { 'n' } },
   },
   triggers = {

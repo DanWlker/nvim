@@ -53,7 +53,7 @@ map('n', '<C-w><S-Down>', '<C-w>J', { desc = 'Switch Window Top' })
 map('n', '<C-w><S-Up>', '<C-w>K', { desc = 'Switch Window Bottom' })
 
 -- Don't cancel me
-map({ 'n', 'x' }, 'h', '<nop>') -- this is now mapped to flash nvim
+map({ 'n', 'x' }, 'h', '<nop>') -- this is now mapped to nvim-jump (hop)
 map({ 'n', 'x' }, 'j', '<nop>') -- this is now mapped for jj, js, jt
 map({ 'n', 'x' }, 'k', '<nop>')
 map({ 'n', 'x' }, 'l', '<nop>') -- this is now mapped to mini.surround ('Lasso')

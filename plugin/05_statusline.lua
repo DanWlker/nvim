@@ -113,7 +113,7 @@ end
 local function git_component()
   if vim.o.columns < 110 then return '' end
 
-  local head = vim.b.minigit_summary_string or vim.b.gitsigns_head
+  local head = vim.b.minigit_summary_string
   if not head or head == '' then return '' end
 
   return string.format(' %s', head)
@@ -147,8 +147,12 @@ vim.api.nvim_create_autocmd('LspProgress', {
     -- This should in theory never happen, but I've seen weird errors.
     if not args.data then return end
 
+    -- The client can already be gone if it exited while progress was in flight
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if not client then return end
+
     progress_status = {
-      client = vim.lsp.get_client_by_id(args.data.client_id).name,
+      client = client.name,
       kind = args.data.params.value.kind,
       title = args.data.params.value.title,
     }
@@ -181,16 +185,12 @@ end
 local special_icons = {
   DiffviewFileHistory = { icons.misc.git, 'Number' },
   DiffviewFiles = { icons.misc.git, 'Number' },
-  ['grug-far'] = { icons.misc.search, 'Constant' },
-  dapui_breakpoints = { icons.misc.bug, 'DapUIRestart' },
-  dapui_scopes = { icons.misc.bug, 'DapUIRestart' },
-  dapui_stacks = { icons.misc.bug, 'DapUIRestart' },
-  fzf = { icons.misc.terminal, 'Special' },
+  ['dap-view'] = { icons.misc.bug, 'DapUIRestart' },
+  ['dap-view-term'] = { icons.misc.bug, 'DapUIRestart' },
+  ['dap-view-help'] = { icons.misc.bug, 'DapUIRestart' },
+  ['dap-repl'] = { icons.misc.bug, 'DapUIRestart' },
   gitcommit = { icons.misc.git, 'Number' },
   gitrebase = { icons.misc.git, 'Number' },
-  lazy = { icons.misc.func, 'Special' },
-  lazyterm = { icons.misc.terminal, 'Special' },
-  minifiles = { icons.misc.folder, 'Directory' },
   qf = { icons.misc.search, 'Conditional' },
 }
 
