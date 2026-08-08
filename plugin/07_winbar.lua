@@ -97,7 +97,7 @@ vim.api.nvim_create_autocmd('BufWinEnter', {
   callback = function(args)
     if
       vim.api.nvim_win_get_config(0).zindex -- Floating window
-      or not vim.bo[args.buf].buftype == '' -- Not a normal buffer
+      or not (vim.bo[args.buf].buftype == '') -- Not a normal buffer
       or vim.api.nvim_buf_get_name(args.buf) == '' -- Does not have a file name
       or vim.wo[0].diff -- In diff mode
     then
