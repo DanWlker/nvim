@@ -1845,7 +1845,7 @@ require('snacks').setup({
       help = { layout = ivy_preview },
       diagnostics = { layout = ivy_preview },
       grep_buffers = { layout = ivy_no_preview },
-      colorschemes = {
+      colorschemes = { -- fix colorscheme wont change if preview is not enabled
         layout = ivy_no_preview,
         confirm = function(picker, item)
           picker.opts._confirmed = true
@@ -1858,7 +1858,7 @@ require('snacks').setup({
           picker.opts._orig =
             { cs = vim.g.colors_name or 'default', bg = vim.o.background }
         end,
-        on_change = function(picker, item)
+        on_change = function(_, item)
           if item then
             vim.schedule(function() vim.cmd('colorscheme ' .. item.text) end)
           end
@@ -1958,14 +1958,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     )
   end,
 })
--- vim.keymap.set(
---   'n',
---   '\\',
---   function()
---     Snacks.explorer()
---   end,
---   { desc = 'Explorer Snacks (cwd)' }
--- )
 vim.keymap.set(
   'n',
   '<leader>fn',
