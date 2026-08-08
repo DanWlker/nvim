@@ -73,7 +73,10 @@ map(
 --   vim.diagnostic.enable(not vim.diagnostic.is_enabled())
 -- end, { desc = 'Toggle diagnostics' })
 
-map('n', '<leader>tu', function()
-  if not package.loaded['undotree'] then vim.cmd('packadd nvim.undotree') end
-  require('undotree').open()
-end, { desc = 'Toggle undotree' })
+vim.cmd('packadd nvim.undotree')
+map(
+  'n',
+  '<leader>tu',
+  function() require('undotree').open() end,
+  { desc = 'Toggle undotree' }
+)
