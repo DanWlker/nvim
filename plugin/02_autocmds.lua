@@ -50,6 +50,14 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+-- Both created once here rather than inside the LspAttach callback, so
+-- clear = true is safe: it resets on re-source instead of wiping the handlers
+-- registered by previously attached buffers.
+local detach_augroup =
+  vim.api.nvim_create_augroup('danwlker/lsp-detach', { clear = true })
+local highlight_augroup =
+  vim.api.nvim_create_augroup('danwlker/lsp-highlight', { clear = true })
+
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup(
     'danwlker/lsp-attach-lspconfig',
@@ -73,8 +81,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
       client
       and client:supports_method('textDocument/documentHighlight', event.buf)
     then
-      local highlight_augroup =
-        vim.api.nvim_create_augroup('danwlker/lsp-highlight', { clear = false })
       vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
         buffer = event.buf,
         group = highlight_augroup,
@@ -90,8 +96,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
         callback = vim.lsp.buf.clear_references,
       })
 
+      -- NOTE: scoped to this buffer, and the group is created once at file
+      -- scope. Creating it here with clear = true would wipe the handler
+      -- registered by every previously attached buffer.
       vim.api.nvim_create_autocmd('LspDetach', {
-        group = vim.api.nvim_create_augroup('danwlker/lsp-detach', { clear = true }),
+        buffer = event.buf,
+        group = detach_augroup,
         callback = function(event2)
           vim.lsp.buf.clear_references()
           vim.api.nvim_clear_autocmds({

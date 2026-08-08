@@ -1,5 +1,19 @@
 local folder_icon = require('icons').misc.folder
 
+-- Special folders that get shown as a prefix instead of the full path. These
+-- never change, so build and normalize them once rather than on every redraw.
+-- CWD is handled separately in Winbar() because it can change at runtime.
+---@type table<string, string>
+local static_dirs = {}
+for dir_name, dir_path in pairs({
+  HOME = vim.env.HOME,
+  XDG_CONFIG = vim.env.XDG_CONFIG_HOME,
+  DOTFILES = (vim.env.HOME or '') .. '/.dotfiles',
+  PROJECTS = (vim.env.HOME or '') .. '/projects',
+}) do
+  if dir_path ~= '' then static_dirs[dir_name] = vim.fs.normalize(dir_path) end
+end
+
 --- Window bar that shows the current file path (in a fancy way).
 ---@return string
 function _G.Winbar()
@@ -18,22 +32,17 @@ function _G.Winbar()
 
   -- For some special folders, add a prefix instead of the full path (making
   -- sure to pick the longest prefix).
-  ---@type table<string, string>
-  local special_dirs = {
-    HOME = vim.env.HOME,
-    XDG_CONFIG = vim.env.XDG_CONFIG_HOME,
-    DOTFILES = vim.env.HOME .. '/.dotfiles',
-    PROJECTS = vim.env.HOME .. '/projects',
-    CWD = vim.uv.cwd() or '',
-  }
-  for dir_name, dir_path in pairs(special_dirs) do
-    if dir_path == '' then goto continue end
-    if
-      vim.startswith(path, vim.fs.normalize(dir_path)) and #dir_path > #prefix_path
-    then
+  for dir_name, dir_path in pairs(static_dirs) do
+    if vim.startswith(path, dir_path) and #dir_path > #prefix_path then
       prefix, prefix_path = dir_name, dir_path
     end
-    ::continue::
+  end
+  local cwd = vim.uv.cwd()
+  if cwd then
+    cwd = vim.fs.normalize(cwd)
+    if vim.startswith(path, cwd) and #cwd > #prefix_path then
+      prefix, prefix_path = 'CWD', cwd
+    end
   end
   if prefix ~= '' then
     path = path:gsub('^' .. vim.pesc(prefix_path), '')

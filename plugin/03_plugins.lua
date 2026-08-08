@@ -8,9 +8,7 @@ vim.api.nvim_create_autocmd('PackChanged', {
       return
     end
 
-    if
-      name == 'LuaSnip' and (ev.data.kind == 'install' or ev.data.kind == 'update')
-    then
+    if name == 'LuaSnip' and (kind == 'install' or kind == 'update') then
       if not ev.data.active then vim.cmd.packadd('luasnip') end
       vim.cmd('make install_jsregexp')
       return
@@ -538,16 +536,23 @@ require('mini.move').setup({
 })
 
 -- nvim-mini/mini.splitjoin
+-- NOTE: the hooks go through setup() so they apply globally. Setting
+-- vim.b.minisplitjoin_config here would only ever reach the empty startup
+-- buffer, which nvim discards as soon as a file is opened.
+local gen_hook = require('mini.splitjoin').gen_hook
 require('mini.splitjoin').setup({
-  mappings = { toggle = 'jT', split = 'jS', join = 'jJ' },
+  mappings = {
+    toggle = 'jT',
+    split = 'jS',
+    join = 'jJ',
+  },
+  split = {
+    hooks_post = { gen_hook.add_trailing_separator() },
+  },
+  join = {
+    hooks_post = { gen_hook.del_trailing_separator() },
+  },
 })
-local gen_hook = MiniSplitjoin.gen_hook
-local add_comma_curly = gen_hook.add_trailing_separator()
-local del_comma_curly = gen_hook.del_trailing_separator()
-vim.b.minisplitjoin_config = {
-  split = { hooks_post = { add_comma_curly } },
-  join = { hooks_post = { del_comma_curly } },
-}
 
 -- nvim-mini/mini.surround
 require('mini.surround').setup({

@@ -2,7 +2,7 @@ local function getTabLabel(n)
   local current_win = vim.api.nvim_tabpage_get_win(n)
   local current_buf = vim.api.nvim_win_get_buf(current_win)
   local file_name = vim.api.nvim_buf_get_name(current_buf)
-  file_name = vim.api.nvim_call_function('fnamemodify', { file_name, ':p:t' })
+  file_name = vim.fn.fnamemodify(file_name, ':p:t')
   if file_name == '' then return 'No Name' end
   local icon = require('mini.icons').get('file', file_name)
   if icon ~= nil then return icon .. ' ' .. file_name end
@@ -37,7 +37,7 @@ function _G.TabLine()
     local hl_text = is_active and '%#TabLinePillActiveText#'
       or '%#TabLinePillInactiveText#'
     local hl_right = is_active and '%#TabLinePillActiveRight#'
-      or '%#TabLinePillInactiveLeft#'
+      or '%#TabLinePillInactiveRight#'
     s = s .. hl_left .. '' .. hl_text .. ' ' .. i .. ' ' .. hl_right .. ''
     s = s
       .. hl_label_left

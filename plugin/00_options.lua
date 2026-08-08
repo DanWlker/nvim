@@ -47,7 +47,9 @@ o.shada = "'100,<50,s10,:1000,/100,@100,h" -- Limit ShaDa file size for faster s
 -- Performance
 o.updatetime = 250 -- CursorHold delay
 o.timeoutlen = 500 -- Mapped sequence wait time
-o.lazyredraw = true -- Don’t redraw while executing macros
+-- Disabled: interacts badly with UI drawn from callbacks (ui2, snacks notifier),
+-- and modern nvim already batches redraws. Re-enable if macros feel slow.
+-- o.lazyredraw = true -- Don’t redraw while executing macros
 
 -- Window management
 o.splitright = true -- New splits open to the right

@@ -224,7 +224,7 @@ end
 --- File-content encoding for the current buffer.
 ---@return string
 local function encoding_component()
-  local encoding = vim.opt.fileencoding:get()
+  local encoding = vim.bo.fileencoding
   return encoding ~= ''
       and string.format('%%#StatuslineModeSeparatorOther# %s', encoding)
     or ''
