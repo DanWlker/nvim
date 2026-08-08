@@ -119,16 +119,19 @@ local function git_component()
   return string.format(' %s', head)
 end
 
+local dap = require('dap')
+
 --- The current debugging status (if any).
 ---@return string?
 local function dap_component()
-  if require('dap').status() == '' then return nil end
+  local status = dap.status()
+  if status == '' then return nil end
 
   return string.format(
     '%%#%s#%s  %s',
     get_or_create_hl('DapUIRestart'),
     icons.misc.bug,
-    require('dap').status()
+    status
   )
 end
 
@@ -197,8 +200,6 @@ local special_icons = {
 --- The buffer's filetype.
 ---@return string
 local function filetype_component()
-  if not MiniIcons then require('mini.icons') end
-
   local filetype = vim.bo.filetype
   if filetype == '' then filetype = '[No Name]' end
 

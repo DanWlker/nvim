@@ -4,9 +4,8 @@ map({ 'i', 'n', 's' }, '<Esc>', function()
 
   vim.schedule(require('snacks').notifier.hide)
 
-  if require('luasnip').expand_or_jumpable() then
-    vim.schedule(require('luasnip').unlink_current)
-  end
+  local luasnip = require('luasnip')
+  if luasnip.expand_or_jumpable() then vim.schedule(luasnip.unlink_current) end
 
   -- resend the default <esc> behavior, 'expr' doesn't work for some reason
   return '<Esc>'

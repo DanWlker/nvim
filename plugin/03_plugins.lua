@@ -295,10 +295,38 @@ require('catppuccin').setup({
 local palette = require('catppuccin.palettes').get_palette()
 vim.cmd.colorscheme('catppuccin')
 
+-- folke/which-key.nvim
+local which_key = require('which-key')
+which_key.setup({
+  preset = 'helix',
+  delay = 500,
+  keys = {
+    scroll_down = '',
+    scroll_up = '',
+  },
+  icons = {
+    -- mappings = vim.g.have_nerd_font,
+    mappings = false,
+  },
+
+  spec = {
+    { '<leader>x', group = 'Trouble' },
+    { '<leader>f', group = '[F]ind', mode = { 'n', 'x' } },
+    { '<leader>g', group = '[G]it' },
+    { '<leader>t', group = '[T]oggle' },
+    { 'gr', group = 'LSP Actions', mode = { 'n' } },
+  },
+  triggers = {
+    { '<auto>', mode = 'nixsotc' },
+    { 'j', mode = { 'n' } }, -- for mini.splitjoin
+  },
+})
+
 -- nvim-mini/mini.icons
 local ext3_blocklist = { scm = true, txt = true, yml = true }
 local ext4_blocklist = { json = true, yaml = true }
-require('mini.icons').setup({
+local mini_icons = require('mini.icons')
+mini_icons.setup({
   use_file_extension = function(ext, _)
     return not (ext3_blocklist[ext:sub(-3)] or ext4_blocklist[ext:sub(-4)])
   end,
@@ -326,69 +354,72 @@ MiniIcons.tweak_lsp_kind()
 MiniIcons.mock_nvim_web_devicons()
 
 -- monaqa/dial.nvim
+local dial_map = require('dial.map')
 vim.keymap.set(
   'n',
   '<C-a>',
-  function() require('dial.map').manipulate('increment', 'normal') end
+  function() dial_map.manipulate('increment', 'normal') end
 )
 vim.keymap.set(
   'n',
   '<C-x>',
-  function() require('dial.map').manipulate('decrement', 'normal') end
+  function() dial_map.manipulate('decrement', 'normal') end
 )
 vim.keymap.set(
   'n',
   'g<C-a>',
-  function() require('dial.map').manipulate('increment', 'gnormal') end
+  function() dial_map.manipulate('increment', 'gnormal') end
 )
 vim.keymap.set(
   'n',
   'g<C-x>',
-  function() require('dial.map').manipulate('decrement', 'gnormal') end
+  function() dial_map.manipulate('decrement', 'gnormal') end
 )
 vim.keymap.set(
   'x',
   '<C-a>',
-  function() require('dial.map').manipulate('increment', 'visual') end
+  function() dial_map.manipulate('increment', 'visual') end
 )
 vim.keymap.set(
   'x',
   '<C-x>',
-  function() require('dial.map').manipulate('decrement', 'visual') end
+  function() dial_map.manipulate('decrement', 'visual') end
 )
 vim.keymap.set(
   'x',
   'g<C-a>',
-  function() require('dial.map').manipulate('increment', 'gvisual') end
+  function() dial_map.manipulate('increment', 'gvisual') end
 )
 vim.keymap.set(
   'x',
   'g<C-x>',
-  function() require('dial.map').manipulate('decrement', 'gvisual') end
+  function() dial_map.manipulate('decrement', 'gvisual') end
 )
 
 -- yorickpeterse/nvim-jump
-require('jump').setup({
+local jump = require('jump')
+jump.setup({
   labels = 'shtarenigpcydolubvjwfzkxqmSHTARENIGPCYDOLUBVJWFZKXQM',
 })
 vim.keymap.set(
   { 'n', 'x', 'o' },
   'h',
-  require('jump').start,
+  jump.start,
   { desc = 'Hop (On the character)' }
 )
 vim.keymap.set(
   { 'n', 'x', 'o' },
   'H',
-  function() require('jump').start({ before = true }) end,
+  function() jump.start({ before = true }) end,
   { desc = 'Hop (Before the character)' }
 )
 
 -- NMAC427/guess-indent.nvim
-require('guess-indent').setup({})
+require('guess-indent').setup()
 
 -- nvim-mini/mini.extra
-require('mini.extra').setup()
+local miniextra = require('mini.extra')
+miniextra.setup()
 
 -- nvim-mini/mini.ai
 -- TODO: remove after nvim 0.13 as this provides the same functionality
@@ -422,7 +453,6 @@ local function nvim_013_l_textobject()
   end
 end
 local ai = require('mini.ai')
-local miniextra = require('mini.extra')
 local mini_ai_opts = {
   n_lines = 500,
   custom_textobjects = {
@@ -456,9 +486,6 @@ local mini_ai_opts = {
 }
 ai.setup(mini_ai_opts)
 local function ai_whichkey(wopts)
-  local ok, module = pcall(function() return require('which-key') end)
-  if not ok then return end
-
   local objects = {
     { ' ', desc = 'whitespace' },
     { '"', desc = '" string' },
@@ -514,7 +541,7 @@ local function ai_whichkey(wopts)
     ::continue::
   end
 
-  module.add(ret, { notify = false })
+  which_key.add(ret, { notify = false })
 end
 ai_whichkey(mini_ai_opts)
 
@@ -539,8 +566,9 @@ require('mini.move').setup({
 -- NOTE: the hooks go through setup() so they apply globally. Setting
 -- vim.b.minisplitjoin_config here would only ever reach the empty startup
 -- buffer, which nvim discards as soon as a file is opened.
-local gen_hook = require('mini.splitjoin').gen_hook
-require('mini.splitjoin').setup({
+local mini_splitjoin = require('mini.splitjoin')
+local gen_hook = mini_splitjoin.gen_hook
+mini_splitjoin.setup({
   mappings = {
     toggle = 'jT',
     split = 'jS',
@@ -602,7 +630,8 @@ local function treesitter_try_attach(buf, language)
     vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
   end
 end
-local available_parsers = require('nvim-treesitter').get_available()
+local nvim_treesitter = require('nvim-treesitter')
+local available_parsers = nvim_treesitter.get_available()
 vim.api.nvim_create_autocmd('FileType', {
   pattern = { '*' },
   group = vim.api.nvim_create_augroup(
@@ -614,13 +643,13 @@ vim.api.nvim_create_autocmd('FileType', {
     local language = vim.treesitter.language.get_lang(filetype)
     if not language then return end
 
-    local installed_parsers = require('nvim-treesitter').get_installed('parsers')
+    local installed_parsers = nvim_treesitter.get_installed('parsers')
     if vim.tbl_contains(installed_parsers, language) then
       -- enable the parser if it is installed
       treesitter_try_attach(buf, language)
     elseif vim.tbl_contains(available_parsers, language) then
       -- if a parser is available in `nvim-treesitter` auto install it, and enable it after the installation is done
-      require('nvim-treesitter')
+      nvim_treesitter
         .install(language)
         :await(function() treesitter_try_attach(buf, language) end)
     else
@@ -629,7 +658,6 @@ vim.api.nvim_create_autocmd('FileType', {
     end
   end,
 })
-local nvim_treesitter = require('nvim-treesitter')
 nvim_treesitter.setup()
 nvim_treesitter.install({
   'bash',
@@ -681,37 +709,34 @@ nvim_treesitter.install({
 require('nvim-treesitter-textobjects').setup()
 
 -- gbprod/substitute.nvim
-require('substitute').setup({
+local substitute = require('substitute')
+local substitute_exchange = require('substitute.exchange')
+substitute.setup({
   -- yank_substituted_text = true,
   highlight_substituted_text = {
     timer = 150,
   },
 })
-vim.keymap.set('n', 's', require('substitute').operator, { desc = 'Substitute' })
-vim.keymap.set('x', 's', require('substitute').visual, { desc = 'Substitute' })
-vim.keymap.set(
-  { 'n', 'x' },
-  'S',
-  require('substitute').eol,
-  { desc = 'Substitute to eol' }
-)
-vim.keymap.set('n', 'ss', require('substitute').line, { desc = 'Substitute line' })
+vim.keymap.set('n', 's', substitute.operator, { desc = 'Substitute' })
+vim.keymap.set('x', 's', substitute.visual, { desc = 'Substitute' })
+vim.keymap.set({ 'n', 'x' }, 'S', substitute.eol, { desc = 'Substitute to eol' })
+vim.keymap.set('n', 'ss', substitute.line, { desc = 'Substitute line' })
 vim.keymap.set(
   'n',
   'gs',
-  require('substitute.exchange').operator,
+  substitute_exchange.operator,
   { desc = 'Substitute exchange' }
 )
 vim.keymap.set(
   'x',
   'gs',
-  require('substitute.exchange').visual,
+  substitute_exchange.visual,
   { desc = 'Substitute exchange' }
 )
 vim.keymap.set(
   'n',
   'gss',
-  require('substitute.exchange').line,
+  substitute_exchange.line,
   { desc = 'Substitute exchange line' }
 )
 
@@ -821,13 +846,14 @@ vim.g.git_messenger_floating_win_opts = { border = 'rounded' }
 vim.keymap.set('n', '<leader>gb', '<Plug>(git-messenger)', { desc = 'Git Blame' })
 
 -- nvim-mini/mini.diff
-require('mini.diff').setup({
+local mini_diff = require('mini.diff')
+mini_diff.setup({
   view = { style = 'sign', signs = { add = '▎', change = '▎', delete = '' } },
 })
 vim.keymap.set(
   'n',
   '<leader>gd',
-  function() require('mini.diff').toggle_overlay(0) end,
+  function() mini_diff.toggle_overlay(0) end,
   { desc = 'Git Diff' }
 )
 
@@ -909,19 +935,19 @@ require('blink.cmp').setup({
         components = {
           kind_icon = {
             text = function(ctx)
-              local kind_icon, _, _ = require('mini.icons').get('lsp', ctx.kind)
+              local kind_icon, _, _ = mini_icons.get('lsp', ctx.kind)
               return kind_icon
             end,
             -- (optional) use highlights from mini.icons
             highlight = function(ctx)
-              local _, hl, _ = require('mini.icons').get('lsp', ctx.kind)
+              local _, hl, _ = mini_icons.get('lsp', ctx.kind)
               return hl
             end,
           },
           kind = {
             -- (optional) use highlights from mini.icons
             highlight = function(ctx)
-              local _, hl, _ = require('mini.icons').get('lsp', ctx.kind)
+              local _, hl, _ = mini_icons.get('lsp', ctx.kind)
               return hl
             end,
           },
@@ -971,13 +997,15 @@ vim.keymap.set(
   function() vim.b.disable_autoformat = not vim.b.disable_autoformat end,
   { desc = 'Toggle format' }
 )
+local conform = require('conform')
+local sqruff_util = require('sqruff')
 vim.api.nvim_create_user_command(
   'ConformFormat',
-  function() require('conform').format({ async = true }) end,
+  function() conform.format({ async = true }) end,
   { desc = 'Format buffer' }
 )
 vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-require('conform').setup({
+conform.setup({
   notify_on_error = false,
   format_on_save = function(bufnr)
     -- Reenable when needed
@@ -1012,7 +1040,7 @@ require('conform').setup({
   formatters = {
     sqruff = {
       args = function(_, ctx)
-        return { 'fix', require('sqruff').dialect_arg(ctx.buf), '$FILENAME' }
+        return { 'fix', sqruff_util.dialect_arg(ctx.buf), '$FILENAME' }
       end,
     },
     -- ['markdown-toc'] = {
@@ -1130,9 +1158,11 @@ require('mason').setup({
 require('mason-lspconfig').setup({ automatic_enable = false })
 
 -- jay-babu/mason-nvim-dap.nvim
-require('mason-nvim-dap').setup({
+local dap = require('dap')
+local mason_nvim_dap = require('mason-nvim-dap')
+mason_nvim_dap.setup({
   handlers = {
-    function(config) require('mason-nvim-dap').default_setup(config) end,
+    function(config) mason_nvim_dap.default_setup(config) end,
     delve = function(config)
       -- On Windows delve must be run attached or it crashes.
       -- See https://github.com/leoluz/nvim-dap-go/blob/main/README.md#configuring
@@ -1142,7 +1172,7 @@ require('mason-nvim-dap').setup({
       -- dlv debug -l 127.0.0.1:38697 --headless main.go
       -- https://github.com/golang/vscode-go/wiki/debugging#launchjson-attributes
       -- https://stackoverflow.com/a/70661460
-      require('dap').adapters.delve_remote = {
+      dap.adapters.delve_remote = {
         type = 'server',
         host = '127.0.0.1',
         port = 38697,
@@ -1154,7 +1184,7 @@ require('mason-nvim-dap').setup({
         request = 'attach',
       })
 
-      require('mason-nvim-dap').default_setup(config)
+      mason_nvim_dap.default_setup(config)
     end,
   },
 })
@@ -1281,25 +1311,20 @@ for type, icon in pairs(breakpoint_icons) do
   local dap_hl = (type == 'Stopped') and 'DapStop' or 'DapBreak'
   vim.fn.sign_define(tp, { text = icon, texthl = dap_hl, numhl = dap_hl })
 end
-vim.keymap.set(
-  'n',
-  '<F5>',
-  require('dap').continue,
-  { desc = 'Debug: Start/Continue' }
-)
-vim.keymap.set('n', '<F1>', require('dap').step_into, { desc = 'Debug: Step Into' })
-vim.keymap.set('n', '<F2>', require('dap').step_over, { desc = 'Debug: Step Over' })
-vim.keymap.set('n', '<F3>', require('dap').step_out, { desc = 'Debug: Step Out' })
+vim.keymap.set('n', '<F5>', dap.continue, { desc = 'Debug: Start/Continue' })
+vim.keymap.set('n', '<F1>', dap.step_into, { desc = 'Debug: Step Into' })
+vim.keymap.set('n', '<F2>', dap.step_over, { desc = 'Debug: Step Over' })
+vim.keymap.set('n', '<F3>', dap.step_out, { desc = 'Debug: Step Out' })
 vim.keymap.set(
   'n',
   '<leader>b',
-  require('dap').toggle_breakpoint,
+  dap.toggle_breakpoint,
   { desc = 'Debug: Toggle Breakpoint' }
 )
 vim.keymap.set(
   'n',
   '<leader>B',
-  function() require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: ')) end,
+  function() dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end,
   { desc = 'Debug: Set Breakpoint' }
 )
 
@@ -1324,7 +1349,7 @@ table.insert(yamllint.args, '{extends: default, rules: {braces: disable}}')
 local sqruff = lint.linters.sqruff
 lint.linters.sqruff = function()
   local linter = vim.deepcopy(sqruff)
-  linter.args = { 'lint', '--format=json', require('sqruff').dialect_arg(0), '-' }
+  linter.args = { 'lint', '--format=json', sqruff_util.dialect_arg(0), '-' }
   return linter
 end
 
@@ -1497,11 +1522,10 @@ require('nvim-tree').setup({
     open_file = {
       window_picker = {
         picker = function()
-          local api = require('nvim-tree.api')
           local open_file = require('nvim-tree.actions.node.open-file')
-          api.tree.close()
+          tree_api.tree.close()
           local winid = open_file.pick_win_id()
-          api.tree.open()
+          tree_api.tree.open()
           return winid
         end,
       },
@@ -1589,7 +1613,8 @@ vim.o.foldcolumn = '0' -- '0' is not bad
 vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
-require('ufo').setup({
+local ufo = require('ufo')
+ufo.setup({
   fold_virt_text_handler = handler,
   provider_selector = function(_, _, _) return { 'treesitter', 'indent' } end,
   -- To fix missing required fields:
@@ -1606,11 +1631,12 @@ require('ufo').setup({
   --   mappings = {},
   -- },
 })
-vim.keymap.set('n', 'zR', require('ufo').openAllFolds, { desc = 'Open all folds' })
-vim.keymap.set('n', 'zM', require('ufo').closeAllFolds, { desc = 'Close all folds' })
+vim.keymap.set('n', 'zR', ufo.openAllFolds, { desc = 'Open all folds' })
+vim.keymap.set('n', 'zM', ufo.closeAllFolds, { desc = 'Close all folds' })
 
 -- stevearc/quicker.nvim
-require('quicker').setup({
+local quicker = require('quicker')
+quicker.setup({
   borders = {
     -- Thinner separator.
     vert = require('icons').misc.vertical_bar,
@@ -1619,15 +1645,10 @@ require('quicker').setup({
 vim.keymap.set(
   'n',
   '<leader>tl',
-  function() require('quicker').toggle({ loclist = true }) end,
+  function() quicker.toggle({ loclist = true }) end,
   { desc = 'Toggle loclist' }
 )
-vim.keymap.set(
-  'n',
-  '<leader>tq',
-  require('quicker').toggle,
-  { desc = 'Toggle quickfix' }
-)
+vim.keymap.set('n', '<leader>tq', quicker.toggle, { desc = 'Toggle quickfix' })
 
 -- DanWlker/snacks.nvim
 local function list_extend(where, what)
@@ -1639,16 +1660,6 @@ local function list_filter(where, what)
     :filter(function(val) return not vim.list_contains(what, val) end)
     :totable()
 end
-vim.api.nvim_create_user_command(
-  'ScratchToggle',
-  function() require('snacks').scratch() end,
-  { desc = 'Scratch Toggle Buffer' }
-)
-vim.api.nvim_create_user_command(
-  'ScratchSelect',
-  function() require('snacks').scratch.select() end,
-  { desc = 'Scratch Select Buffer' }
-)
 local ivy_no_preview = {
   hidden = { 'preview' },
   preset = 'ivy',
@@ -1827,7 +1838,16 @@ require('snacks').setup({
   },
   image = {},
 })
-
+vim.api.nvim_create_user_command(
+  'ScratchToggle',
+  function() Snacks.scratch() end,
+  { desc = 'Scratch Toggle Buffer' }
+)
+vim.api.nvim_create_user_command(
+  'ScratchSelect',
+  function() Snacks.scratch.select() end,
+  { desc = 'Scratch Select Buffer' }
+)
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup(
     'danwlker/lsp-attach-pickers',
@@ -2027,7 +2047,8 @@ vim.keymap.set(
 require('todo-comments').setup({ signs = false })
 
 -- folke/trouble.nvim
-require('trouble').setup()
+local trouble = require('trouble')
+trouble.setup()
 vim.keymap.set(
   'n',
   '<leader>xd',
@@ -2065,17 +2086,13 @@ vim.keymap.set(
   { desc = 'Quickfix List' }
 )
 vim.keymap.set('n', '<C-p>', function()
-  if require('trouble').is_open() then
-    require('trouble').prev({ skip_groups = true, jump = true })
-  end
+  if trouble.is_open() then trouble.prev({ skip_groups = true, jump = true }) end
 end, { desc = 'Previous Trouble/Quickfix Item' })
 vim.keymap.set('n', '<C-n>', function()
-  if require('trouble').is_open() then
-    require('trouble').next({ skip_groups = true, jump = true })
-  end
+  if trouble.is_open() then trouble.next({ skip_groups = true, jump = true }) end
 end, { desc = 'Next Trouble/Quickfix Item' })
 vim.keymap.set('n', '<leader>xc', function()
-  if require('trouble').is_open() then require('trouble').close() end
+  if trouble.is_open() then trouble.close() end
 end, { desc = 'Close' })
 vim.keymap.set(
   'n',
@@ -2099,7 +2116,8 @@ end, {
 require('smart-paste').setup()
 
 -- mcauley-penney/visual-whitespace.nvim
-require('visual-whitespace').setup({
+local visual_whitespace = require('visual-whitespace')
+visual_whitespace.setup({
   --   nl_char = '󰌑',
   ignore = {
     buftypes = {
@@ -2112,35 +2130,9 @@ require('visual-whitespace').setup({
 vim.keymap.set(
   'n',
   '<leader>tv',
-  function() require('visual-whitespace').toggle() end,
+  function() visual_whitespace.toggle() end,
   { desc = 'Toggle visual-whitespace' }
 )
-
--- folke/which-key.nvim
-require('which-key').setup({
-  preset = 'helix',
-  delay = 500,
-  keys = {
-    scroll_down = '',
-    scroll_up = '',
-  },
-  icons = {
-    -- mappings = vim.g.have_nerd_font,
-    mappings = false,
-  },
-
-  spec = {
-    { '<leader>x', group = 'Trouble' },
-    { '<leader>f', group = '[F]ind', mode = { 'n', 'x' } },
-    { '<leader>g', group = '[G]it' },
-    { '<leader>t', group = '[T]oggle' },
-    { 'gr', group = 'LSP Actions', mode = { 'n' } },
-  },
-  triggers = {
-    { '<auto>', mode = 'nixsotc' },
-    { 'j', mode = { 'n' } }, -- for mini.splitjoin
-  },
-})
 
 -- vim.defer_fn(function()
 --   local ok, detect = pcall(require, 'catppuccin.lib.detect_integrations')
