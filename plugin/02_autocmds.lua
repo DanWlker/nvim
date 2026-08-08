@@ -50,13 +50,18 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
--- Both created once here rather than inside the LspAttach callback, so
--- clear = true is safe: it resets on re-source instead of wiping the handlers
--- registered by previously attached buffers.
+-- Created once here rather than inside the LspAttach callback, which is what
+-- made the old inline clear = true destructive.
+--
+-- clear = false is deliberate: everything in these groups is registered
+-- per-buffer from the callback below, so clearing on re-source would drop the
+-- handlers for already-attached buffers without re-adding them (LspAttach does
+-- not re-fire for live clients). Nothing is added here directly, so keeping
+-- them cannot produce duplicates.
 local detach_augroup =
-  vim.api.nvim_create_augroup('danwlker/lsp-detach', { clear = true })
+  vim.api.nvim_create_augroup('danwlker/lsp-detach', { clear = false })
 local highlight_augroup =
-  vim.api.nvim_create_augroup('danwlker/lsp-highlight', { clear = true })
+  vim.api.nvim_create_augroup('danwlker/lsp-highlight', { clear = false })
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup(
@@ -96,9 +101,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
         callback = vim.lsp.buf.clear_references,
       })
 
-      -- NOTE: scoped to this buffer, and the group is created once at file
-      -- scope. Creating it here with clear = true would wipe the handler
-      -- registered by every previously attached buffer.
       vim.api.nvim_create_autocmd('LspDetach', {
         buffer = event.buf,
         group = detach_augroup,
