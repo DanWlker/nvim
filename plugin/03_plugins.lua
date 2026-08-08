@@ -1715,6 +1715,13 @@ vim.api.nvim_create_user_command(
   function() require('snacks').scratch.select() end,
   { desc = 'Scratch Select Buffer' }
 )
+local ivy_no_preview = {
+  hidden = { 'preview' },
+  preset = 'ivy',
+}
+local ivy_preview = {
+  preset = 'ivy',
+}
 local files_config = {
   hidden = true,
   ignored = true,
@@ -1724,12 +1731,9 @@ local files_config = {
     '*.docx',
     '*.zip',
     '*.pptx',
-    '*.svg',
   },
   matcher = { frecency = true },
-  layout = {
-    hidden = { 'preview' },
-  },
+  layout = ivy_no_preview,
 }
 
 require('snacks').setup({
@@ -1815,11 +1819,10 @@ require('snacks').setup({
             },
           },
         },
+        layout = ivy_preview,
       },
       commands = {
-        layout = {
-          preset = 'vscode',
-        },
+        layout = ivy_no_preview,
         actions = {
           accept = function(picker, item)
             picker:close()
@@ -1835,36 +1838,62 @@ require('snacks').setup({
           },
         },
       },
-      diagnostics = {
-        layout = {
-          preset = 'ivy_split',
-        },
-      },
-      recent = {
-        layout = {
-          hidden = { 'preview' },
-        },
-      },
-      buffer = {
-        layout = {
-          hidden = { 'preview' },
-        },
-      },
+      pickers = { layout = ivy_no_preview },
+      keymaps = { layout = ivy_preview },
+      jumps = { layout = ivy_preview },
+      highlights = { layout = ivy_no_preview },
+      help = { layout = ivy_preview },
+      diagnostics = { layout = ivy_preview },
+      grep_buffers = { layout = ivy_no_preview },
       colorschemes = {
-        layout = {
-          preset = 'ivy',
-        },
+        layout = ivy_no_preview,
+        confirm = function(picker, item)
+          picker.opts._confirmed = true
+          picker:close()
+          if item then
+            vim.schedule(function() vim.cmd('colorscheme ' .. item.text) end)
+          end
+        end,
+        on_show = function(picker)
+          picker.opts._orig =
+            { cs = vim.g.colors_name or 'default', bg = vim.o.background }
+        end,
+        on_change = function(picker, item)
+          if item then
+            vim.schedule(function() vim.cmd('colorscheme ' .. item.text) end)
+          end
+        end,
+        on_close = function(picker)
+          local orig = picker.opts._orig
+          if orig and not picker.opts._confirmed then
+            vim.schedule(function()
+              vim.cmd('colorscheme ' .. orig.cs)
+              vim.o.background = orig.bg
+            end)
+          end
+        end,
       },
-      notifications = {
-        layout = {
-          preset = 'vertical',
+      notifications = { layout = ivy_no_preview },
+      registers = { layout = ivy_preview },
+      undo = { layout = ivy_preview },
+      grep_word = { layout = ivy_preview },
+      lines = { layout = ivy_no_preview },
+      command_history = { layout = ivy_no_preview },
+      lsp_references = { layout = ivy_preview },
+      lsp_implementations = { layout = ivy_preview },
+      lsp_symbols = {
+        layout = ivy_preview,
+        filter = {
+          default = true,
+          lua = true,
         },
+        keep_parents = true,
       },
-      registers = {
-        layout = {
-          preset = 'vertical',
-        },
-      },
+      lsp_incoming_calls = { layout = ivy_preview },
+      lsp_outgoing_calls = { layout = ivy_preview },
+      lsp_definitions = { layout = ivy_preview },
+      lsp_type_definitions = { layout = ivy_preview },
+      lsp_workspace_symbols = { layout = ivy_preview },
     },
     -- kinds = require('icons').symbol_kinds,
     formatters = {
@@ -1887,13 +1916,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = desc })
     end
 
-    local should_flatten = {
-      ['json'] = true,
-      ['yaml'] = true,
-      ['toml'] = true,
-      ['helm'] = true,
-    }
-
     map(
       'grr',
       function() Snacks.picker.lsp_references() end,
@@ -1906,15 +1928,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     )
     map(
       'gO',
-      function()
-        Snacks.picker.lsp_symbols({
-          filter = {
-            default = true,
-            lua = true,
-          },
-          keep_parents = true,
-        })
-      end,
+      function() Snacks.picker.lsp_symbols() end,
       'Snacks.picker.lsp_symbols()'
     )
     map(
@@ -2014,12 +2028,6 @@ vim.keymap.set(
 )
 vim.keymap.set(
   'n',
-  '<leader>f.',
-  function() Snacks.picker.recent() end,
-  { desc = 'Find Recent Files' }
-)
-vim.keymap.set(
-  'n',
   '<leader><leader>',
   function() Snacks.picker.buffers() end,
   { desc = 'Find Existing Buffers' }
@@ -2035,16 +2043,6 @@ vim.keymap.set(
   '<leader>fo',
   function() Snacks.picker.grep_buffers() end,
   { desc = 'Find in Open Files' }
-)
-vim.keymap.set(
-  'n',
-  '<leader>fN',
-  function()
-    Snacks.picker.files({
-      cwd = vim.fn.stdpath('config'),
-    })
-  end,
-  { desc = 'Find Neovim Files' }
 )
 vim.keymap.set(
   'n',
@@ -2084,11 +2082,16 @@ vim.keymap.set(
 )
 vim.keymap.set('n', '<leader>ft', function()
   if not package.loaded['todo-comments'] then require('todo-comments') end
-  Snacks.picker.todo_comments()
+  Snacks.picker.todo_comments({
+    layout = ivy_preview,
+  })
 end, { desc = 'Find Todo' })
 vim.keymap.set('n', '<leader>fT', function()
   if not package.loaded['todo-comments'] then require('todo-comments') end
-  Snacks.picker.todo_comments({ keywords = { 'TODO', 'FIX', 'FIXME' } })
+  Snacks.picker.todo_comments({
+    keywords = { 'TODO', 'FIX', 'FIXME' },
+    layout = ivy_preview,
+  })
 end, { desc = 'Find Todo/Fix/Fixme' })
 vim.keymap.set(
   'n',
