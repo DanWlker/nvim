@@ -1790,6 +1790,9 @@ require('snacks').setup({
         },
       },
     },
+    layouts = {
+      ivy = { layout = { backdrop = true } },
+    },
     sources = {
       smart = files_config,
       files = files_config,
