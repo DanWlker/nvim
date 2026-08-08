@@ -122,7 +122,7 @@ end
 --- The current debugging status (if any).
 ---@return string?
 local function dap_component()
-  if not package.loaded['dap'] or require('dap').status() == '' then return nil end
+  if require('dap').status() == '' then return nil end
 
   return string.format(
     '%%#%s#%s  %s',

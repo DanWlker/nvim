@@ -1995,19 +1995,27 @@ vim.keymap.set(
   function() Snacks.picker.registers() end,
   { desc = 'Find Registers' }
 )
-vim.keymap.set('n', '<leader>ft', function()
-  if not package.loaded['todo-comments'] then require('todo-comments') end
-  Snacks.picker.todo_comments({
-    layout = ivy_preview,
-  })
-end, { desc = 'Find Todo' })
-vim.keymap.set('n', '<leader>fT', function()
-  if not package.loaded['todo-comments'] then require('todo-comments') end
-  Snacks.picker.todo_comments({
-    keywords = { 'TODO', 'FIX', 'FIXME' },
-    layout = ivy_preview,
-  })
-end, { desc = 'Find Todo/Fix/Fixme' })
+vim.keymap.set(
+  'n',
+  '<leader>ft',
+  function()
+    Snacks.picker.todo_comments({
+      layout = ivy_preview,
+    })
+  end,
+  { desc = 'Find Todo' }
+)
+vim.keymap.set(
+  'n',
+  '<leader>fT',
+  function()
+    Snacks.picker.todo_comments({
+      keywords = { 'TODO', 'FIX', 'FIXME' },
+      layout = ivy_preview,
+    })
+  end,
+  { desc = 'Find Todo/Fix/Fixme' }
+)
 vim.keymap.set(
   'n',
   '<leader>ts',

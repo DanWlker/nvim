@@ -2,9 +2,9 @@ local map = vim.keymap.set
 map({ 'i', 'n', 's' }, '<Esc>', function()
   vim.cmd('noh')
 
-  if package.loaded['snacks'] then vim.schedule(require('snacks').notifier.hide) end
+  vim.schedule(require('snacks').notifier.hide)
 
-  if package.loaded['luasnip'] and require('luasnip').expand_or_jumpable() then
+  if require('luasnip').expand_or_jumpable() then
     vim.schedule(require('luasnip').unlink_current)
   end
 
