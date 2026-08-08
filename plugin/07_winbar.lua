@@ -17,6 +17,11 @@ end
 --- Window bar that shows the current file path (in a fancy way).
 ---@return string
 function _G.Winbar()
+  if vim.fn.win_gettype(0) == 'popup' then
+    vim.wo.winbar = nil
+    return ''
+  end
+
   -- Get the path and expand variables.
   local path = vim.fs.normalize(vim.fn.expand('%:p') --[[@as string]])
 
@@ -69,14 +74,8 @@ function _G.Winbar()
   --   ),
   -- }
 
-  local wintype = vim.fn.win_gettype(0)
   -- local thing = vim.api.nvim_win_get_config(0).relative ~= ''
   -- local second_thing = vim.api.nvim_get_option_value('buftype', {})
-
-  if wintype == 'popup' then
-    vim.wo.winbar = nil
-    return ''
-  end
 
   return table.concat({
     '%=',

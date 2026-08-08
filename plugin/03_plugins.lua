@@ -1128,9 +1128,36 @@ require('mason').setup({
 
 -- mason-org/mason-lspconfig.nvim
 require('mason-lspconfig').setup({ automatic_enable = false })
---
--- mason-org/mason-lspconfig.nvim
-require('mason-nvim-dap').setup()
+
+-- jay-babu/mason-nvim-dap.nvim
+require('mason-nvim-dap').setup({
+  handlers = {
+    function(config) require('mason-nvim-dap').default_setup(config) end,
+    delve = function(config)
+      -- On Windows delve must be run attached or it crashes.
+      -- See https://github.com/leoluz/nvim-dap-go/blob/main/README.md#configuring
+      config.adapters.executable.detached = vim.fn.has('win32') == 0
+
+      -- Attach to an already-running headless delve, e.g.
+      -- dlv debug -l 127.0.0.1:38697 --headless main.go
+      -- https://github.com/golang/vscode-go/wiki/debugging#launchjson-attributes
+      -- https://stackoverflow.com/a/70661460
+      require('dap').adapters.delve_remote = {
+        type = 'server',
+        host = '127.0.0.1',
+        port = 38697,
+      }
+      table.insert(config.configurations, {
+        type = 'delve_remote',
+        name = 'Delve: Attach (127.0.0.1:38697)',
+        mode = 'remote',
+        request = 'attach',
+      })
+
+      require('mason-nvim-dap').default_setup(config)
+    end,
+  },
+})
 
 -- WhoIsSethDaniel/mason-tool-installer.nvim
 require('mason-tool-installer').setup({
