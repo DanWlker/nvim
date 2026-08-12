@@ -268,7 +268,7 @@ end
 local function cwd_component()
   local cwd = vim.fn.fnamemodify(vim.uv.cwd() or '', ':~')
 
-  if vim.o.columns < 85 then cwd = vim.fn.pathshorten(cwd) end
+  if vim.o.columns < 95 then cwd = vim.fn.pathshorten(cwd) end
 
   return '%#StatusLine#' .. icons.misc.folder .. ' ' .. cwd .. ' '
 end
