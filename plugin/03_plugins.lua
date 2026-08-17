@@ -1644,11 +1644,11 @@ quicker.setup({
 })
 vim.keymap.set(
   'n',
-  '<leader>tl',
+  '<leader>xl',
   function() quicker.toggle({ loclist = true }) end,
   { desc = 'Toggle loclist' }
 )
-vim.keymap.set('n', '<leader>tq', quicker.toggle, { desc = 'Toggle quickfix' })
+vim.keymap.set('n', '<leader>xq', quicker.toggle, { desc = 'Toggle quickfix' })
 
 -- DanWlker/snacks.nvim
 local function list_extend(where, what)
@@ -2069,7 +2069,7 @@ vim.keymap.set(
 )
 vim.keymap.set(
   'n',
-  '<leader>xl',
+  '<leader>xr',
   '<cmd>Trouble lsp toggle focus=false win.position=right win.size=0.4<cr>',
   { desc = 'LSP Definitions / references / ...' }
 )
@@ -2077,13 +2077,13 @@ vim.keymap.set(
   'n',
   '<leader>xL',
   '<cmd>Trouble loclist toggle<cr>',
-  { desc = 'Location List' }
+  { desc = 'Open Location List in Trouble' }
 )
 vim.keymap.set(
   'n',
   '<leader>xQ',
   '<cmd>Trouble qflist toggle<cr>',
-  { desc = 'Quickfix List' }
+  { desc = 'Open Quickfix List in Trouble' }
 )
 vim.keymap.set('n', '<C-p>', function()
   if trouble.is_open() then trouble.prev({ skip_groups = true, jump = true }) end
