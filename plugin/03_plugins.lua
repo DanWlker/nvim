@@ -1205,7 +1205,7 @@ require('mason-tool-installer').setup({
     'gopls', -- Check your go env version, cauld cause issues
     'superhtml',
     'cssls',
-    'tsgo',
+    'tsc',
     'emmet_language_server',
     'lua_ls',
     'tailwindcss',

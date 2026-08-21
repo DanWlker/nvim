@@ -6,7 +6,7 @@
       "version": "2.0.0 - 3.0.0"
     },
     "SchemaStore.nvim": {
-      "rev": "427b0ff24377a6cdd18aa822a984a5adf156c3fa",
+      "rev": "73e89eb3e536a4dd8f991c963bd37189520c9919",
       "src": "https://github.com/b0o/SchemaStore.nvim"
     },
     "blame.nvim": {
@@ -23,7 +23,7 @@
       "src": "https://github.com/p00f/clangd_extensions.nvim"
     },
     "conform.nvim": {
-      "rev": "619363c30309d29ffa631e67c8183f2a72caa373",
+      "rev": "016802de402556da54c36bd7359b441266b01cdd",
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "crates.nvim": {
@@ -39,7 +39,7 @@
       "src": "https://github.com/monaqa/dial.nvim"
     },
     "diffview.nvim": {
-      "rev": "62dc5adf4e77489a2a6d3bf36ef6e4ac5738b634",
+      "rev": "460b96c8285fbf0cd411bddfd9322408f37f81a5",
       "src": "https://github.com/dlyongemallo/diffview.nvim"
     },
     "friendly-snippets": {
@@ -71,7 +71,7 @@
       "src": "https://github.com/AndrewRadev/linediff.vim"
     },
     "mason-lspconfig.nvim": {
-      "rev": "67029ccdac1ef8941e13b826417bc0ffac24cc86",
+      "rev": "9d28935aa95fa6c1dc7c4d6747f101a72a8a4bec",
       "src": "https://github.com/mason-org/mason-lspconfig.nvim"
     },
     "mason-nvim-dap.nvim": {
@@ -139,7 +139,7 @@
       "src": "https://github.com/mfussenegger/nvim-dap"
     },
     "nvim-dap-view": {
-      "rev": "43a2ccf5618ea26a9b11575ff18ded1cc82746bf",
+      "rev": "4e73e57008df10f9971b60c3a11e6aa11ba9f94a",
       "src": "https://github.com/igorlfs/nvim-dap-view"
     },
     "nvim-dap-virtual-text": {
@@ -160,7 +160,7 @@
       "src": "https://github.com/antosha417/nvim-lsp-file-operations"
     },
     "nvim-lspconfig": {
-      "rev": "43ed3797b266e1ee8d222e491379ad471c9d3146",
+      "rev": "bff1bd61cb1455040533201ca1edf1e84efa578f",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-tree.lua": {
@@ -168,7 +168,7 @@
       "src": "https://github.com/DanWlker/nvim-tree.lua"
     },
     "nvim-treesitter": {
-      "rev": "c9f9ed6c1892f629ea399f4ee7905f2686fa13f2",
+      "rev": "074aa4422bf029908338e855d0c0f71470a971bb",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-treesitter-context": {
@@ -200,7 +200,7 @@
       "src": "https://github.com/stevearc/quicker.nvim"
     },
     "smart-paste.nvim": {
-      "rev": "bb46e9a06a728d65f004ad709ff7ee0249717e5e",
+      "rev": "a81e5511adc6fc145a7a71b08819440fd059af34",
       "src": "https://github.com/nemanjamalesija/smart-paste.nvim"
     },
     "snacks.nvim": {
@@ -217,7 +217,7 @@
       "src": "https://github.com/folke/todo-comments.nvim"
     },
     "touchup.nvim": {
-      "rev": "1f07cc5299d750feb963a12c86b2e0c19de82971",
+      "rev": "efc7df43515aeb29c84ef088f0197bde83e9ce12",
       "src": "https://github.com/noisesfromspace/touchup.nvim"
     },
     "treesj": {
