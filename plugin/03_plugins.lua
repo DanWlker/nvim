@@ -1695,9 +1695,7 @@ require('snacks').setup({
   },
   input = { enabled = true },
   notifier = { enabled = true },
-  statuscolumn = {
-    right = { 'fold' },
-  },
+  statuscolumn = { enabled = true },
   -- disable backdrop
   -- win = {
   --   backdrop = false,
