@@ -6,7 +6,7 @@
       "version": "2.0.0 - 3.0.0"
     },
     "SchemaStore.nvim": {
-      "rev": "b4a92475bb6928810b66a0dd2fd86bea44089aba",
+      "rev": "d34c58439271f5e73ed79c2b8d1a09731c4525f1",
       "src": "https://github.com/b0o/SchemaStore.nvim"
     },
     "blame.nvim": {
@@ -31,7 +31,7 @@
       "src": "https://github.com/saecki/crates.nvim"
     },
     "csvview.nvim": {
-      "rev": "5c22774c3ecc7f8883af5d143b366e45b1f0875d",
+      "rev": "2466bdda54047f525d4faca53040fe657c9c33db",
       "src": "https://github.com/hat0uma/csvview.nvim"
     },
     "dial.nvim": {
@@ -61,6 +61,10 @@
     "hlchunk.nvim": {
       "rev": "4ddc056e4ca45f1c7dc6aa21935df710b263b1aa",
       "src": "https://github.com/shellRaining/hlchunk.nvim"
+    },
+    "kulala.nvim": {
+      "rev": "232a9939919fe9bc88d573bce92de50f2f160c60",
+      "src": "https://github.com/mistweaverco/kulala.nvim"
     },
     "lazydev.nvim": {
       "rev": "ff2cbcba459b637ec3fd165a2be59b7bbaeedf0d",
@@ -160,7 +164,7 @@
       "src": "https://github.com/antosha417/nvim-lsp-file-operations"
     },
     "nvim-lspconfig": {
-      "rev": "3928e638fdedf195b23ae5a18f024afa487982bc",
+      "rev": "16286347bdba1333c7d124d9de9fe6630731b2b2",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-tree.lua": {
@@ -168,7 +172,7 @@
       "src": "https://github.com/DanWlker/nvim-tree.lua"
     },
     "nvim-treesitter": {
-      "rev": "8b98b4470eb326f1c7b50dae79f8c963568e5720",
+      "rev": "19071296d3d643b48615ee574a20e8a03ac40872",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-treesitter-context": {

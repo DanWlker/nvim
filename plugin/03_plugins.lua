@@ -97,6 +97,7 @@ vim.pack.add({
   'https://github.com/mcauley-penney/visual-whitespace.nvim',
   'https://github.com/folke/which-key.nvim',
   'https://github.com/nemanjamalesija/smart-paste.nvim',
+  'https://github.com/mistweaverco/kulala.nvim',
 })
 
 -- catppuccin/nvim
@@ -981,6 +982,17 @@ require('blink.cmp').setup({
   },
 })
 
+-- mistweaverco/kulala.nvim
+require('kulala').setup({
+  -- your configuration comes here
+  global_keymaps = true,
+  global_keymaps_prefix = '<leader>r',
+  kulala_keymaps_prefix = '',
+  ui = {
+    split_direction = 'horizontal',
+  },
+})
+
 -- stevearc/conform.nvim
 local oxfmt = { 'oxfmt' }
 -- local disable_filetypes = {}
@@ -1096,6 +1108,7 @@ conform.setup({
     tf = { 'terraform_fmt' },
     ['terraform-vars'] = { 'terraform_fmt' },
     zsh = { 'shfmt' },
+    http = { 'kulala-fmt' },
   },
 })
 
@@ -1235,6 +1248,7 @@ require('mason-tool-installer').setup({
     'bacon', -- used by bacon_ls
     -- 'rustfmt', -- deprecated, install this using rustup
     'tflint',
+    'kulala-fmt',
   },
 })
 
