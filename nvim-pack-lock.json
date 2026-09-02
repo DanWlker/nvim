@@ -6,7 +6,7 @@
       "version": "2.0.0 - 3.0.0"
     },
     "SchemaStore.nvim": {
-      "rev": "d34c58439271f5e73ed79c2b8d1a09731c4525f1",
+      "rev": "6a1a2daf151dd742d5ff2f64eb2cc049d7e5ab4a",
       "src": "https://github.com/b0o/SchemaStore.nvim"
     },
     "blame.nvim": {
@@ -57,10 +57,6 @@
     "guess-indent.nvim": {
       "rev": "84a4987ff36798c2fc1169cbaff67960aed9776f",
       "src": "https://github.com/NMAC427/guess-indent.nvim"
-    },
-    "hlchunk.nvim": {
-      "rev": "4ddc056e4ca45f1c7dc6aa21935df710b263b1aa",
-      "src": "https://github.com/shellRaining/hlchunk.nvim"
     },
     "kulala.nvim": {
       "rev": "232a9939919fe9bc88d573bce92de50f2f160c60",
@@ -160,11 +156,11 @@
       "version": "'droast'"
     },
     "nvim-lsp-file-operations": {
-      "rev": "b9c795d3973e8eec22706af14959bc60c579e771",
+      "rev": "775c97a7de77e0368758a70eddd8a52af1ab6046",
       "src": "https://github.com/antosha417/nvim-lsp-file-operations"
     },
     "nvim-lspconfig": {
-      "rev": "bbe6b383a1e85d3a84b54a43f7d9d83567c150cb",
+      "rev": "ee1e369181a9e64904cdd7b739e98c70778cfc71",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-tree.lua": {
@@ -208,9 +204,9 @@
       "src": "https://github.com/nemanjamalesija/smart-paste.nvim"
     },
     "snacks.nvim": {
-      "rev": "410308059b26a1bc185ca86d65aeab75910cf61e",
+      "rev": "f477e1ba1f1d32fedf40bd6327119bbca1d5ee1d",
       "src": "https://github.com/DanWlker/snacks.nvim",
-      "version": "'keep_parents_ordering'"
+      "version": "'error_hl_chunk'"
     },
     "substitute.nvim": {
       "rev": "0d2077398552f069abccbd964a26dd7cd26882cd",

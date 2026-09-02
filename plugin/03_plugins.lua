@@ -57,7 +57,6 @@ vim.pack.add({
   },
   'https://github.com/stevearc/conform.nvim',
   'https://github.com/rafamadriz/friendly-snippets',
-  'https://github.com/shellRaining/hlchunk.nvim',
   'https://github.com/AndrewRadev/linediff.vim',
   {
     src = 'https://github.com/L3MON4D3/LuaSnip',
@@ -87,7 +86,7 @@ vim.pack.add({
   'https://github.com/stevearc/quicker.nvim',
   {
     src = 'https://github.com/DanWlker/snacks.nvim',
-    version = 'keep_parents_ordering',
+    version = 'error_hl_chunk',
   },
   'https://github.com/folke/todo-comments.nvim',
   'https://github.com/folke/trouble.nvim',
@@ -197,7 +196,8 @@ require('catppuccin').setup({
       -- MiniStatuslineRecording = { bg = colors.red, fg = colors.base },
 
       -- [[ Snacks nvim ]]
-      -- SnacksIndentChunk = { fg = '#9399b2' },
+      SnacksIndentChunk = { fg = colors.overlay2 },
+      SnacksIndentChunkError = { fg = colors.maroon },
       -- SnacksIndentScope = { fg = '#9399b2' },
       SnacksPickerBorder = { fg = colors.lavender },
       -- SnacksPickerBorder = { fg = colors.mantle, bg = colors.mantle },
@@ -294,7 +294,6 @@ require('catppuccin').setup({
     return custom_stuff
   end,
 })
-local palette = require('catppuccin.palettes').get_palette()
 vim.cmd.colorscheme('catppuccin')
 
 -- folke/which-key.nvim
@@ -1112,36 +1111,6 @@ conform.setup({
   },
 })
 
--- shellRaining/hlchunk.nvim
-require('hlchunk').setup({
-  chunk = {
-    chars = {
-      horizontal_line = '─',
-      vertical_line = '│',
-      left_top = '╭',
-      left_bottom = '╰',
-      right_arrow = '─',
-    },
-    -- Sourced from the palette so they can't drift from the theme
-    style = {
-      palette.overlay2,
-      palette.maroon,
-    },
-    enable = true,
-    duration = 0,
-    delay = 0,
-  },
-  indent = {
-    enable = false,
-  },
-  line_num = {
-    enable = false,
-  },
-  blank = {
-    enable = false,
-  },
-})
-
 -- L3MON4D3/LuaSnip
 local luasnip = require('luasnip')
 require('luasnip.loaders.from_vscode').lazy_load()
@@ -1715,25 +1684,24 @@ require('snacks').setup({
   --   backdrop = false,
   -- },
   --
-  -- Not as good as hlchunk
-  -- indent = {
-  --   indent = {
-  --     enabled = false,
-  --   },
-  --   animate = {
-  --     enabled = false,
-  --   },
-  --   chunk = {
-  --     enabled = true,
-  --     char = {
-  --       horizontal = '─',
-  --       vertical = '│',
-  --       corner_top = '╭',
-  --       corner_bottom = '╰',
-  --       arrow = '─',
-  --     },
-  --   },
-  -- },
+  indent = {
+    indent = {
+      enabled = false,
+    },
+    animate = {
+      enabled = false,
+    },
+    chunk = {
+      enabled = true,
+      char = {
+        horizontal = '─',
+        vertical = '│',
+        corner_top = '╭',
+        corner_bottom = '╰',
+        arrow = '─',
+      },
+    },
+  },
   picker = {
     actions = require('trouble.sources.snacks').actions,
     win = {
@@ -1852,7 +1820,7 @@ require('snacks').setup({
       },
     },
   },
-  image = {},
+  image = { enabled = true },
 })
 vim.api.nvim_create_user_command(
   'ScratchToggle',
