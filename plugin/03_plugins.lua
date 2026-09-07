@@ -989,6 +989,8 @@ require('kulala').setup({
   kulala_keymaps_prefix = '',
   ui = {
     split_direction = 'horizontal',
+    -- dump the response to a temp file only past 1.5Mb (default is 32Kb)
+    max_response_size = 1.5 * 1024 * 1024,
   },
 })
 
