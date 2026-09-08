@@ -987,6 +987,20 @@ require('kulala').setup({
   global_keymaps = true,
   global_keymaps_prefix = '<leader>r',
   kulala_keymaps_prefix = '',
+  -- TODO: can remove after `=== wait-for-server` is implemented i guess
+  -- https://github.com/mistweaverco/kulala.nvim/issues/413#issuecomment-5581440403
+  -- https://www.jetbrains.com/help/idea/http-client-in-product-code-editor.html#websocket
+  kulala_keymaps = {
+    -- Buffer-local to the kulala window only. Default is <S-CR>, which kitty+tmux
+    -- can't deliver (kitty doesn't speak modifyOtherKeys / tmux extkeys).
+    -- Normal/visual only: leader is <Space>, so binding this in insert mode would
+    -- swallow spaces while composing a message. Press <Esc> first, then <leader>rs.
+    ['Send WS message'] = {
+      '<leader>rs',
+      function() require('kulala.ui.ws_input').on_send_keymap() end,
+      mode = { 'n', 'v' },
+    },
+  },
   ui = {
     split_direction = 'horizontal',
     -- dump the response to a temp file only past 1.5Mb (default is 32Kb)
