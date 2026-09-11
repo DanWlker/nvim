@@ -624,6 +624,9 @@ vim.api.nvim_create_autocmd('User', {
 ---@param language string
 local function treesitter_try_attach(buf, language)
   if not vim.treesitter.language.add(language) then return end
+
+  if not vim.api.nvim_buf_is_valid(buf) then return end
+
   vim.treesitter.start(buf, language)
 
   local has_indent_query = vim.treesitter.query.get(language, 'indents') ~= nil
