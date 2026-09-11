@@ -1,6 +1,6 @@
 return {
   settings = {
-    typescript = {
+    ['js/ts'] = {
       inlayHints = {
         enumMemberValues = { enabled = true },
         functionLikeReturnTypes = { enabled = false },
