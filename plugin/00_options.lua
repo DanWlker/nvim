@@ -245,4 +245,5 @@ vim.lsp.enable({
   'rust_analyzer',
   'dartls',
   'terraformls',
+  'ols',
 })

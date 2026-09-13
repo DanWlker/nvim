@@ -1237,6 +1237,7 @@ require('mason-tool-installer').setup({
     -- 'rustfmt', -- deprecated, install this using rustup
     'tflint',
     'kulala-fmt',
+    'ols', --odin
   },
 })
 
