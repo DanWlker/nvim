@@ -1,5 +1,5 @@
 vim.pack.add({
-  'https://github.com/hat0uma/csvview.nvim',
+  'https://github.com/DanWlker/csvview.nvim',
 })
 
 -- hat0uma/csvview.nvim

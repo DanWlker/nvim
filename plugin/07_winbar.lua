@@ -108,7 +108,6 @@ vim.api.nvim_create_autocmd('BufWinEnter', {
       or not (vim.bo[args.buf].buftype == '') -- Not a normal buffer
       or vim.api.nvim_buf_get_name(args.buf) == '' -- Does not have a file name
       or vim.wo[0].diff -- In diff mode
-      or vim.fn.win_gettype() ~= '' -- https://github.com/sindrets/diffview.nvim/issues/193#issuecomment-1221553350
     then
       return
     end

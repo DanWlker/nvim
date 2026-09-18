@@ -31,8 +31,8 @@
       "src": "https://github.com/saecki/crates.nvim"
     },
     "csvview.nvim": {
-      "rev": "2466bdda54047f525d4faca53040fe657c9c33db",
-      "src": "https://github.com/hat0uma/csvview.nvim"
+      "rev": "5b09cc9a6b94d44b8fd44f400feeaf72b120bb57",
+      "src": "https://github.com/DanWlker/csvview.nvim"
     },
     "dial.nvim": {
       "rev": "f2634758455cfa52a8acea6f142dcd6271a1bf57",
