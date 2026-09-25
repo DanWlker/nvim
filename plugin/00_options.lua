@@ -103,7 +103,7 @@ opt.fillchars = {
 }
 
 -- Diff Mode settings (taken from maria's config)
-vim.opt.diffopt:append('followwrap,vertical,context:99')
+opt.diffopt:append('followwrap,vertical,context:99')
 
 -- Diagnostic configuration
 local icons = require('icons')
@@ -192,7 +192,7 @@ vim.diagnostic.config({
       })
     end,
   },
-})
+} --[[@as vim.diagnostic.Opts]])
 
 -- Ui2
 require('vim._core.ui2').enable()
