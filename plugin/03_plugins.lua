@@ -888,7 +888,7 @@ require('ts-error-translator').setup({
     'typescript-tools',
     'volar',
     'vtsls',
-    'tsgo',
+    'tsc',
   },
 })
 
@@ -1020,7 +1020,7 @@ local prefer_lsp = {}
 local fallback_to_lsp = { -- only fallback to lsp if no formatter
   lua = true,
   html = true, -- superhtml lsp has issues formatting <script> tags
-  -- tsgo formats typescript weirdly for some reason
+  -- tsc formats typescript weirdly for some reason
   typescript = true,
   typescriptreact = true,
 }
