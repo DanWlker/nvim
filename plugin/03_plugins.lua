@@ -293,7 +293,7 @@ require('catppuccin').setup({
 
     return custom_stuff
   end,
-})
+} --[[@as CatppuccinOptions]])
 vim.cmd.colorscheme('catppuccin')
 
 -- folke/which-key.nvim
@@ -321,7 +321,7 @@ which_key.setup({
     { '<auto>', mode = 'nixsotc' },
     { 'j', mode = { 'n' } }, -- for mini.splitjoin
   },
-})
+} --[[@as wk.Opts]])
 
 -- nvim-mini/mini.icons
 local ext3_blocklist = { scm = true, txt = true, yml = true }
@@ -760,9 +760,10 @@ require('ts-comments').setup({
     },
     kitty = '# %s',
   },
-})
+} --[[@as TSCommentsOptions]])
 
 -- FabijanZulj/blame.nvim
+---@diagnostic disable-next-line: param-type-mismatch
 require('blame').setup({ blame_options = { '-w' } })
 vim.keymap.set(
   'n',
@@ -874,6 +875,7 @@ vim.api.nvim_create_autocmd('User', {
   end,
 })
 
+---@diagnostic disable-next-line: param-type-mismatch
 require('ts-error-translator').setup({
   -- Auto-attach to LSP servers for TypeScript diagnostics (default: true)
   auto_attach = true,
@@ -982,7 +984,7 @@ require('blink.cmp').setup({
       enabled = true,
     },
   },
-})
+} --[[@as blink.cmp.Config]])
 
 -- mistweaverco/kulala.nvim
 require('kulala').setup({
@@ -1154,10 +1156,10 @@ require('mason').setup({
       package_uninstalled = ' ',
     },
   },
-})
+} --[[@as MasonSettings]])
 
 -- mason-org/mason-lspconfig.nvim
-require('mason-lspconfig').setup({ automatic_enable = false })
+require('mason-lspconfig').setup({ automatic_enable = false } --[[@as MasonLspconfigSettings]])
 
 -- jay-babu/mason-nvim-dap.nvim
 local dap = require('dap')
@@ -1189,7 +1191,7 @@ mason_nvim_dap.setup({
       mason_nvim_dap.default_setup(config)
     end,
   },
-})
+} --[[@as MasonNvimDapSettings]])
 
 -- WhoIsSethDaniel/mason-tool-installer.nvim
 require('mason-tool-installer').setup({
@@ -1208,7 +1210,7 @@ require('mason-tool-installer').setup({
     'cssls',
     'tsc',
     'emmet_language_server',
-    'lua_ls',
+    'emmylua_ls',
     'tailwindcss',
     'bashls',
     'bacon_ls',
@@ -1284,7 +1286,7 @@ require('dap-view').setup({
     default_section = 'scopes',
   },
   switchbuf = 'usetab,uselast',
-})
+} --[[@as dapview.Config]])
 vim.keymap.set(
   'n',
   '<F7>',
@@ -1293,7 +1295,7 @@ vim.keymap.set(
 )
 
 -- theHamsta/nvim-dap-virtual-text
-require('nvim-dap-virtual-text').setup({ virt_text_pos = 'eol' })
+require('nvim-dap-virtual-text').setup({ virt_text_pos = 'eol' } --[[@as nvim_dap_virtual_text_options]])
 
 -- mfussenegger/nvim-dap
 vim.api.nvim_set_hl(0, 'DapBreak', { fg = '#e51400' })
@@ -1841,7 +1843,7 @@ require('snacks').setup({
     },
   },
   image = { enabled = true },
-})
+} --[[@as snacks.Config]])
 vim.api.nvim_create_user_command(
   'ScratchToggle',
   function() Snacks.scratch() end,

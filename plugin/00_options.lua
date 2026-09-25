@@ -236,7 +236,7 @@ vim.lsp.enable({
   'oxlint',
   'tsc',
   'emmet_language_server',
-  'lua_ls',
+  'emmylua_ls',
   'tailwindcss',
   'bashls',
   'bacon_ls',
