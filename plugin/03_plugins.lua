@@ -707,6 +707,7 @@ nvim_treesitter.install({
   'terraform',
   'hcl',
   'tmux',
+  'odin',
 })
 
 -- nvim-treesitter-textobjects
@@ -902,16 +903,11 @@ require('blink.cmp').setup({
   },
   sources = {
     per_filetype = {
-      lua = { inherit_defaults = true, 'lazydev' },
       sql = { 'dadbod' },
     },
     providers = {
       dadbod = {
         module = 'vim_dadbod_completion.blink',
-      },
-      lazydev = {
-        module = 'lazydev.integrations.blink',
-        score_offset = 100,
       },
       path = {
         opts = {
