@@ -96,6 +96,7 @@ vim.pack.add({
   'https://github.com/mcauley-penney/visual-whitespace.nvim',
   'https://github.com/folke/which-key.nvim',
   'https://github.com/nemanjamalesija/smart-paste.nvim',
+  'https://github.com/xzbdmw/colorful-menu.nvim',
 })
 
 -- catppuccin/nvim
@@ -293,7 +294,7 @@ require('catppuccin').setup({
     return custom_stuff
   end,
 } --[[@as CatppuccinOptions]])
-vim.cmd.colorscheme('catppuccin')
+vim.cmd.colorscheme('catppuccin-nvim')
 
 -- folke/which-key.nvim
 local which_key = require('which-key')
@@ -892,6 +893,9 @@ require('ts-error-translator').setup({
   },
 })
 
+-- xzbdmw/colorful-menu.nvim
+require('colorful-menu').setup()
+
 -- Saghen/blink.cmp
 require('blink.cmp').setup({
   keymap = {
@@ -934,6 +938,14 @@ require('blink.cmp').setup({
         -- treesitter = { 'lsp' },
         -- align_to = 'cursor',
         components = {
+          label = {
+            text = function(ctx)
+              return require('colorful-menu').blink_components_text(ctx)
+            end,
+            highlight = function(ctx)
+              return require('colorful-menu').blink_components_highlight(ctx)
+            end,
+          },
           kind_icon = {
             text = function(ctx)
               local kind_icon, _, _ = mini_icons.get('lsp', ctx.kind)
@@ -953,12 +965,18 @@ require('blink.cmp').setup({
             end,
           },
           source_name = {
-            text = function(ctx) return '[' .. ctx.source_name .. ']' end,
+            -- blink's lsp source stamps `client_name` on every item, so it's
+            -- only present for LSP completions: `[LSP:gopls]` vs `[Buffer]`.
+            text = function(ctx)
+              local name = ctx.item.client_name and ('LSP:' .. ctx.item.client_name)
+                or ctx.source_name
+              return '[' .. name .. ']'
+            end,
           },
         },
         columns = {
           { 'label', 'label_description', gap = 1 },
-          { 'kind' },
+          -- { 'kind' },
           { 'source_name' },
         },
       },
