@@ -73,10 +73,7 @@ vim.pack.add({
   'https://github.com/igorlfs/nvim-dap-view',
   'https://github.com/mfussenegger/nvim-dap',
   'https://github.com/theHamsta/nvim-dap-virtual-text',
-  {
-    src = 'https://github.com/DanWlker/nvim-lint',
-    version = 'droast',
-  },
+  'https://github.com/mfussenegger/nvim-lint',
   'https://github.com/antosha417/nvim-lsp-file-operations',
   'https://github.com/DanWlker/nvim-tree.lua',
   'https://github.com/nvim-treesitter/nvim-treesitter-context',

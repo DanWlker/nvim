@@ -6,7 +6,7 @@
       "version": "2.0.0 - 3.0.0"
     },
     "SchemaStore.nvim": {
-      "rev": "d93ef1e8365950420ea3e706e82caf65dc9ff968",
+      "rev": "ba1c08d07452528a430d319c53fba46e5884ef11",
       "src": "https://github.com/b0o/SchemaStore.nvim"
     },
     "blame.nvim": {
@@ -21,6 +21,10 @@
     "clangd_extensions.nvim": {
       "rev": "78c2ecd659d54972be17aa6ba2deac3c53223b80",
       "src": "https://github.com/p00f/clangd_extensions.nvim"
+    },
+    "colorful-menu.nvim": {
+      "rev": "196ddf16d5f8fec09ba7f20e6b153aa5188e907b",
+      "src": "https://github.com/xzbdmw/colorful-menu.nvim"
     },
     "conform.nvim": {
       "rev": "016802de402556da54c36bd7359b441266b01cdd",
@@ -79,7 +83,7 @@
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini-git": {
-      "rev": "cf5aaa83be51d0419aeb0a2060fc4ec13ea22b74",
+      "rev": "d1c160576be4f55993152e940717773cdb2ad1cc",
       "src": "https://github.com/nvim-mini/mini-git"
     },
     "mini.ai": {
@@ -91,7 +95,7 @@
       "src": "https://github.com/nvim-mini/mini.diff"
     },
     "mini.extra": {
-      "rev": "9c6affac2b176142f48b185bd7abc5db7ec20ac8",
+      "rev": "2d30f3830510c1cb1618b4e8efbb07356ecfda4d",
       "src": "https://github.com/nvim-mini/mini.extra"
     },
     "mini.hipatterns": {
@@ -143,16 +147,15 @@
       "src": "https://github.com/DanWlker/nvim-jump"
     },
     "nvim-lint": {
-      "rev": "b191899ed750fdf18334a66ee9e9f30fdf087b47",
-      "src": "https://github.com/DanWlker/nvim-lint",
-      "version": "'droast'"
+      "rev": "50ede9339d70b882e8dd63122aed403451dfc5b1",
+      "src": "https://github.com/mfussenegger/nvim-lint"
     },
     "nvim-lsp-file-operations": {
-      "rev": "02bebff28512c0ae07fb719711c96c62bc8c0879",
+      "rev": "d0ea762975070297763758a0f44c03e525d1de2a",
       "src": "https://github.com/antosha417/nvim-lsp-file-operations"
     },
     "nvim-lspconfig": {
-      "rev": "3e8d598d3b5f8338a41699c436e5fa11d2666cf0",
+      "rev": "db68de3575fff9dd9bb78b34c8371759ed35fe34",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-tree.lua": {
