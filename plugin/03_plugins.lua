@@ -151,8 +151,8 @@ require('catppuccin').setup({
       BlinkCmpDocBorder = { fg = colors.overlay0 },
       -- BlinkCmpSignatureHelpBorder = { fg = colors.overlay0, bg = colors.base },
       BlinkCmpSignatureHelpBorder = { fg = colors.overlay0 },
-      -- BlinkCmpLabelMatch = { fg = colors.blue },
-      -- BlinkCmpLabel = { fg = colors.text },
+      BlinkCmpLabelMatch = { fg = colors.blue, bold = true },
+      BlinkCmpLabel = { fg = colors.text },
 
       -- [[ Telescope ]]
       TelescopeNormal = { bg = colors.mantle },
@@ -949,6 +949,15 @@ require('blink.cmp').setup({
               return hl
             end,
           },
+          label_description = {
+            text = function(ctx)
+              if ctx.label_description ~= '' then return ctx.label_description end
+              -- Skip the fallback when the server sends labelDetails, to avoid duplicate text
+              if ctx.label_detail ~= '' then return '' end
+              local detail = ctx.item.detail or ''
+              return (detail:gsub('\n.*', ''))
+            end,
+          },
           source_name = {
             text = function(ctx)
               local name = ctx.item.client_name and ('LSP:' .. ctx.item.client_name)
@@ -958,9 +967,8 @@ require('blink.cmp').setup({
           },
         },
         columns = {
-          { 'label', 'label_description', gap = 1 },
-          { 'kind' },
-          { 'source_name' },
+          { 'kind_icon' },
+          { 'label', 'label_description', gap = 2 },
         },
       },
     },
