@@ -152,8 +152,8 @@ require('catppuccin').setup({
       BlinkCmpDocBorder = { fg = colors.overlay0 },
       -- BlinkCmpSignatureHelpBorder = { fg = colors.overlay0, bg = colors.base },
       BlinkCmpSignatureHelpBorder = { fg = colors.overlay0 },
-      -- BlinkCmpLabelMatch = { fg = colors.blue },
-      -- BlinkCmpLabel = { fg = colors.text },
+      BlinkCmpLabelMatch = { fg = colors.blue, style = { 'bold' } },
+      BlinkCmpLabel = { fg = colors.text },
 
       -- [[ Telescope ]]
       TelescopeNormal = { bg = colors.mantle },
@@ -940,7 +940,20 @@ require('blink.cmp').setup({
               return require('colorful-menu').blink_components_text(ctx)
             end,
             highlight = function(ctx)
-              return require('colorful-menu').blink_components_highlight(ctx)
+              -- IntelliJ style: white label, blue matches, gray extra info
+              local info = require('colorful-menu').blink_highlights(ctx)
+              local label = info and info.label or ctx.label
+              local highlights = { { 0, #label, group = 'BlinkCmpLabel' } }
+              for _, hl in ipairs(info and info.highlights or {}) do
+                if hl.group == '@comment' then table.insert(highlights, hl) end
+              end
+              for _, idx in ipairs(ctx.label_matched_indices) do
+                table.insert(
+                  highlights,
+                  { idx, idx + 1, group = 'BlinkCmpLabelMatch' }
+                )
+              end
+              return highlights
             end,
           },
           kind_icon = {
