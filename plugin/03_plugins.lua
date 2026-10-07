@@ -93,7 +93,6 @@ vim.pack.add({
   'https://github.com/mcauley-penney/visual-whitespace.nvim',
   'https://github.com/folke/which-key.nvim',
   'https://github.com/nemanjamalesija/smart-paste.nvim',
-  'https://github.com/xzbdmw/colorful-menu.nvim',
 })
 
 -- catppuccin/nvim
@@ -152,8 +151,8 @@ require('catppuccin').setup({
       BlinkCmpDocBorder = { fg = colors.overlay0 },
       -- BlinkCmpSignatureHelpBorder = { fg = colors.overlay0, bg = colors.base },
       BlinkCmpSignatureHelpBorder = { fg = colors.overlay0 },
-      BlinkCmpLabelMatch = { fg = colors.blue, style = { 'bold' } },
-      BlinkCmpLabel = { fg = colors.text },
+      -- BlinkCmpLabelMatch = { fg = colors.blue },
+      -- BlinkCmpLabel = { fg = colors.text },
 
       -- [[ Telescope ]]
       TelescopeNormal = { bg = colors.mantle },
@@ -890,9 +889,6 @@ require('ts-error-translator').setup({
   },
 })
 
--- xzbdmw/colorful-menu.nvim
-require('colorful-menu').setup()
-
 -- Saghen/blink.cmp
 require('blink.cmp').setup({
   keymap = {
@@ -935,27 +931,6 @@ require('blink.cmp').setup({
         -- treesitter = { 'lsp' },
         -- align_to = 'cursor',
         components = {
-          label = {
-            text = function(ctx)
-              return require('colorful-menu').blink_components_text(ctx)
-            end,
-            highlight = function(ctx)
-              -- IntelliJ style: white label, blue matches, gray extra info
-              local info = require('colorful-menu').blink_highlights(ctx)
-              local label = info and info.label or ctx.label
-              local highlights = { { 0, #label, group = 'BlinkCmpLabel' } }
-              for _, hl in ipairs(info and info.highlights or {}) do
-                if hl.group == '@comment' then table.insert(highlights, hl) end
-              end
-              for _, idx in ipairs(ctx.label_matched_indices) do
-                table.insert(
-                  highlights,
-                  { idx, idx + 1, group = 'BlinkCmpLabelMatch' }
-                )
-              end
-              return highlights
-            end,
-          },
           kind_icon = {
             text = function(ctx)
               local kind_icon, _, _ = mini_icons.get('lsp', ctx.kind)
@@ -975,8 +950,6 @@ require('blink.cmp').setup({
             end,
           },
           source_name = {
-            -- blink's lsp source stamps `client_name` on every item, so it's
-            -- only present for LSP completions: `[LSP:gopls]` vs `[Buffer]`.
             text = function(ctx)
               local name = ctx.item.client_name and ('LSP:' .. ctx.item.client_name)
                 or ctx.source_name
@@ -986,7 +959,7 @@ require('blink.cmp').setup({
         },
         columns = {
           { 'label', 'label_description', gap = 1 },
-          -- { 'kind' },
+          { 'kind' },
           { 'source_name' },
         },
       },
