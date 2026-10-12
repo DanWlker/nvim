@@ -13,6 +13,12 @@ vim.api.nvim_create_autocmd('PackChanged', {
       vim.cmd('make install_jsregexp')
       return
     end
+
+    if name == 'duckument.nvim' and (kind == 'install' or kind == 'update') then
+      if not ev.data.active then vim.cmd.packadd('duckument.nvim') end
+      vim.cmd('DuckBuild')
+      return
+    end
   end,
 })
 
@@ -93,6 +99,7 @@ vim.pack.add({
   'https://github.com/mcauley-penney/visual-whitespace.nvim',
   'https://github.com/folke/which-key.nvim',
   'https://github.com/nemanjamalesija/smart-paste.nvim',
+  'https://github.com/DanWlker/duckument.nvim',
 })
 
 -- catppuccin/nvim
